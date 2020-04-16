@@ -1,0 +1,15 @@
+{
+  "build/css/app.css": "/build/css/app.css",
+  "build/js/app.js": "/build/js/app.js",
+  "build/runtime.js": "/build/runtime.js",
+  "build/vendors~js/app.js": "/build/vendors~js/app.js",
+  "build/fonts/Chalkduster.woff": "/build/fonts/Chalkduster.05ecdaa0.woff",
+  "build/fonts/Chalkduster.eot": "/build/fonts/Chalkduster.4a4bf398.eot",
+  "build/fonts/Chalkduster.woff2": "/build/fonts/Chalkduster.5a65fab8.woff2",
+  "build/fonts/Chalkduster.ttf": "/build/fonts/Chalkduster.bd9805cb.ttf",
+  "build/fonts/adventpro-regular-webfont.eot": "/build/fonts/adventpro-regular-webfont.0a020f5b.eot",
+  "build/fonts/adventpro-regular-webfont.ttf": "/build/fonts/adventpro-regular-webfont.7b1a3e31.ttf",
+  "build/fonts/adventpro-regular-webfont.woff": "/build/fonts/adventpro-regular-webfont.e30cfde0.woff",
+  "build/images/Chalkduster.svg": "/build/images/Chalkduster.1421e4e9.svg",
+  "build/images/adventpro-regular-webfont.svg": "/build/images/adventpro-regular-webfont.9d423fec.svg"
+}
