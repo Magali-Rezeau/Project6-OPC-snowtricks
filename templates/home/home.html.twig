@@ -1,20 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Page d'accueil
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Applications/MAMP/htdocs/Project6-OPC-snowtricks/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Applications/MAMP/htdocs/Project6-OPC-snowtricks/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+	<section class="about">
+		<div class="about-title">
+			<h1>Welcome</h1>
+		</div>
+		{% if not app.user %}
+			<div class="about-content">
+				<p>Les figures de snowboard sont des sauts ou des manœuvres exécutées sur des snowboards pour le plaisir ou lors de compétitions. Le plus souvent, ces manœuvres sont effectuées sur des obstacles tels que des sauts, des halfpipes , des quarterpipes , des hanches, des mains courantes, des funbox ou des rebords, ou à la surface de la neige. Beaucoup ont leurs origines dans des sports de glisse plus anciens comme le skateboard et le surf.</p>
+				<p>« J'ai un bon pop sur les frontside nose-roll nollies parce que je les fais à partir d’un carve ». Si vous ne comprenez rien à cette phrase, ce site est fait pour vous.</p>
+				<p>Ce site a été créé pour faire découvrir et partager les figures de snowboard. Inscrivez-vous pour devenir membre de la communauté et collaborer à l'apprentissage des figures de snowboard.</p>
+				<button class="btn">
+					<a href="#">S'inscrire</a>
+				</button>
+				<p class="about-content-p">Déjà inscrit ?</p>
+				<button class="btn">
+					<a href="#">Se connecter</a>
+				</button>
+			</div>
+		{% else %}
+			<div class="about-content">
+				<p>Vous êtes membre de la communauté Snowtricks.</p>
+				<p>Partagez vos connaissances et collaborer à l'apprentissage des figures de snowboard.</p>
+				<p>. Vous pouvez ajouter des nouvelles figures.</p>
+				<button class="btn" type="button">
+					<a href="#">Ajouter</a>
+				</button>
+				<p>Vous pouvez également modifier les tricks de votre choix en ajoutant ou en supprimmant le descriptif, des photos ou des vidéos.</p>
+				<p class="about-content-p">Se déconnecter ?</p>
+				<button class="btn" type="button">
+					<a href="#">Se déconnecter</a>
+				</button>
+			</div>
+		{% endif %}
+	</section>
+	<section class="tricks" id="tricks">
+		<div class="tricks-title">
+			<h1>Tricks</h1>
+		</div>
+		
+		<div class="tricks-arrow">
+			<a href="{{ path('home') }}#tricks"><img src="{{ asset('build/images/arrow-up.png') }}" class="arrow"></a>
+		</div>
+	</section>
 {% endblock %}
