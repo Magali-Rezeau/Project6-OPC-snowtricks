@@ -1,0 +1,48 @@
+<header class="header">
+    <div class="header-logo">
+        <img src="{{ asset('build/images/logo.png') }}" alt="logo-snowtricks" class="header-logo-img">
+    </div>
+    <nav class="header-nav">
+        <ul>
+            <li><a href="{{ path('home') }}">Home</a></li>
+            <li><a href="{{ path('home') }}#tricks">Tricks</a></li>
+            {% if not app.user %}
+            <li><a href="#">S'inscrire</a></li>
+            <li><a href="#">Se connecter</a></li>
+            {% else %}
+            <li><a href="#">Se déconnecter</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <nav class="header-nav-wrap">
+        <input type="checkbox" class="header-nav-wrap-toggler">
+        <div class="header-nav-wrap-hamburger">
+            <div>
+                <img src="{{ asset('build/images/menu.png') }}" alt="hamburger-menu" class="header-nav-wrap-hamburger-img">
+            </div>
+        </div>
+        <div class="header-nav-wrap-menu">
+            <div>
+                <div>
+                    <ul>
+                        <li><a href="{{ path('home') }}">Home</a></li>
+                        <li><a href="{{ path('home') }}#tricks">Tricks</a></li>
+                        {% if not app.user %}
+                        <li><a href="#">S'inscrire</a></li>
+                        <li><a href="#">Se connecter</a></li>
+                        {% else %}
+                        <li><a href="#">Se déconnecter</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="header-title">
+        <h1>Le site communautaire</h1>
+        <h2>des tricks de snowboard</h2>
+    </div>
+    <div class="header-arrow">
+        <a href="{{ path('home') }}#tricks"><img src="{{ asset('build/images/arrow-down.png') }}" class="arrow" alt="arrow-down"></a>
+    </div>
+</header>

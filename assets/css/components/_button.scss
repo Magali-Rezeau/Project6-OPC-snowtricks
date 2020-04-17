@@ -1,0 +1,46 @@
+.btn {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &,
+  &:link,
+  &:visited {
+    width: 20rem;
+    height: 6rem;
+    background-image: url(../../images/bg-button.png);
+    background-size: contain;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: $color-dark;
+    text-decoration: none;
+    border: none;
+    outline: 0;
+    text-align: center;
+    font-family: $ff-title;
+    font-size: 1.5rem;
+    transition: transform .5s ease-in-out;
+    
+    @include medium-only {
+      width: 11rem;
+      height: 4rem;
+      font-size: 1.2rem;
+      margin: 2rem; 
+    }
+    @include small-only{
+      margin: 1rem;
+    }
+    @include smallest-only {
+      width: 8rem;
+      height:3rem;
+      font-size: 1rem;
+    }
+  }
+
+  &:hover {
+    transform: rotate(10deg);
+    text-decoration: none;
+  }
+}
