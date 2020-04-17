@@ -32,11 +32,30 @@
         justify-self: center;
         text-align: center;
 
-        &-p {
-            margin-top: 4rem;
-            @include small-only {
-                margin-top: 1rem;
+        &-btn {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-top: 6rem;
+
+            @include medium-only {
+                margin-top: 4rem;
             }
-        } 
+
+            & :first-child {
+                width: 70rem;
+
+                @include medium-only {
+                  width: 15rem;
+                }
+                @include small-only {
+                    width: 8rem;
+                }
+            }
+
+            & > * {
+                flex: 0 0 auto;
+            }
+        }
     }
 }

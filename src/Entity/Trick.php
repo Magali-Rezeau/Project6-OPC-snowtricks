@@ -66,8 +66,8 @@ class Trick
         $this->created_at = new DateTime();
     }
 
-    public function slugify($string, $delimiter = '-') {
-           
+    public function slugify($string, $delimiter = '-') 
+    {   
         $stringClean = iconv('UTF-8', 'ASCII//TRANSLIT', $string);
         $stringClean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $stringClean);
         $stringClean = strtolower($stringClean);

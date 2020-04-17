@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Page d'accueil
-{% endblock %}
+{% block title %}Page d'accueil{% endblock %}
 
 {% block body %}
 	<section class="about">
@@ -13,13 +12,15 @@
 				<p>Les figures de snowboard sont des sauts ou des manœuvres exécutées sur des snowboards pour le plaisir ou lors de compétitions. Le plus souvent, ces manœuvres sont effectuées sur des obstacles tels que des sauts, des halfpipes , des quarterpipes , des hanches, des mains courantes, des funbox ou des rebords, ou à la surface de la neige. Beaucoup ont leurs origines dans des sports de glisse plus anciens comme le skateboard et le surf.</p>
 				<p>« J'ai un bon pop sur les frontside nose-roll nollies parce que je les fais à partir d’un carve ». Si vous ne comprenez rien à cette phrase, ce site est fait pour vous.</p>
 				<p>Ce site a été créé pour faire découvrir et partager les figures de snowboard. Inscrivez-vous pour devenir membre de la communauté et collaborer à l'apprentissage des figures de snowboard.</p>
-				<button class="btn">
-					<a href="#">S'inscrire</a>
-				</button>
-				<p class="about-content-p">Déjà inscrit ?</p>
-				<button class="btn">
-					<a href="#">Se connecter</a>
-				</button>
+				<div class="about-content-btn">
+					<button class="btn" type="button">
+						<a href="#">S'inscrire</a>
+					</button>
+					<p class="about-content-p">Déjà inscrit ?</p>
+					<button class="btn" type="button">
+						<a href="#">Se connecter</a>
+					</button>
+				</div>
 			</div>
 		{% else %}
 			<div class="about-content">
@@ -41,7 +42,61 @@
 		<div class="tricks-title">
 			<h1>Tricks</h1>
 		</div>
-		
+		<div class="tricks-content">
+			{% for trick in tricks %}
+				<div class="tricks-content-card">
+					<div class="tricks-content-card-img">
+						{% if trick.pictures is defined %}
+							{% for picture in trick.pictures %}
+								{% if loop.first %}
+									<figure class="tricks-content-card-img-figure">
+										<a href="#"><img src="{{ asset('build/images/pictures/' ~ picture.path) }}"></a>
+									</figure>
+								{% endif %}
+							{% else %}
+								<figure class="tricks-content-card-img-figure">
+									<a href="#"><img src="{{ asset('build/images/pictures/default-picture.png') }}"></a>
+								</figure>
+							{% endfor %}
+						{% endif %}
+					</div>
+					<div class="tricks-content-card-btn">
+						<button class="btn" type="button">
+							<a href="#">{{ trick.name }}</a>
+						</button>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		<div class="tricks-content-more">
+			<input type="checkbox" hidden class="tricks-content-more-state" id="read-more">
+			{% for trick in tricks_more %}
+				<div class="tricks-content-more-target tricks-content-card">
+					<div class="tricks-content-card-img">
+							{% if trick.pictures is defined %}
+							{% for picture in trick.pictures %}
+								{% if loop.first %}
+									<figure class="tricks-content-card-img-figure">
+										<a href="#"><img src="{{ asset('build/images/pictures/' ~ picture.path) }}"></a>
+									</figure>
+								{% endif %}
+							{% else %}
+								<figure class="tricks-content-card-img-figure">
+									<a href="#"><img src="{{ asset('build/images/pictures/default-picture.png') }}"></a>
+								</figure>
+							{% endfor %}
+						{% endif %}
+					</div>
+					<div class="tricks-content-card-btn">
+						<button class="btn" type="button">
+							<a href="#">{{ trick.name }}</a>
+						</button>
+					</div>
+				</div>
+			{% endfor %}
+			<label for="read-more" class="tricks-content-more-trigger_closed btn">Voir plus</label>
+			<label for="read-more" class="tricks-content-more-trigger_opened btn">Voir Moins</label>
+		</div>
 		<div class="tricks-arrow">
 			<a href="{{ path('home') }}#tricks"><img src="{{ asset('build/images/arrow-up.png') }}" class="arrow"></a>
 		</div>
