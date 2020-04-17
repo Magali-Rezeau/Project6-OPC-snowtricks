@@ -1,0 +1,13 @@
+.arrow {
+    margin-bottom: 4rem;
+    width: 6rem;
+    display: block;
+    
+    @include medium-only {
+        width: 5rem;
+    }
+    @include small-only {
+        width: 4rem;
+        margin-bottom: 0;
+    }
+}
