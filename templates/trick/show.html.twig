@@ -29,9 +29,7 @@
             <div class="trick-content-more-target">
                 <div class="trick-content-title-img">
                     <h3>Photos</h3>
-
                 </div>
-
                 <div class="trick-content-thumbnail">
                     {% for picture in trick.pictures %}
                     <figure class="trick-content-thumbnail-figure">
@@ -52,21 +50,16 @@
             <label for="read-more" class="trick-content-more-trigger_closed btn">Voir plus</label>
             <label for="read-more" class="trick-content-more-trigger_opened btn">Voir Moins</label>
         </div>
-
         <div class="trick-content-description">
             <p>{{ trick.description|nl2br }}</p>
         </div>
-
         <div class="trick-content-details">
             <ul class="trick-content-details-list">
                 <li>Date de création : {{ trick.createdAt|date("d/m/Y") }}</li>
                 <li>Date de modification : {{ trick.updatedAt|date("d/m/Y")}}</li>
                 <li>Catégorie : {{ trick.category.name }}</li>
             </ul>
-
         </div>
     </div>
-
 </section>
-
 {% endblock %}
