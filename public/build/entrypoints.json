@@ -3,6 +3,7 @@
     "js/app": {
       "js": [
         "/build/runtime.js",
+        "/build/vendors~js/app.js",
         "/build/js/app.js"
       ]
     },
