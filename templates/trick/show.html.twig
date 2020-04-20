@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ trick.name }}{% endblock %}
+
+{% block body %}
+<section class="trick">
+    <div class="trick-title">
+        <h1>{{ trick.name }}</h1>
+    </div>
+    <div class="trick-content">
+        {% for picture in trick.pictures %}
+        {% if loop.first %}
+        <div class="trick-content-img">
+            <figure class="trick-content-img-figure">
+                <img src="{{ asset('build/images/pictures/' ~ picture.path) }}">
+            </figure>
+        </div>
+        {% endif %}
+        {% else %}
+        <div class="trick-content-img">
+            <figure class="tricks-content-card-img-figure">
+                <a href="#"><img
+                        src="{{ asset('build/images/pictures/default-picture.png') }}"></a>
+            </figure>
+        </div>
+        {% endfor %}
+        <div class="trick-content-more">
+            <input type="checkbox" hidden class="trick-content-more-state" id="read-more">
+            <div class="trick-content-more-target">
+                <div class="trick-content-title-img">
+                    <h3>Photos</h3>
+
+                </div>
+
+                <div class="trick-content-thumbnail">
+                    {% for picture in trick.pictures %}
+                    <figure class="trick-content-thumbnail-figure">
+                        <img src="{{ asset('build/images/pictures/' ~ picture.path) }}">
+                    </figure>
+                    {% endfor %}
+                </div>
+                <div class="trick-content-title-videos">
+                    <h3>Vidéos</h3>
+                </div>
+                <div class="trick-content-videos">
+                    {% for video in trick.videos %}
+                    <iframe src="{{ video.url }}" width="50%" frameborder="100" width="1920" height="1080"
+                        allowfullscreen></iframe>
+                    {% endfor %}
+                </div>
+            </div>
+            <label for="read-more" class="trick-content-more-trigger_closed btn">Voir plus</label>
+            <label for="read-more" class="trick-content-more-trigger_opened btn">Voir Moins</label>
+        </div>
+
+        <div class="trick-content-description">
+            <p>{{ trick.description|nl2br }}</p>
+        </div>
+
+        <div class="trick-content-details">
+            <ul class="trick-content-details-list">
+                <li>Date de création : {{ trick.createdAt|date("d/m/Y") }}</li>
+                <li>Date de modification : {{ trick.updatedAt|date("d/m/Y")}}</li>
+                <li>Catégorie : {{ trick.category.name }}</li>
+            </ul>
+
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}
