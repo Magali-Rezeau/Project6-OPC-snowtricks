@@ -4,33 +4,39 @@
     grid-template-rows: 15rem 1fr;
     align-items: center;
     justify-items: center;
-  
     margin: 5rem;
-    box-shadow: inset 8px 8px 8px 0 rgba(0, 0, 0, 0.2),
-    inset -8px -8px 8px 0 rgba(255, 255, 255, 0.4);
+    @include shadow;
+
     @include medium-only {
         grid-template-columns: 5rem 1fr 5rem;
         grid-template-rows: 10rem 1fr;
     }
-
     @include small-only {
-        grid-template-columns: 5rem 1fr 5rem;  
+        grid-template-columns:3rem 1fr 3rem;  
+        margin: 2rem;
     }
-
     @include smallest-only {
         grid-template-columns: 2rem 1fr 2rem;
+        margin: 1rem;
     }
+
     & div {
         margin: 4rem 0;
-       
+
+        @include small-only {
+            margin: 2rem 0;
+        }  
     } 
+
     & div:nth-child(2) {
-        margin: 1rem 0;
+        margin: 1rem 0; 
     }
+
     &-title {
         grid-column: 2/3;
         grid-row: 1/2;
     }
+
     &-content, &-content-more {
         grid-column: 2/3;
         grid-row: 2/3;
@@ -40,16 +46,19 @@
             width: 100%;
             text-align: center;
         }
+
         &-img {
-            width: 100%;
+           
             @include medium-only {
                margin: 2rem 0;
             }
+
             &-figure img {
                 width: 100%;
                 display: block;
             }
         }
+
         &-thumbnail {
             width: 100%;
             display: flex;
@@ -57,12 +66,14 @@
             justify-content: center;
             align-items: center;
             align-content: center;
+
             &-figure img {
                 width: 20rem;
                 height: 20rem;
                 object-fit: cover;
                 display: block;
                 margin: 1rem;
+
                 @include medium-only {
                     width: 15rem;
                     height: 15rem;
@@ -70,6 +81,7 @@
             }
 
         }
+
         &-videos {
             width: 100%;
             display: flex;
@@ -77,6 +89,7 @@
             justify-content: center;
             align-items: center;
             align-content: center;
+
             & iframe {
                 width: 20rem;
                 height: 20rem;
@@ -88,52 +101,73 @@
             }
         }
        
-        
-        
         &-details {
-            font-size: 1.4rem;
+           
+            @include medium-only {
+                font-size: 1rem;
+            }
+            @include small-only {
+                font-size: .5rem;
+            }
+            @include smallest-only {
+                font-size: .4rem;
+            }
+          
             &-list {
                 display: flex;
                 justify-content: space-evenly;
                 align-items: center;
+                @include small-only {
+                    text-align: center;
+                }
+
                 & li {
-                    box-shadow: inset 8px 8px 8px 0 rgba(0, 0, 0, 0.2),
-                    inset -8px -8px 8px 0 rgba(255, 255, 255, 0.4);
                     padding: 1rem;
                     margin: 1rem;
+                    @include shadow;
+
+                    @include smallest-only {
+                        margin: .3rem;
+                        padding: .6rem;
+                    }
                 }
             }
-        }
-        
+        }  
     }
-    &-content-more {
-      
 
+    &-content-more {
+       
         &-target{
             display: block;
             @include medium-only {
                 display: none;
             }
         }
-        &-trigger_opened {
+
+        &-trigger_opened, &-trigger_closed {
             margin: 0 auto;
-            display: flex;
+            display: none;
+
             @include medium-only {
-                display: none;
+                width: 14rem;
+            }
+            @include small-only {
+                width: 8rem;
+                font-size: .7rem;
             }
         }
 
-        &-state:checked~&-target,
-        {
-
+        &-state:checked~&-target {
             display: none;
+
             @include medium-only {
                 display: block;
             }
         }
-        &-state:checked~&-trigger_opened {
 
+        &-state:checked~&-trigger_opened {
             display: none;
+
             @include medium-only {
                 display: flex;
             }
@@ -141,24 +175,17 @@
 
         &-state:checked~&-trigger_closed {
             display: block;
+
             @include medium-only {
                 display: none;
             }
         }
+
         &-trigger_closed {
-            margin: 0 auto;
-            display: none;
+            
             @include medium-only {
                 display:flex;
             }
-        }
-        
+        } 
     }
-   
-
-
-
 }
-
-
-

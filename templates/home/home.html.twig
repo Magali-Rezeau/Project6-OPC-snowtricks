@@ -44,25 +44,26 @@
 		</div>
 		<div class="tricks-content">
 			{% for trick in tricks %}
+			{% set url = path('trick_show', {'slug':trick.slug}) %}
 				<div class="tricks-content-card">
 					<div class="tricks-content-card-img">
 						{% if trick.pictures is defined %}
 							{% for picture in trick.pictures %}
 								{% if loop.first %}
 									<figure class="tricks-content-card-img-figure">
-										<a href="#"><img src="{{ asset('build/images/pictures/' ~ picture.path) }}"></a>
+										<a href="{{ url }}"><img src="{{ asset('build/images/pictures/' ~ picture.path) }}"></a>
 									</figure>
 								{% endif %}
 							{% else %}
 								<figure class="tricks-content-card-img-figure">
-									<a href="#"><img src="{{ asset('build/images/pictures/default-picture.png') }}"></a>
+									<a href="{{ url }}"><img src="{{ asset('build/images/pictures/default-picture.png') }}"></a>
 								</figure>
 							{% endfor %}
 						{% endif %}
 					</div>
 					<div class="tricks-content-card-btn">
 						<button class="btn" type="button">
-							<a href="#">{{ trick.name }}</a>
+							<a href="{{ url }}">{{ trick.name }}</a>
 						</button>
 					</div>
 				</div>
@@ -71,25 +72,26 @@
 		<div class="tricks-content-more">
 			<input type="checkbox" hidden class="tricks-content-more-state" id="read-more">
 			{% for trick in tricks_more %}
+			{% set url = path('trick_show', {'slug':trick.slug}) %}
 				<div class="tricks-content-more-target tricks-content-card">
 					<div class="tricks-content-card-img">
 							{% if trick.pictures is defined %}
 							{% for picture in trick.pictures %}
 								{% if loop.first %}
 									<figure class="tricks-content-card-img-figure">
-										<a href="#"><img src="{{ asset('build/images/pictures/' ~ picture.path) }}"></a>
+										<a href="{{ url }}"><img src="{{ asset('build/images/pictures/' ~ picture.path) }}"></a>
 									</figure>
 								{% endif %}
 							{% else %}
 								<figure class="tricks-content-card-img-figure">
-									<a href="#"><img src="{{ asset('build/images/pictures/default-picture.png') }}"></a>
+									<a href="{{ url }}"><img src="{{ asset('build/images/pictures/default-picture.png') }}"></a>
 								</figure>
 							{% endfor %}
 						{% endif %}
 					</div>
 					<div class="tricks-content-card-btn">
 						<button class="btn" type="button">
-							<a href="#">{{ trick.name }}</a>
+							<a href="{{ url }}">{{ trick.name }}</a>
 						</button>
 					</div>
 				</div>
