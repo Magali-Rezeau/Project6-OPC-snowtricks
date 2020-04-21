@@ -1,8 +1,10 @@
 {
-  "build/0.e4a99748.js": "/build/0.e4a99748.js",
-  "build/css/app.css": "/build/css/app.9d7d7a4a.css",
-  "build/js/app.js": "/build/js/app.1a44255a.js",
-  "build/runtime.js": "/build/runtime.e9dea5e6.js",
+  "build/css/app.css": "/build/css/app.css",
+  "build/js/add.js": "/build/js/add.js",
+  "build/js/app.js": "/build/js/app.js",
+  "build/runtime.js": "/build/runtime.js",
+  "build/vendors~js/add~js/app.js": "/build/vendors~js/add~js/app.js",
+  "build/vendors~js/app.js": "/build/vendors~js/app.js",
   "build/fonts/Chalkduster.woff": "/build/fonts/Chalkduster.05ecdaa0.woff",
   "build/fonts/Chalkduster.eot": "/build/fonts/Chalkduster.4a4bf398.eot",
   "build/fonts/Chalkduster.ttf": "/build/fonts/Chalkduster.bd9805cb.ttf",
@@ -59,5 +61,6 @@
   "build/images/pictures/tail-grab.jpg": "/build/images/pictures/tail-grab.b783df27.jpg",
   "build/images/pink-lady.jpg": "/build/images/pink-lady.d0ab8eee.jpg",
   "build/images/pink-lady2.jpg": "/build/images/pink-lady2.62e2c2d1.jpg",
-  "build/images/sprite.svg": "/build/images/sprite.75299b65.svg"
+  "build/images/sprite.svg": "/build/images/sprite.75299b65.svg",
+  "build/vendors~js/add.js": "/build/vendors~js/add.js"
 }

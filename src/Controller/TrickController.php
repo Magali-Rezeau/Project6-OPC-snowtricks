@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Trick;
 use App\Entity\Picture;
 use App\Form\TrickType;
-use App\Repository\TrickRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +24,27 @@ class TrickController extends AbstractController
        
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
+       
+        if($form->isSubmitted() && $form->isValid()) {
+            
+            foreach($trick->getPictures() as $picture ) {
+                $picture->setTrick($trick);
+                $entityManagerInterface->persist($picture);
+            }
+            foreach($trick->getVideos() as $video ) {
+                $video->setTrick($trick);
+                $entityManagerInterface->persist($video);
+            }
+
+            $entityManagerInterface->persist($trick);
+            $entityManagerInterface->flush();
+            
+            $this->addFlash('success', "La nouvelle figure  a bien été enregistrée.");
+
+            return $this->redirectToRoute('trick_show', [
+                'slug' => $trick->getSlug()
+            ]);
+        }
         return $this->render('trick/create.html.twig', [
             'controller_name' => 'TrickController',
             

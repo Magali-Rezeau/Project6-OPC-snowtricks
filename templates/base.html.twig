@@ -9,6 +9,13 @@
     </head>
     <body>
         {% include 'shared/header.html.twig' %}
+        {% for label, messages in app.flashes %}
+            <div class="{{ label }}">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
         {% block body %}{% endblock %}
         {% include 'shared/footer.html.twig' %}
         {% block javascripts %}{{ encore_entry_script_tags('js/app') }}{% endblock %}

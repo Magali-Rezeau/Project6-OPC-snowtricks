@@ -56,15 +56,15 @@ class Trick
     private $category;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="tricks", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick", orphanRemoval=true)
      */
     private $videos;
 
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
-        $this->videos = new ArrayCollection();
         $this->created_at = new DateTime();
+        $this->videos = new ArrayCollection();
     }
 
     public function slugify($string, $delimiter = '-') 
@@ -100,7 +100,7 @@ class Trick
     {
         return $this->slug;
     }
-
+    
     public function setSlug($slug): self
     {
         $this->slug = $this->slugify($slug);
@@ -143,7 +143,7 @@ class Trick
 
         return $this;
     }
-
+   
     /**
      * @return Collection|Picture[]
      */
@@ -199,7 +199,7 @@ class Trick
     {
         if (!$this->videos->contains($video)) {
             $this->videos[] = $video;
-            $video->setTricks($this);
+            $video->setTrick($this);
         }
 
         return $this;
@@ -210,11 +210,12 @@ class Trick
         if ($this->videos->contains($video)) {
             $this->videos->removeElement($video);
             // set the owning side to null (unless already changed)
-            if ($video->getTricks() === $this) {
-                $video->setTricks(null);
+            if ($video->getTrick() === $this) {
+                $video->setTrick(null);
             }
         }
 
         return $this;
     }
+
 }

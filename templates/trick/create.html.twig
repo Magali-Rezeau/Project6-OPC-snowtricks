@@ -1,15 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouvelle Trick{% endblock %}
+{% block title %}Nouvelle Trick
+{% endblock %}
 
 {% block body %}
-<section class="add-trick">
-    <div class="add-trick-title">
-        <h1>Ajouter une nouvelle figure</h1>
-    </div>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button type="submit" class="btn">Valider</button>
-    {{ form_end(form) }}
-</section> 
+	<section class="add-trick">
+		<div class="add-trick-title">
+			<h1>Ajouter une nouvelle figure</h1>
+		</div>
+		<div class="add-trick-form">
+			{{ form_start(form) }}
+			{{ form_row(form.name)}}
+			{{ form_row(form.description)}}
+			{{ form_row(form.category)}}
+            <div class="add-trick-form-pictures">
+			<div id="picture-fields-list" data-prototype="{{ form_widget(form.pictures.vars.prototype)|e }}" data-widget-tags="{{ '<div></div>'|e }}" data-widget-counter="{{ form.pictures|length }}">
+				{% for picture in form.pictures %}
+					<div>{{ form_row(picture.path) }}
+						{{ form_row(picture.caption) }}
+					</div>
+				{% endfor %}
+			</div>
+			<button type="button" class="add-another-collection-widget btn" data-list-selector="#picture-fields-list">Ajouter une image</button>
+            </div>
+            <div class="add-trick-form-videos">
+			<div id="video-fields-list" data-prototype="{{ form_widget(form.videos.vars.prototype)|e }}" data-widget-tags="{{ '<div></div>'|e }}" data-widget-counter="{{ form.videos|length }}">
+				{% for video in form.videos %}
+					<div>{{ form_row(video.name) }}
+						{{ form_row(video.url) }}
+					</div>
+				{% endfor %}
+			</div>
+			<button type="button" class="add-another-collection-widget btn" data-list-selector="#video-fields-list">Ajouter une video</button>
+            </div>
+             <button type="submit" class="btn">Valider</button>
+			{{ form_end(form) }}
+		</div>
+    </section>
 {% endblock %}
+{% block javascripts %}{{ encore_entry_script_tags('js/add') }}{% endblock %}
