@@ -1,14 +1,14 @@
 jQuery(document).ready(function() {
    
     // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
-    var $container = $('div#trick_pictures');
-    console.log($container);
+    $containerPicture = $('div#trick_pictures');
+    console.log($containerPicture);
     // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
-    var index = $container.find('input').length;
+    var index = $containerPicture.find('input').length;
 
     // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
     $('#add_picture').click(function(e) {
-      addPicture($container);
+      addPicture($containerPicture);
 
       e.preventDefault(); // évite qu'un # apparaisse dans l'URL
       return false;
@@ -16,45 +16,45 @@ jQuery(document).ready(function() {
 
     // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
     if (index == 0) {
-      addPicture($container);
+      addPicture($containerPicture);
     } else {
       // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
-      $container.children('div').each(function() {
+      $containerPicture.children('div').each(function() {
         addDeleteLink($(this));
       });
     }
 
     // La fonction qui ajoute un formulaire CategoryType
-    function addPicture($container) {
+    function addPicture($containerPicture) {
       // Dans le contenu de l'attribut « data-prototype », on remplace :
       // - le texte "__name__label__" qu'il contient par le label du champ
       // - le texte "__name__" qu'il contient par le numéro du champ
-      var template = $container.attr('data-prototype').replace(/__name__/g,        index)
+      var template = $containerPicture.attr('data-prototype').replace(/__name__/g,        index)
       ;
 
       // On crée un objet jquery qui contient ce template
-      var $prototype = $(template);
+      $prototype = $(template);
 
       // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
-      addDeleteLink($prototype);
+      addDeleteLinkPicture($prototype);
 
       // On ajoute le prototype modifié à la fin de la balise <div>
-      $container.append($prototype);
+      $containerPicture.append($prototype);
 
       // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
       index++;
     }
 
     // La fonction qui ajoute un lien de suppression d'une catégorie
-    function addDeleteLink($prototype) {
+    function addDeleteLinkPicture($prototype) {
       // Création du lien
-      var $deleteLink = $('<button type="button" class="btn-delete-picture">X</button>');
+      $deleteLinkPicture = $('<button type="button" class="btn-delete-picture">X</button>');
 
       // Ajout du lien
-      $prototype.append($deleteLink);
+      $prototype.append($deleteLinkPicture);
 
       // Ajout du listener sur le clic du lien pour effectivement supprimer la catégorie
-      $deleteLink.click(function(e) {
+      $deleteLinkPicture.click(function(e) {
         $prototype.remove();
 
         e.preventDefault(); // évite qu'un # apparaisse dans l'URL
@@ -65,14 +65,14 @@ jQuery(document).ready(function() {
 
 
     // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
-    var $container = $('div#trick_videos');
-    console.log($container);
+    $containerVideo = $('div#trick_videos');
+    console.log($containerVideo);
     // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
-    var index = $container.find('input').length;
+    var index = $containerVideo.find('input').length;
 
     // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
     $('#add_video').click(function(e) {
-      addVideo($container);
+      addVideo($containerVideo);
 
       e.preventDefault(); // évite qu'un # apparaisse dans l'URL
       return false;
@@ -80,45 +80,45 @@ jQuery(document).ready(function() {
 
     // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
     if (index == 0) {
-      addVideo($container);
+      addVideo($containerVideo);
     } else {
       // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
-      $container.children('div').each(function() {
+      $containerVideo.children('div').each(function() {
         addDeleteLink($(this));
       });
     }
 
     // La fonction qui ajoute un formulaire CategoryType
-    function addVideo($container) {
+    function addVideo($containerVideo) {
       // Dans le contenu de l'attribut « data-prototype », on remplace :
       // - le texte "__name__label__" qu'il contient par le label du champ
       // - le texte "__name__" qu'il contient par le numéro du champ
-      var template = $container.attr('data-prototype').replace(/__name__/g,        index)
+      var template = $containerVideo.attr('data-prototype').replace(/__name__/g,        index)
       ;
 
       // On crée un objet jquery qui contient ce template
-      var $prototype = $(template);
+      $prototype = $(template);
 
       // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
-      addDeleteLink($prototype);
+      addDeleteLinkVideo($prototype);
 
       // On ajoute le prototype modifié à la fin de la balise <div>
-      $container.append($prototype);
+      $containerVideo.append($prototype);
 
       // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
       index++;
     }
 
     // La fonction qui ajoute un lien de suppression d'une catégorie
-    function addDeleteLink($prototype) {
+    function addDeleteLinkVideo($prototype) {
       // Création du lien
-      var $deleteLink = $('<button type="button" class="btn-delete-video">X</button>');
+      $deleteLinkVideo = $('<button type="button" class="btn-delete-video">X</button>');
 
       // Ajout du lien
-      $prototype.append($deleteLink);
+      $prototype.append($deleteLinkVideo);
 
       // Ajout du listener sur le clic du lien pour effectivement supprimer la catégorie
-      $deleteLink.click(function(e) {
+      $deleteLinkVideo.click(function(e) {
         $prototype.remove();
 
         e.preventDefault(); // évite qu'un # apparaisse dans l'URL
