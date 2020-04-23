@@ -3,6 +3,7 @@
   "build/js/add.js": "/build/js/add.js",
   "build/js/app.js": "/build/js/app.js",
   "build/runtime.js": "/build/runtime.js",
+  "build/vendors~js/add.js": "/build/vendors~js/add.js",
   "build/vendors~js/add~js/app.js": "/build/vendors~js/add~js/app.js",
   "build/vendors~js/app.js": "/build/vendors~js/app.js",
   "build/fonts/Chalkduster.woff": "/build/fonts/Chalkduster.05ecdaa0.woff",
@@ -61,6 +62,5 @@
   "build/images/pictures/tail-grab.jpg": "/build/images/pictures/tail-grab.b783df27.jpg",
   "build/images/pink-lady.jpg": "/build/images/pink-lady.d0ab8eee.jpg",
   "build/images/pink-lady2.jpg": "/build/images/pink-lady2.62e2c2d1.jpg",
-  "build/images/sprite.svg": "/build/images/sprite.75299b65.svg",
-  "build/vendors~js/add.js": "/build/vendors~js/add.js"
+  "build/images/sprite.svg": "/build/images/sprite.75299b65.svg"
 }

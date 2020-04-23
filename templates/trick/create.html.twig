@@ -2,40 +2,85 @@
 
 {% block title %}Nouvelle Trick
 {% endblock %}
-
+{% form_theme form _self %}
 {% block body %}
 	<section class="add-trick">
 		<div class="add-trick-title">
 			<h1>Ajouter une nouvelle figure</h1>
 		</div>
-		<div class="add-trick-form">
-			{{ form_start(form) }}
-			{{ form_row(form.name)}}
-			{{ form_row(form.description)}}
-			{{ form_row(form.category)}}
-            <div class="add-trick-form-pictures">
-			<div id="picture-fields-list" data-prototype="{{ form_widget(form.pictures.vars.prototype)|e }}" data-widget-tags="{{ '<div></div>'|e }}" data-widget-counter="{{ form.pictures|length }}">
-				{% for picture in form.pictures %}
-					<div>{{ form_row(picture.path) }}
-						{{ form_row(picture.caption) }}
-					</div>
-				{% endfor %}
-			</div>
-			<button type="button" class="add-another-collection-widget btn" data-list-selector="#picture-fields-list">Ajouter une image</button>
-            </div>
-            <div class="add-trick-form-videos">
-			<div id="video-fields-list" data-prototype="{{ form_widget(form.videos.vars.prototype)|e }}" data-widget-tags="{{ '<div></div>'|e }}" data-widget-counter="{{ form.videos|length }}">
-				{% for video in form.videos %}
-					<div>{{ form_row(video.name) }}
-						{{ form_row(video.url) }}
-					</div>
-				{% endfor %}
-			</div>
-			<button type="button" class="add-another-collection-widget btn" data-list-selector="#video-fields-list">Ajouter une video</button>
-            </div>
-             <button type="submit" class="btn">Valider</button>
-			{{ form_end(form) }}
-		</div>
-    </section>
+
+		{{ form_start(form, { 'attr': {'class': 'add-trick-form'} }) }}
+		
+			{{ form_row(form.name) }}
+		
+			{{ form_row(form.description) }}
+		
+		
+			{{ form_row(form.category) }}
+			
+		
+	
+			
+				
+				{{ form_row(form.pictures) }}
+				
+			
+		
+		
+		
+			
+				{{ form_row(form.videos) }}
+				
+			
+
+		<button type="submit" class="btn btn-form">Valider</button>
+		{{ form_end(form) }}
+
+	</section>
 {% endblock %}
-{% block javascripts %}{{ encore_entry_script_tags('js/add') }}{% endblock %}
+{% block form_row %}
+<div class="add-trick-form-row">
+{{ form_label(form) }}
+{{ form_errors(form) }}
+{{ form_widget(form) }}
+</div>
+{% endblock %}
+{% block _trick_pictures_row %}
+<h3>Ajouter des photos</h3>
+
+{{ form_errors(form) }}
+{{ form_widget(form) }}
+
+<button type="button" class="btn-add-picture" id="add-picture">Ajouter une image</button>
+{% endblock %}
+{% block _trick_pictures_entry_widget %}
+<div class="add-trick-form-entry">
+{{ form_label(form.path)}}
+{{ form_widget(form.path)}}
+</div>
+<div class="add-trick-form-entry">
+{{ form_label(form.caption)}}
+{{ form_widget(form.caption)}}
+</div>
+{% endblock %}
+{% block _trick_videos_row %}
+<h3>Ajouter des vidéos</h3>
+
+{{ form_errors(form) }}
+{{ form_widget(form) }}
+
+<button type="button" class="btn-add-picture" id="add-video">Ajouter une vidéo</button>
+{% endblock %}
+{% block _trick_videos_entry_widget %}
+<div class="add-trick-form-entry">
+{{ form_label(form.name)}}
+{{ form_widget(form.name)}}
+</div>
+<div class="add-trick-form-entry">
+{{ form_label(form.url)}}
+{{ form_widget(form.url)}}
+</div>
+{% endblock %}
+{% block javascripts %}
+	{{ encore_entry_script_tags('js/add') }}
+{% endblock %}
