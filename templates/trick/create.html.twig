@@ -8,34 +8,15 @@
 		<div class="add-trick-title">
 			<h1>Ajouter une nouvelle figure</h1>
 		</div>
-
 		{{ form_start(form, { 'attr': {'class': 'add-trick-form'} }) }}
-		
 			{{ form_row(form.name) }}
-		
 			{{ form_row(form.description) }}
-		
-		
 			{{ form_row(form.category) }}
-			
-		
-	
-			
-				
-				{{ form_row(form.pictures) }}
-				
-			
-		
-		
-		
-			
-				{{ form_row(form.videos) }}
-				
-			
-
-		<button type="submit" class="btn btn-form">Valider</button>
+			{{ form_row(form.pictures) }}
+			{{ form_row(form.videos) }}
+			<button type="submit" class="btn btn-form">Valider</button>
 		{{ form_end(form) }}
-
+	
 	</section>
 {% endblock %}
 {% block form_row %}

@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PictureRepository")
@@ -31,7 +33,7 @@ class Picture
      * @ORM\JoinColumn(nullable=false)
      */
     private $trick;
-
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -60,7 +62,7 @@ class Picture
 
         return $this;
     }
-
+    
     public function getTrick(): ?Trick
     {
         return $this->trick;

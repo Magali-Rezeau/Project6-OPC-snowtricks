@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Trick;
-use App\Entity\Picture;
 use App\Form\TrickType;
+use App\Service\UploaderHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,19 +18,29 @@ class TrickController extends AbstractController
      * 
      * @return Response
      */
-    public function create(Request $request, EntityManagerInterface $entityManagerInterface)
-    {
+    public function create(Request $request, EntityManagerInterface $entityManagerInterface, UploaderHelper $uploaderHelper)
+    {  
         $trick = new Trick();
        
         $form = $this->createForm(TrickType::class, $trick);
+        
         $form->handleRequest($request);
-       
+        
         if($form->isSubmitted() && $form->isValid()) {
-            
+
             foreach($trick->getPictures() as $picture ) {
+
+                foreach($form['pictures'] as $key => $value) {
+                    $uploadedFile = $form['pictures'][$key]['path']->getData();
+                }
+                if ($uploadedFile) {
+                $newFilename = $uploaderHelper->uploadPicture($uploadedFile);
+                $picture->setPath($newFilename);
+                }
                 $picture->setTrick($trick);
                 $entityManagerInterface->persist($picture);
             }
+
             foreach($trick->getVideos() as $video ) {
                 $video->setTrick($trick);
                 $entityManagerInterface->persist($video);
@@ -63,7 +73,5 @@ class TrickController extends AbstractController
             'controller_name' => 'TrickController',
             'trick' => $trick
         ]);
-    }
-
-    
+    }  
 }

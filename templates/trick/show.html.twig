@@ -12,7 +12,7 @@
         {% if loop.first %}
         <div class="trick-content-img">
             <figure class="trick-content-img-figure">
-                <img src="{{ asset('build/images/pictures/' ~ picture.path) }}">
+                <img src="{{ asset('uploads/pictures/' ~ picture.path) }}">
             </figure>
         </div>
         {% endif %}
@@ -20,7 +20,7 @@
         <div class="trick-content-img">
             <figure class="tricks-content-card-img-figure">
                 <a href="#"><img
-                        src="{{ asset('build/images/pictures/default-picture.png') }}"></a>
+                        src="{{ asset('uploads/pictures/default-picture.png') }}"></a>
             </figure>
         </div>
         {% endfor %}
@@ -33,7 +33,7 @@
                 <div class="trick-content-thumbnail">
                     {% for picture in trick.pictures %}
                     <figure class="trick-content-thumbnail-figure">
-                        <img src="{{ asset('build/images/pictures/' ~ picture.path) }}">
+                        <img src="{{ asset('uploads/pictures/' ~ picture.path) }}">
                     </figure>
                     {% endfor %}
                 </div>
