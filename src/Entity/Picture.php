@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PictureRepository")
+ * @UniqueEntity(fields={"caption"}, message="Ce titre est déjà utilisé.")
  */
 class Picture
 {
@@ -25,6 +26,12 @@ class Picture
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     * min=3,
+     * max=25, 
+     * minMessage="Le titre de la photo doit contenir plus de 3 caractères.",
+     * maxMessage="Le titre de la photo ne peut pas contenir plus de 25 caractères."
+     * )
      */
     private $caption;
 

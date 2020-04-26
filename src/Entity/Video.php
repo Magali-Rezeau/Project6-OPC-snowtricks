@@ -3,9 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\VideoRepository")
+ * @UniqueEntity(fields={"url"}, message="Cette vidéo existe déjà.")
+ * @UniqueEntity(fields={"name"}, message="Ce titre est déjà utilisé.")
  */
 class Video
 {
@@ -18,11 +22,18 @@ class Video
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     * min=3,
+     * max=25, 
+     * minMessage="Le titre de la vidéo doit contenir plus de 3 caractères.",
+     * maxMessage="Le titre de la vidéo ne peut pas contenir plus de 25 caractères."
+     * )
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Url()
      */
     private $url;
 

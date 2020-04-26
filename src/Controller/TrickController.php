@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class TrickController extends AbstractController
 {
     /**
-     * @Route("/trick/create", name="trick_create")
+     * @Route("/trick/new", name="trick_new")
      * 
      * @return Response
      */
@@ -55,9 +55,8 @@ class TrickController extends AbstractController
                 'slug' => $trick->getSlug()
             ]);
         }
-        return $this->render('trick/create.html.twig', [
+        return $this->render('trick/new.html.twig', [
             'controller_name' => 'TrickController',
-            
             'form' => $form->createView()
         ]);
     }
