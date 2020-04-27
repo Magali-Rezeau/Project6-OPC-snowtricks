@@ -32,11 +32,12 @@ class TrickController extends AbstractController
 
                 foreach($form['pictures'] as $key => $value) {
                     $uploadedFile = $form['pictures'][$key]['path']->getData();
+                    if ($uploadedFile) {
+                        $newFilename = $uploaderHelper->uploadPicture($uploadedFile);
+                        $picture->setPath($newFilename);
+                        }
                 }
-                if ($uploadedFile) {
-                $newFilename = $uploaderHelper->uploadPicture($uploadedFile);
-                $picture->setPath($newFilename);
-                }
+               
                 $picture->setTrick($trick);
                 $entityManagerInterface->persist($picture);
             }
