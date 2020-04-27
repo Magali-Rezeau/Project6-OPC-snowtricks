@@ -21,6 +21,12 @@ class Picture
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\File(
+     * maxSize="1024k",
+     * maxSizeMessage="Le fichier excède 1Mo.",
+     * mimeTypes={"image/png", "image/jpeg", "image/jpg"},
+     * mimeTypesMessage= "Les photos doivent être au format png, jpeg ou jpg"
+     * )
      */
     private $path;
 
