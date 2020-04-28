@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PictureRepository")
+ * @UniqueEntity(fields={"caption"}, message="Ce titre est déjà utilisé.")
  */
 class Picture
 {
@@ -18,11 +21,23 @@ class Picture
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\File(
+     * maxSize="1024k",
+     * maxSizeMessage="Le fichier excède 1Mo.",
+     * mimeTypes={"image/png", "image/jpeg", "image/jpg"},
+     * mimeTypesMessage= "Les photos doivent être au format png, jpeg ou jpg"
+     * )
      */
     private $path;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     * min=3,
+     * max=25, 
+     * minMessage="Le titre de la photo doit contenir plus de 3 caractères.",
+     * maxMessage="Le titre de la photo ne peut pas contenir plus de 25 caractères."
+     * )
      */
     private $caption;
 
@@ -31,7 +46,7 @@ class Picture
      * @ORM\JoinColumn(nullable=false)
      */
     private $trick;
-
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -60,7 +75,7 @@ class Picture
 
         return $this;
     }
-
+    
     public function getTrick(): ?Trick
     {
         return $this->trick;

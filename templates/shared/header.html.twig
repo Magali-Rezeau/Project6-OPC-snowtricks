@@ -1,4 +1,9 @@
-<header class={% if app.request.attributes.get('_route') == "home" %}"home-header" {% else %}"header"{% endif %}>
+<header class=
+    {% if app.request.attributes.get('_route') == "home" %}
+        "home-header" 
+    {% else %}
+        "header"
+    {% endif %}>
     <div class="home-header-logo">
         <img src="{{ asset('build/images/logo.png') }}" alt="logo-snowtricks" class="home-header-logo-img">
     </div>
@@ -6,6 +11,7 @@
         <ul>
             <li><a href="{{ path('home') }}">Home</a></li>
             <li><a href="{{ path('home') }}#tricks">Tricks</a></li>
+            <li><a href="{{ path('trick_new') }}">New trick</a></li>
             {% if not app.user %}
             <li><a href="#">S'inscrire</a></li>
             <li><a href="#">Se connecter</a></li>
@@ -27,6 +33,7 @@
                     <ul>
                         <li><a href="{{ path('home') }}">Home</a></li>
                         <li><a href="{{ path('home') }}#tricks">Tricks</a></li>
+                        <li><a href="{{ path('trick_new') }}">New trick</a></li>
                         {% if not app.user %}
                         <li><a href="#">S'inscrire</a></li>
                         <li><a href="#">Se connecter</a></li>

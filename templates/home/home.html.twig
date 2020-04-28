@@ -51,12 +51,12 @@
 							{% for picture in trick.pictures %}
 								{% if loop.first %}
 									<figure class="tricks-content-card-img-figure">
-										<a href="{{ url }}"><img src="{{ asset('build/images/pictures/' ~ picture.path) }}"></a>
+										<a href="{{ url }}"><img src="{{ asset('uploads/pictures/' ~ picture.path) }}"></a>
 									</figure>
 								{% endif %}
 							{% else %}
 								<figure class="tricks-content-card-img-figure">
-									<a href="{{ url }}"><img src="{{ asset('build/images/pictures/default-picture.png') }}"></a>
+									<a href="{{ url }}"><img src="{{ asset('uploads/pictures/default-picture.png') }}"></a>
 								</figure>
 							{% endfor %}
 						{% endif %}
@@ -79,12 +79,12 @@
 							{% for picture in trick.pictures %}
 								{% if loop.first %}
 									<figure class="tricks-content-card-img-figure">
-										<a href="{{ url }}"><img src="{{ asset('build/images/pictures/' ~ picture.path) }}"></a>
+										<a href="{{ url }}"><img src="{{ asset('uploads/pictures/' ~ picture.path) }}"></a>
 									</figure>
 								{% endif %}
 							{% else %}
 								<figure class="tricks-content-card-img-figure">
-									<a href="{{ url }}"><img src="{{ asset('build/images/pictures/default-picture.png') }}"></a>
+									<a href="{{ url }}"><img src="{{ asset('uploads/pictures/default-picture.png') }}"></a>
 								</figure>
 							{% endfor %}
 						{% endif %}

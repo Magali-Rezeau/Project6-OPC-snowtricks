@@ -6,7 +6,6 @@ use App\Entity\Trick;
 use App\Entity\Video;
 use App\Entity\Picture;
 use App\Entity\Category;
-use App\Service\SlugConvertor;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -14,7 +13,6 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        
         $video1 = new Video();
         $video1
             ->setName("How to Mute Grab on a Snowboard - Goofy")
@@ -158,7 +156,6 @@ class AppFixtures extends Fixture
         $category6->setName("Rotations désaxées");
         $manager->persist($category6);
         
-        $slug = new SlugConvertor();
         $trick1 = new Trick();
         $trick1
             ->setName("Mute")

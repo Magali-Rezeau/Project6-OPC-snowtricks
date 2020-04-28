@@ -7,9 +7,15 @@ use App\Entity\Picture;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
+ * @UniqueEntity(
+ * fields={"name"},
+ * message="Une autre figure possède déjà ce nom."
+ * )
  */
 class Trick
 {
@@ -22,6 +28,13 @@ class Trick
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     * min=3,
+     * max=25, 
+     * minMessage="Le nom de la figure doit contenir plus de 3 caractères.", 
+     * maxMessage="Le nom de la figure ne peut pas contenir plus de 25 caractères."
+     * )
+     * @Assert\NotBlank
      */
     private $name;
 
@@ -47,6 +60,7 @@ class Trick
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="trick", orphanRemoval=true)
+     * @Assert\Valid()
      */
     private $pictures;
 
@@ -56,15 +70,16 @@ class Trick
     private $category;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="tricks", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick", orphanRemoval=true)
+     * @Assert\Valid()
      */
     private $videos;
 
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
-        $this->videos = new ArrayCollection();
         $this->created_at = new DateTime();
+        $this->videos = new ArrayCollection();
     }
 
     public function slugify($string, $delimiter = '-') 
@@ -100,7 +115,7 @@ class Trick
     {
         return $this->slug;
     }
-
+    
     public function setSlug($slug): self
     {
         $this->slug = $this->slugify($slug);
@@ -143,7 +158,7 @@ class Trick
 
         return $this;
     }
-
+   
     /**
      * @return Collection|Picture[]
      */
@@ -199,7 +214,7 @@ class Trick
     {
         if (!$this->videos->contains($video)) {
             $this->videos[] = $video;
-            $video->setTricks($this);
+            $video->setTrick($this);
         }
 
         return $this;
@@ -210,11 +225,12 @@ class Trick
         if ($this->videos->contains($video)) {
             $this->videos->removeElement($video);
             // set the owning side to null (unless already changed)
-            if ($video->getTricks() === $this) {
-                $video->setTricks(null);
+            if ($video->getTrick() === $this) {
+                $video->setTrick(null);
             }
         }
 
         return $this;
     }
+
 }

@@ -3,8 +3,17 @@
     "js/app": {
       "js": [
         "/build/runtime.js",
+        "/build/vendors~js/add~js/app.js",
         "/build/vendors~js/app.js",
         "/build/js/app.js"
+      ]
+    },
+    "js/add": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~js/add~js/app.js",
+        "/build/vendors~js/add.js",
+        "/build/js/add.js"
       ]
     },
     "css/app": {
