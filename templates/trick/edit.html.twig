@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification d'une figure{% endblock %}
+{% form_theme form _self %}
+{% block body %}
+<section class="edit-trick">
+    <div class="edit-trick-title">
+        <h1>Modification de la figure</h1>
+        <h2>{{ trick.name }}</h2>
+    </div>
+    <div class="edit-trick-content">
+        {% for picture in trick.pictures %}
+        {% if loop.first %}
+        <div class="edit-trick-content-img">
+            <figure class="edit-trick-content-img-figure">
+                <img src="{{ asset('uploads/pictures/' ~ picture.path) }}">
+            </figure>
+        </div>
+        {% endif %}
+        {% else %}
+        <div class="edit-trick-content-img">
+            <figure class="edit-trick-content-card-img-figure">
+                <a href="#"><img
+                        src="{{ asset('uploads/pictures/default-picture.png') }}"></a>
+            </figure>
+        </div>
+        {% endfor %}
+        <div class="edit-trick-content-more">
+            <input type="checkbox" hidden class="edit-trick-content-more-state" id="read-more">
+            <div class="edit-trick-content-more-target">
+                <div class="edit-trick-content-title-img">
+                    <h3>Photos</h3>
+                </div>
+                <div class="edit-trick-content-thumbnail">
+                    {% for picture in trick.pictures %}
+                    <figure class="edit-trick-content-thumbnail-figure">
+                        <img src="{{ asset('uploads/pictures/' ~ picture.path) }}">
+                    </figure>
+                    {% endfor %}
+                </div>
+                <div class="edit-trick-content-title-videos">
+                    <h3>Vidéos</h3>
+                </div>
+                <div class="edit-trick-content-videos">
+                    {% for video in trick.videos %}
+                    <iframe src="{{ video.url }}" width="50%" frameborder="100" width="1920" height="1080"
+                        allowfullscreen></iframe>
+                    {% endfor %}
+                </div>
+            </div>
+            <label for="read-more" class="edit-trick-content-more-trigger_closed btn">Voir plus</label>
+            <label for="read-more" class="edit-trick-content-more-trigger_opened btn">Voir Moins</label>
+        </div>
+       
+            	{{ form_start(form, { 'attr': {'class': 'edit-trick-content-form'} }) }}
+		{{ form_row(form.name) }}
+		{{ form_row(form.description) }}
+		{{ form_row(form.category) }}
+	
+		<button type="submit" class="btn btn-form">Valider</button>
+		{{ form_end(form) }}
+       
+        <div class="edit-trick-content-details">
+            <ul class="edit-trick-content-details-list">
+                <li>Date de création : {{ trick.createdAt|date("d/m/Y") }}</li>
+                <li>Date de modification : {{ trick.updatedAt|date("d/m/Y")}}</li>
+              
+            </ul>
+        </div>
+    </div>
+    </section>
+
+    {% endblock %}
+
+
+
+

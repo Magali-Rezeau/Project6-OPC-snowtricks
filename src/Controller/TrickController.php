@@ -63,6 +63,23 @@ class TrickController extends AbstractController
     }
 
     /**
+     * @Route("/trick/{slug}/edit", name="trick_edit")
+     * 
+     * @return Response
+     */
+    public function edit(Trick $trick, Request $request, EntityManagerInterface $entityManagerInterface)
+    {
+        $form = $this->createForm(TrickType::class, $trick);
+        $form->handleRequest($request);
+
+        return $this->render('trick/edit.html.twig', [
+            'controller_name' => 'TrickController',
+            'trick' => $trick,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
      * @Route("/trick/{slug}", name="trick_show")
      * 
      * @return Response
