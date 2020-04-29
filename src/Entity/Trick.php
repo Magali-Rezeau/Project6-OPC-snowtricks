@@ -59,7 +59,7 @@ class Trick
     private $updated_at;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="trick", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="trick", cascade = {"persist"}, orphanRemoval=true)
      * @Assert\Valid()
      */
     private $pictures;
@@ -70,7 +70,7 @@ class Trick
     private $category;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick", cascade = {"persist"}, orphanRemoval=true)
      * @Assert\Valid()
      */
     private $videos;

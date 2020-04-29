@@ -24,9 +24,9 @@ class Video
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
      * min=3,
-     * max=25, 
+     * max=50, 
      * minMessage="Le titre de la vidéo doit contenir plus de 3 caractères.",
-     * maxMessage="Le titre de la vidéo ne peut pas contenir plus de 25 caractères."
+     * maxMessage="Le titre de la vidéo ne peut pas contenir plus de 50 caractères."
      * )
      */
     private $name;

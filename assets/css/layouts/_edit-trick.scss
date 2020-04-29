@@ -1,108 +1,118 @@
 .edit-trick {
     display: grid;
     grid-template-columns: 10rem 1fr 10rem;
-    grid-template-rows: 15rem 1fr;
+    grid-template-rows: 15rem auto auto;
     align-items: center;
     justify-items: center;
-    margin: 5rem;
+    margin: 5rem 15rem;
     @include shadow;
 
     @include medium-only {
-        grid-template-columns: 5rem 1fr 5rem;
-        grid-template-rows: 10rem 1fr;
+        grid-template-columns: 4rem 1fr 4rem;
+        margin: 3rem 5rem;
     }
     @include small-only {
-        grid-template-columns:3rem 1fr 3rem;  
-        margin: 2rem;
+        grid-template-columns: 2rem 1fr 2rem;
+        grid-template-rows: 10rem auto auto;
+        margin: 0 2rem;
     }
     @include smallest-only {
         grid-template-columns: 2rem 1fr 2rem;
         margin: 1rem;
     }
 
-    & div {
-        margin: 4rem 0;
-
-        @include small-only {
-            margin: 2rem 0;
-        }  
-    } 
-
-    & div:nth-child(2) {
-        margin: 1rem 0; 
-    }
-
     &-title {
+        width: 100%;
         grid-column: 2/3;
         grid-row: 1/2;
+        align-self: center;
+        text-align: center;
+
+        & h1 {
+            font-size: 3rem;
+
+            @include small-only {
+                font-size: 1.3rem;
+            }
+        }
     }
 
-    &-content, &-content-more {
+    &-content,
+    &-content-more {
         grid-column: 2/3;
         grid-row: 2/3;
         text-align: justify;
+        width: 100%;
 
-        &-title-img, &-title-videos {
+        &-picture-title,
+        &-video-title {
             width: 100%;
             text-align: center;
         }
 
-        &-img {
-           
-            @include medium-only {
-               margin: 2rem 0;
-            }
+        &-picture {
+            width: 100%;
 
-            &-figure img {
+            &-featured img {
                 width: 100%;
                 display: block;
             }
-        }
 
-        &-thumbnail {
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            align-content: center;
+            &-thumbnail {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                align-content: center;
+                text-align: center;
 
-            &-figure img {
-                width: 20rem;
-                height: 20rem;
-                object-fit: cover;
-                display: block;
-                margin: 1rem;
+                &-figure img {
+                    width: 20rem;
+                    height: 20rem;
+                    object-fit: cover;
+                    display: block;
+                    margin: 1rem;
 
-                @include medium-only {
-                    width: 15rem;
-                    height: 15rem;
+                    @include medium-only {
+                        width: 15rem;
+                        height: 15rem;
+                    }
+                    @include small-only {
+                        width: 10rem;
+                        height: 10rem;
+                    }
                 }
             }
-
         }
 
-        &-videos {
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            align-content: center;
+        &-video {
+
+            &-thumbnail {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                align-content: center;
+                text-align: center;
+            }
 
             & iframe {
                 width: 20rem;
                 height: 20rem;
                 margin: 1rem;
+
                 @include medium-only {
                     width: 15rem;
                     height: 15rem;
                 }
             }
         }
-       
+
         &-details {
-           
+            margin: 5rem 0;
+
             @include medium-only {
                 font-size: 1rem;
             }
@@ -112,11 +122,12 @@
             @include smallest-only {
                 font-size: .4rem;
             }
-          
+
             &-list {
                 display: flex;
                 justify-content: space-evenly;
                 align-items: center;
+
                 @include small-only {
                     text-align: center;
                 }
@@ -132,20 +143,28 @@
                     }
                 }
             }
-        }  
+        }
+
+        & button {
+
+            margin: 3rem auto;
+            display: block;
+        }
     }
 
     &-content-more {
-       
-        &-target{
+
+        &-target {
             display: block;
+
             @include medium-only {
                 display: none;
             }
         }
 
-        &-trigger_opened, &-trigger_closed {
-            margin: 0 auto;
+        &-trigger_opened,
+        &-trigger_closed {
+            margin: 5rem auto;
             display: none;
 
             @include medium-only {
@@ -182,10 +201,134 @@
         }
 
         &-trigger_closed {
-            
+
             @include medium-only {
-                display:flex;
+                display: flex;
             }
-        } 
+        }
+    }
+
+    &-content-form {
+        grid-column: 2/3;
+        grid-row: 2/3;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+
+        & h2 {
+            margin: 8rem auto 2rem auto;
+            font-size: 2.5rem;
+
+            @include small-only {
+                margin: 3rem auto 1rem auto;
+                font-size: 1.2rem;
+            }
+        }
+
+        &-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin: 2rem 0;
+
+            @include medium-only {
+                margin: 1rem 0;
+            }
+
+            @include small-only {
+                flex-direction: column;
+            }
+
+            & label {
+                width: 30%;
+                display: block;
+
+                @include small-only {
+                    height: 2rem;
+                    width: 100%;
+                    align-self: flex-start;
+                }
+            }
+
+            & input {
+                width: 70%;
+                height: 5rem;
+                display: block;
+
+                @include small-only {
+                    height: 2rem;
+                    width: 100%;
+                }
+            }
+
+            & textarea {
+                width: 70%;
+                height: 20rem;
+
+                @include small-only {
+                    height: 15rem;
+                    width: 100%;
+                }
+            }
+        }
+
+        & #trick_pictures,
+        & #trick_videos {
+            width: 100%;
+        }
+
+        &-entry {
+            width: 45%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            position: relative;
+            align-items: center;
+
+            @include medium-only {
+                flex-wrap: nowrap;
+            }
+            @include small-only {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            & input[type="file"] {
+                display: block;
+                width: 25rem;
+                position: absolute;
+                top: 5%;
+                left: 20%;
+
+                @include medium-only {
+                    left: 20%;
+                    top: 0;
+                }
+                @include small-only {
+                    position: initial;
+                    width: 100%;
+                    height: 3rem;
+                }
+            }
+
+            & label {
+                width: 20%;
+            }
+        }
+
+        &-error ul li {
+            color: red;
+            font-size: 1.5rem;
+
+            @include medium-only {
+                font-size: 1.2rem;
+            }
+            @include small-only {
+                font-size: .8rem;
+            }
+        }
     }
 }

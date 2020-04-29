@@ -27,17 +27,17 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()) {
+             
+            $pictures = $form['pictures']->getData();
+            foreach($pictures as $picture ) {
+                
 
-            foreach($trick->getPictures() as $picture ) {
-
-                foreach($form['pictures'] as $key => $value) {
-                    $uploadedFile = $form['pictures'][$key]['path']->getData();
-                    if ($uploadedFile) {
-                        $newFilename = $uploaderHelper->uploadPicture($uploadedFile);
-                        $picture->setPath($newFilename);
-                        }
-                }
-               
+                 $uploadedFile = $picture->getFile();
+                
+                 if($uploadedFile) {
+                     $newFilename = $uploaderHelper->uploadPicture($uploadedFile);
+                     $picture->setPath($newFilename);
+                 } 
                 $picture->setTrick($trick);
                 $entityManagerInterface->persist($picture);
             }
@@ -67,11 +67,43 @@ class TrickController extends AbstractController
      * 
      * @return Response
      */
-    public function edit(Trick $trick, Request $request, EntityManagerInterface $entityManagerInterface)
+    public function edit(Trick $trick, Request $request, EntityManagerInterface $entityManagerInterface, UploaderHelper $uploaderHelper)
     {
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
+       
+        if($form->isSubmitted() && $form->isValid()) {
+            
+            $pictures = $form['pictures']->getData();
+            
+            foreach($pictures as $picture) {
+                $uploadedFile = $picture->getFile();
+              
+                if($uploadedFile) {
+                    $newFilename = $uploaderHelper->uploadPicture($uploadedFile);
+                    $picture->setPath($newFilename);
+                } else {
+                }
 
+                $picture->setTrick($trick);
+                $entityManagerInterface->persist($picture);
+            }
+            
+            foreach($trick->getVideos() as $video ) {
+                $video->setTrick($trick);
+                $entityManagerInterface->persist($video);
+            }
+
+            $entityManagerInterface->persist($trick);
+            $entityManagerInterface->flush();
+            
+            $this->addFlash('success', "La figure a bien été modifié.");
+            return $this->redirectToRoute('trick_show', [
+                'slug' => $trick->getSlug()
+            ]);
+
+            
+        }
         return $this->render('trick/edit.html.twig', [
             'controller_name' => 'TrickController',
             'trick' => $trick,

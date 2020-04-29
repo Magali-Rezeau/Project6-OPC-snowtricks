@@ -31,6 +31,9 @@ class TrickType extends ApplicationType
                 'entry_type' => PictureType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
+                'allow_file_upload' => true,
+             
+
                 'required' => false,
                 'entry_options' => ['label' => false], 
             ])
@@ -39,6 +42,7 @@ class TrickType extends ApplicationType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'required' => false,
+            
                 'entry_options' => ['label' => false],
             ])
         ;

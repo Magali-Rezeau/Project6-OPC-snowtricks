@@ -19,7 +19,7 @@ jQuery(document).ready(function () {
   } else {
     // Adding a delete link
     $containerPicture.children('div').each(function () {
-      addDeleteLink($(this));
+      addDeleteLinkPicture($(this));
     });
   }
 
@@ -74,7 +74,7 @@ jQuery(document).ready(function () {
   } else {
     // Adding a delete link
     $containerVideo.children('div').each(function () {
-      addDeleteLink($(this));
+      addDeleteLinkVideo($(this));
     });
   }
 

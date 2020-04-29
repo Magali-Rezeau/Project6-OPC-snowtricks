@@ -133,8 +133,11 @@ svg {
 input, textarea {
   padding: 1rem;
   outline: 0;
-  font-size: 1rem;
+  
   font-family: $ff-content;
+  @include small-only {
+    font-size: 1rem;
+  }
 }
 
 select {
