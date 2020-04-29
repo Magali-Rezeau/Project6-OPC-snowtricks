@@ -44,56 +44,70 @@
 		</div>
 		<div class="tricks-content">
 			{% for trick in tricks %}
-			{% set url = path('trick_show', {'slug':trick.slug}) %}
+			{% set show_url = path('trick_show', {'slug':trick.slug}) %}
+			{% set edit_url = path('trick_edit', {'slug':trick.slug}) %}
 				<div class="tricks-content-card">
 					<div class="tricks-content-card-img">
 						{% if trick.pictures is defined %}
 							{% for picture in trick.pictures %}
 								{% if loop.first %}
 									<figure class="tricks-content-card-img-figure">
-										<a href="{{ url }}"><img src="{{ asset('uploads/pictures/' ~ picture.path) }}"></a>
+										<a href="{{ show_url }}"><img src="{{ asset('uploads/pictures/' ~ picture.path) }}"></a>
 									</figure>
 								{% endif %}
 							{% else %}
 								<figure class="tricks-content-card-img-figure">
-									<a href="{{ url }}"><img src="{{ asset('uploads/pictures/default-picture.png') }}"></a>
+									<a href="{{ show_url }}"><img src="{{ asset('uploads/pictures/default-picture.png') }}"></a>
 								</figure>
 							{% endfor %}
 						{% endif %}
-					</div>
+					</div>	
 					<div class="tricks-content-card-btn">
-						<button class="btn" type="button">
-							<a href="{{ url }}">{{ trick.name }}</a>
-						</button>
-					</div>
+                    	<button class="btn"><a href="{{ show_url }}">{{ trick.name }}</a></button> 
+                    	<div class="tricks-content-card-btn-icon">
+                        	<a href="{{ edit_url }}"><i class="fas fa-pencil-alt"></i></a>
+                        	<form method="POST" action="#">
+                            	<input type="hidden" name="_method" value="delete">
+                            	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trick.id)}}">
+                           		<button class="fas fa-trash-alt" type="submit"  onclick="return confirm('Etes-vous sûr ?');"></button>
+                        	</form>
+						</div>
+                    </div>
 				</div>
 			{% endfor %}
 		</div>
 		<div class="tricks-content-more">
 			<input type="checkbox" hidden class="tricks-content-more-state" id="read-more">
 			{% for trick in tricks_more %}
-			{% set url = path('trick_show', {'slug':trick.slug}) %}
+			{% set show_url = path('trick_show', {'slug':trick.slug}) %}
+			{% set edit_url = path('trick_edit', {'slug':trick.slug}) %}
 				<div class="tricks-content-more-target tricks-content-card">
 					<div class="tricks-content-card-img">
 							{% if trick.pictures is defined %}
 							{% for picture in trick.pictures %}
 								{% if loop.first %}
 									<figure class="tricks-content-card-img-figure">
-										<a href="{{ url }}"><img src="{{ asset('uploads/pictures/' ~ picture.path) }}"></a>
+										<a href="{{ show_url }}"><img src="{{ asset('uploads/pictures/' ~ picture.path) }}"></a>
 									</figure>
 								{% endif %}
 							{% else %}
 								<figure class="tricks-content-card-img-figure">
-									<a href="{{ url }}"><img src="{{ asset('uploads/pictures/default-picture.png') }}"></a>
+									<a href="{{ show_url }}"><img src="{{ asset('uploads/pictures/default-picture.png') }}"></a>
 								</figure>
 							{% endfor %}
 						{% endif %}
 					</div>
 					<div class="tricks-content-card-btn">
-						<button class="btn" type="button">
-							<a href="{{ url }}">{{ trick.name }}</a>
-						</button>
-					</div>
+                    	<button class="btn"><a href="{{ show_url }}">{{ trick.name }}</a></button> 
+                    	<div class="tricks-content-card-btn-icon">
+                        	<a href="{{ edit_url }}"><i class="fas fa-pencil-alt"></i></a>
+                        	<form method="POST" action="#">
+                            	<input type="hidden" name="_method" value="delete">
+                            	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trick.id)}}">
+                           		<input class="fas fa-trash-alt" type="submit" value="&#xf2ed;" onclick="return confirm('Etes-vous sûr ?');">
+                        	</form>
+						</div>
+                    </div>
 				</div>
 			{% endfor %}
 			<label for="read-more" class="tricks-content-more-trigger_closed btn">Voir plus</label>

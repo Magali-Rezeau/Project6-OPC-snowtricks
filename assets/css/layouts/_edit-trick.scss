@@ -27,10 +27,9 @@
         grid-row: 1/2;
         align-self: center;
         text-align: center;
-
+        
         & h1 {
             font-size: 3rem;
-
             @include small-only {
                 font-size: 1.3rem;
             }

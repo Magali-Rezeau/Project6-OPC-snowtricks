@@ -51,10 +51,6 @@ a {
   @include smallest-only {
     font-size: .7rem;
   }
-
-  &:hover {
-    color: $color-blue-light;
-  }
 }
 
 h1 {

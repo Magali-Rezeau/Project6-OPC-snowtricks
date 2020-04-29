@@ -18,9 +18,11 @@
     },
     "css/app": {
       "js": [
-        "/build/runtime.js"
+        "/build/runtime.js",
+        "/build/vendors~css/app.js"
       ],
       "css": [
+        "/build/vendors~css/app.css",
         "/build/css/app.css"
       ]
     }
