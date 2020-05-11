@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TrickController extends AbstractController
@@ -29,11 +30,9 @@ class TrickController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
              
             $pictures = $form['pictures']->getData();
-            foreach($pictures as $picture ) {
+            foreach($pictures as $picture) {
                 
-
                  $uploadedFile = $picture->getFile();
-                
                  if($uploadedFile) {
                      $newFilename = $uploaderHelper->uploadPicture($uploadedFile);
                      $picture->setPath($newFilename);
@@ -42,7 +41,7 @@ class TrickController extends AbstractController
                 $entityManagerInterface->persist($picture);
             }
 
-            foreach($trick->getVideos() as $video ) {
+            foreach($trick->getVideos() as $video) {
                 $video->setTrick($trick);
                 $entityManagerInterface->persist($video);
             }
@@ -71,24 +70,27 @@ class TrickController extends AbstractController
     {
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
-       
-        if($form->isSubmitted() && $form->isValid()) {
-            
-            $pictures = $form['pictures']->getData();
-            
-            foreach($pictures as $picture) {
-                $uploadedFile = $picture->getFile();
-              
-                if($uploadedFile) {
-                    $newFilename = $uploaderHelper->uploadPicture($uploadedFile);
-                    $picture->setPath($newFilename);
-                } else {
-                }
+        
 
+        if($form->isSubmitted() && $form->isValid()) {
+            $pictures = $form['pictures']->getData();
+     
+            foreach($pictures as $picture) {
+                $path = $picture->getPath();
+              
+                $uploadedFile = $picture->getFile();
+                if($uploadedFile) {
+                     $newFilename = $uploaderHelper->uploadPicture($uploadedFile);
+                     $picture->setPath($newFilename);
+                    
+                } else {
+                    $picture->setPath($path);
+                }
+               
                 $picture->setTrick($trick);
                 $entityManagerInterface->persist($picture);
             }
-            
+
             foreach($trick->getVideos() as $video ) {
                 $video->setTrick($trick);
                 $entityManagerInterface->persist($video);
@@ -96,7 +98,6 @@ class TrickController extends AbstractController
 
             $entityManagerInterface->persist($trick);
             $entityManagerInterface->flush();
-            
             $this->addFlash('success', "La figure a bien été modifié.");
             return $this->redirectToRoute('trick_show', [
                 'slug' => $trick->getSlug()

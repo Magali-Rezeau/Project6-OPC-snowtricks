@@ -15,8 +15,10 @@ class PictureType extends ApplicationType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('path', TextType::class)
-            ->add('file', FileType::class)
+          
+            ->add('file', FileType::class,
+            [
+            'required' => false ])
             ->add('caption', TextType::class, $this->fieldsConfiguration("Veuillez saisir un titre."))
         ;
     }

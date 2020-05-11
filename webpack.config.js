@@ -25,6 +25,7 @@ Encore
      */
     .addEntry('js/app', './assets/js/app.js')
     .addEntry('js/add', './assets/js/add-trick.js')
+    .addEntry('js/test', './assets/js/test.js')
     .addStyleEntry('css/app', './assets/css/app.scss')
     
     //.addEntry('page2', './assets/js/page2.js')

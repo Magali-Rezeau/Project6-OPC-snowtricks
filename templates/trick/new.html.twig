@@ -12,6 +12,7 @@
 		{{ form_row(form.description) }}
 		{{ form_row(form.category) }}
 		{{ form_row(form.pictures) }}
+		
 		{{ form_row(form.videos) }}
 		<button type="submit" class="btn btn-form">Valider</button>
 		{{ form_end(form) }}
@@ -27,7 +28,7 @@
 	</div>
 {% endblock %}
 {% block _trick_pictures_row %}
-	<h2>Ajouter des photos</h2>
+	<h3>Ajouter des photos</h3>
 	{{ form_widget(form) }}
 	<button type="button" class="btn-add-picture" id="add_picture">Ajouter une autre photo</button>
 {% endblock %}
@@ -46,9 +47,10 @@
 			{{ form_errors(form.caption) }}
 		</div>
 	</div>
-{% endblock %}
+	<button type="button" data-action="delete" class="btn-delete-picture" id="delete_picture">X</button>
+{% endblock %} 
 {% block _trick_videos_row %}
-	<h2>Ajouter des vidéos</h2>
+	<h3>Ajouter des vidéos</h3>
 	{{ form_widget(form) }}
 	<button type="button" class="btn-add-picture" id="add_video">Ajouter une autre vidéo</button>
 {% endblock %}
@@ -67,5 +69,5 @@
 			{{ form_errors(form.name) }}
 		</div>
 	</div>
-{% endblock %}
-{% block javascripts %}{{ encore_entry_script_tags('js/add') }}{% endblock %}
+{% endblock %} 
+{% block javascripts %}{{ encore_entry_script_tags('js/test') }}{% endblock %}
