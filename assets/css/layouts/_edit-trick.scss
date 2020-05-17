@@ -10,6 +10,7 @@
     @include medium-only {
         grid-template-columns: 4rem 1fr 4rem;
         margin: 3rem 5rem;
+        font-size: 1.5rem;
     }
     @include small-only {
         grid-template-columns: 2rem 1fr 2rem;
@@ -51,10 +52,20 @@
 
         &-picture {
             width: 100%;
-
+            font-size: 1rem;
             &-featured img {
                 width: 100%;
                 display: block;
+                margin-bottom: 1rem;
+               
+            }
+            &-featured-icon {
+             
+                display: flex;
+                justify-content: flex-end;
+               & .btn-delete-picture {
+                   margin-left: 1rem;
+               }
             }
 
             &-thumbnail {
@@ -65,14 +76,14 @@
                 align-items: center;
                 align-content: center;
                 text-align: center;
-
+                font-size: 1rem;
                 &-figure img {
                     width: 20rem;
                     height: 20rem;
                     object-fit: cover;
                     display: block;
                     margin: 1rem;
-
+                  
                     @include medium-only {
                         width: 15rem;
                         height: 15rem;
@@ -82,29 +93,54 @@
                         height: 10rem;
                     }
                 }
+                &-figure-icon {
+                    width: 20rem;
+                    display: flex;
+                    justify-content: flex-end;
+                    @include medium-only {
+                        width: 15rem;
+                       
+                    }
+                    @include small-only {
+                        width: 10rem;
+                       
+                    }
+                   & .btn-delete-picture {
+                       margin-left: 1rem;
+                   }
+                }
             }
         }
 
         &-video {
-
+            width: 100%;
             &-thumbnail {
-                width: 100%;
+           
                 display: flex;
                 flex-wrap: wrap;
-                justify-content: center;
+                justify-content: space-evenly;
                 align-items: center;
                 align-content: center;
                 text-align: center;
-            }
-
-            & iframe {
-                width: 20rem;
-                height: 20rem;
-                margin: 1rem;
-
-                @include medium-only {
+                &-card {
+                    display: flex;
+                    flex-direction: column;
                     width: 15rem;
                     height: 15rem;
+                    & iframe {
+                        width: 100%;
+                        height: 100%;
+                        margin: 1rem;
+        
+                    }
+                    &-icon {
+                        width: 15rem;
+                        display: flex;
+                        justify-content: flex-end;
+                       & .btn-delete-video {
+                           margin-left: 1rem;
+                       }
+                    }
                 }
             }
         }
@@ -143,12 +179,13 @@
                 }
             }
         }
-
-        & button {
-
-            margin: 3rem auto;
-            display: block;
-        }
+        & .btn  {
+            width: 100%;
+             margin: 3rem auto;
+         }
+ 
+     
+       
     }
 
     &-content-more {
@@ -206,7 +243,7 @@
             }
         }
     }
-
+   
     &-content-form {
         grid-column: 2/3;
         grid-row: 2/3;
@@ -231,10 +268,10 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            margin: 2rem 0;
+            margin: 3rem 0;
 
             @include medium-only {
-                margin: 1rem 0;
+                margin: 2rem 0;
             }
 
             @include small-only {
@@ -244,7 +281,9 @@
             & label {
                 width: 30%;
                 display: block;
-
+                @include medium-only {
+                    width: 20%;
+                }
                 @include small-only {
                     height: 2rem;
                     width: 100%;
@@ -257,6 +296,9 @@
                 height: 5rem;
                 display: block;
 
+                @include medium-only {
+                    height: 3rem;
+                }
                 @include small-only {
                     height: 2rem;
                     width: 100%;
@@ -272,13 +314,14 @@
                     width: 100%;
                 }
             }
+          
         }
 
         & #trick_pictures,
         & #trick_videos {
             width: 100%;
         }
-
+        
         &-entry {
             width: 45%;
             display: flex;
@@ -305,6 +348,7 @@
                 @include medium-only {
                     left: 20%;
                     top: 0;
+                    font-size: .8rem;
                 }
                 @include small-only {
                     position: initial;
@@ -329,5 +373,6 @@
                 font-size: .8rem;
             }
         }
+       
     }
 }

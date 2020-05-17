@@ -31,7 +31,6 @@ class TrickController extends AbstractController
              
             $pictures = $form['pictures']->getData();
             foreach($pictures as $picture) {
-                
                  $uploadedFile = $picture->getFile();
                  if($uploadedFile) {
                      $newFilename = $uploaderHelper->uploadPicture($uploadedFile);
@@ -68,14 +67,83 @@ class TrickController extends AbstractController
      */
     public function edit(Trick $trick, Request $request, EntityManagerInterface $entityManagerInterface, UploaderHelper $uploaderHelper)
     {
+       
+        $originalPictures = new ArrayCollection();
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
-        
-
         if($form->isSubmitted() && $form->isValid()) {
+           foreach ($originalPictures as $picture) {
+                if (false === $trick->getPictures()->contains($picture)) {
+                    // remove the Task from the Tag
+                    $picture->getTrick()->removeElement($trick);
+    
+                    // if it was a many-to-one relationship, remove the relationship like this
+                    // $tag->setTask(null);
+    
+                    $entityManagerInterface->persist($picture);
+    
+                    // if you wanted to delete the Tag entirely, you can also do that
+                    // $entityManager->remove($tag);
+                }
+            }
             $pictures = $form['pictures']->getData();
-     
             foreach($pictures as $picture) {
+                 $uploadedFile = $picture->getFile();
+                 if($uploadedFile) {
+                     $newFilename = $uploaderHelper->uploadPicture($uploadedFile);
+                     $picture->setPath($newFilename);
+                 } 
+                $picture->setTrick($trick);
+                $entityManagerInterface->persist($picture);
+            }
+
+            /*foreach ($originalVideos as $video) {
+                if (false === $trick->getVideos()->contains($video)) {
+                    // remove the Task from the Tag
+                    $video->getTrick()->removeElement($trick);
+    
+                    // if it was a many-to-one relationship, remove the relationship like this
+                    // $tag->setTask(null);
+    
+                    $entityManagerInterface->persist($video);
+    
+                    // if you wanted to delete the Tag entirely, you can also do that
+                    // $entityManager->remove($tag);
+                }
+            }*/ 
+            /*if (false === $task->getTags()->contains($tag)) {
+                // remove the Task from the Tag
+                $tag->getTasks()->removeElement($task);
+
+                // if it was a many-to-one relationship, remove the relationship like this
+                // $tag->setTask(null);
+
+                $entityManager->persist($tag);
+
+                // if you wanted to delete the Tag entirely, you can also do that
+                // $entityManager->remove($tag);
+            }
+            $pictures = $form['pictures']->getData();
+            foreach($pictures as $picture) {
+                 $uploadedFile = $picture->getFile();
+                 if($uploadedFile) {
+                     $newFilename = $uploaderHelper->uploadPicture($uploadedFile);
+                     $picture->setPath($newFilename);
+                 } else {
+                    $picture->setPath($newFilename);
+                 }
+
+                $picture->setTrick($trick);
+                $entityManagerInterface->persist($picture);
+            }
+            $pictureCollection = $trick->getPictures();
+
+            $videos = $form['videos']->getData();
+            foreach($videos as $video) {
+                $video->setTrick($trick);
+                $entityManagerInterface->persist($video);
+            }
+           /*foreach($trick->getPictures() as $picture ) {
                 $path = $picture->getPath();
               
                 $uploadedFile = $picture->getFile();
@@ -85,16 +153,16 @@ class TrickController extends AbstractController
                     
                 } else {
                     $picture->setPath($path);
+                    $picture->setCaption($picture->getCaption);
                 }
                
                 $picture->setTrick($trick);
                 $entityManagerInterface->persist($picture);
             }
-
             foreach($trick->getVideos() as $video ) {
                 $video->setTrick($trick);
                 $entityManagerInterface->persist($video);
-            }
+            }*/
 
             $entityManagerInterface->persist($trick);
             $entityManagerInterface->flush();

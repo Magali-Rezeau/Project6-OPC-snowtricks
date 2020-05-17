@@ -6,17 +6,18 @@
         "/build/js/app.js"
       ]
     },
-    "js/add": {
+    "js/add-trick": {
       "js": [
         "/build/runtime.js",
-        "/build/js/add.js"
+        "/build/vendors~js/add-trick~js/edit-trick.js",
+        "/build/js/add-trick.js"
       ]
     },
-    "js/test": {
+    "js/edit-trick": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors~js/test.js",
-        "/build/js/test.js"
+        "/build/vendors~js/add-trick~js/edit-trick.js",
+        "/build/js/edit-trick.js"
       ]
     },
     "css/app": {

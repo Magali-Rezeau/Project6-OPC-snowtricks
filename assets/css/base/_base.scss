@@ -36,9 +36,12 @@ ul li {
   list-style-type: none;
   color: $color-blue-dark;
 }
-
+button:target {
+  outline: none;
+}
 a {
   text-decoration: none;
+  outline: none;
   color: $color-dark;
 
   @include medium-only {
@@ -143,6 +146,8 @@ select {
   color: $color-blue-dark;
   @include medium-only {
     height: 4rem;
+    padding: .5rem;
+    width: 15rem;
   }
   @include small-only {
     height: 3rem;

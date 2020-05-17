@@ -41,7 +41,7 @@ class TrickType extends ApplicationType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'required' => false,
-            
+                'by_reference' => false,
                 'entry_options' => ['label' => false],
             ])
         ;

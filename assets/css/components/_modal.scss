@@ -1,0 +1,140 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.8);
+    display: none;
+    margin: 0;
+    padding: 0;
+ 
+    &-wrapper {
+        display: flex;
+        width: 120rem;
+        max-width: 100vw;
+        max-height: 100vh;
+        overflow: auto;
+        padding: 3rem;
+        background-color: $color-blue-light;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        
+        @include medium-only {
+            width: 50rem;
+            flex-direction: column;
+        }
+
+        & .js-modal-close {
+            position: absolute;
+            width: 2rem;
+            height: 2rem;
+            top: 1rem;
+            right: 1rem;
+        }
+
+        & .edit-trick-content-form-entry {
+            width: 100%;
+            margin-bottom: 1rem;
+
+            & label {
+                width: 30%;
+                display: block;
+
+                @include medium-only {
+                    width: 100%;
+                }
+                @include small-only {
+                    height: 2rem;
+                    width: 100%;
+                    align-self: flex-start;
+                }
+            }
+        
+            & input {
+                width: 70%;
+                height: 5rem;
+                display: block;
+        
+                @include medium-only {
+                    height: 3rem;
+                    width: 100%;
+                }
+                @include small-only {
+                    height: 2rem;
+                    width: 100%;
+                }
+            }
+        
+            & textarea {
+                width: 70%;
+                height: 20rem;
+        
+                @include small-only {
+                    height: 15rem;
+                    width: 100%;
+                }
+            }
+        }
+        & input[type="file"] {
+            top: 30%;
+            @include medium-only {
+                top: 0;
+                position: initial;
+            }
+        }
+        & label {
+            width: 30%;
+            display: block;
+
+            @include medium-only {
+                width: 100%;
+            }
+            @include small-only {
+                height: 2rem;
+                width: 100%;
+                align-self: flex-start;
+            }
+        }
+    
+        & input {
+            width: 70%;
+            height: 5rem;
+            display: block;
+    
+            @include medium-only {
+                height: 3rem;
+                width: 100%;
+            }
+            @include small-only {
+                height: 2rem;
+                width: 100%;
+            }
+        }
+    
+        & textarea {
+            width: 70%;
+            height: 20rem;
+    
+            @include small-only {
+                height: 15rem;
+                width: 100%;
+            }
+        }
+    }
+}
+
+.modal-none {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 3rem 0;
+
+    @include medium-only {
+        margin: 2rem 0;
+    }
+}

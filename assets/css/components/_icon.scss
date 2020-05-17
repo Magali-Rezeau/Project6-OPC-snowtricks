@@ -5,6 +5,7 @@
     display: inline-block;
     background-color: transparent;
     border: none;
+    outline: none;
     @include small-only {
         font-size: 1rem;
     } 
