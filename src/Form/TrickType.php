@@ -31,14 +31,17 @@ class TrickType extends ApplicationType
                 'entry_type' => PictureType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
+                'allow_file_upload' => true,
                 'required' => false,
                 'entry_options' => ['label' => false], 
+                'by_reference' => false
             ])
             ->add('videos', CollectionType::class, [
                 'entry_type' => VideoType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'required' => false,
+                'by_reference' => false,
                 'entry_options' => ['label' => false],
             ])
         ;

@@ -81,9 +81,18 @@
   }
 }
 
-.btn-delete-picture, .btn-delete-video {
+
+
+.btn-form {
+  margin: 10rem;
+  
+  @include medium-only {
+    margin: 5rem;
+  }
+}
+.js-modal-close {
   cursor: pointer;
-  display: inline-flex;
+  display: block;
   align-items: center;
   justify-content: center;
 
@@ -118,13 +127,5 @@
   &:hover {
     transform: rotate(10deg);
     text-decoration: none;
-  }
-}
-
-.btn-form {
-  margin: 10rem;
-  
-  @include medium-only {
-    margin: 5rem;
   }
 }

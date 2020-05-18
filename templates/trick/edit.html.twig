@@ -1,0 +1,161 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification d'une figure{% endblock %}
+{% form_theme form _self %}
+{% block body %}
+	<section class="edit-trick">
+		<div class="edit-trick-title">
+			<h1>Modification de la figure</h1>
+			<h2>{{ trick.name }}</h2>
+		</div>
+		<div class="edit-trick-content">
+			{% if trick.pictures is not empty %}
+				<div class="edit-trick-content-picture">
+					{% for picture in trick.pictures %}
+						{% if loop.first %}
+							<figure class="edit-trick-content-picture-featured">
+								<figcaption>
+									{{ picture.caption }}
+								</figcaption>
+								<img src="{{ asset('uploads/pictures/' ~ picture.path) }}">
+								<div class="edit-trick-content-picture-featured-icon">
+									<a href="" class="js-modal-picture fas fa-pencil-alt" >	
+									</a>
+									<a class="btn-delete-picture fas fa-trash-alt" href=" " onclick="return confirm('Etes-vous sûr ?');">
+									</a>
+								</div>
+							</figure>
+						{% endif %}
+					{% endfor %}
+				</div>
+			{% endif %}
+			<div class="edit-trick-content-more">
+				<input type="checkbox" hidden class="edit-trick-content-more-state" id="read-more">
+				<div class="edit-trick-content-more-target">
+					{{ form_start(form, { "attr": { "class": "edit-trick-content-form"} }) }}
+					<div class="edit-trick-content-picture-title">
+						<h2>Photos</h2>
+					</div>
+					<div class="edit-trick-content-picture-thumbnail">
+						{% for picture in trick.pictures %}
+						{% if not loop.first %}
+							<figure class="edit-trick-content-picture-thumbnail-figure">
+								<figcaption>
+									{{ picture.caption }}
+								</figcaption>
+								<img src="{{ asset('uploads/pictures/' ~ picture.path) }}">
+								<div class="edit-trick-content-picture-thumbnail-figure-icon">
+									<a href="" class="js-modal-picture fas fa-pencil-alt">
+									</a>
+									<a class="btn-delete-picture fas fa-trash-alt" href="" onclick="return confirm('Etes-vous sûr ?');">
+									</a>
+								</div>
+							</figure>
+						{% endif %}
+						{% endfor %}
+					</div>
+					{{ form_row(form.pictures) }}
+					{% if trick.videos is not empty %}
+						<div class="edit-trick-content-video">
+							<div class="edit-trick-content-video-title">
+								<h2>Vidéos</h2>
+							</div>
+							<div class="edit-trick-content-video-thumbnail">
+								{% for video in trick.videos %}
+								<div class="edit-trick-content-video-thumbnail-card">
+									<iframe width="200" height="150" src="{{ video.url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+									<div class="edit-trick-content-video-thumbnail-card-icon">
+									<a href="" class="js-modal-video fas fa-pencil-alt">
+									</a>
+									<a class="btn-delete-video fas fa-trash-alt" href="" onclick="return confirm('Etes-vous sûr ?');">
+									</a>
+								</div>
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+					{% endif %}
+                    {{ form_row(form.videos) }}
+				</div>
+				<label for="read-more" class="edit-trick-content-more-trigger_closed btn">Voir plus</label>
+				<label for="read-more" class="edit-trick-content-more-trigger_opened btn">Voir Moins</label>
+			</div>
+			{{ form_row(form.name) }}
+			{{ form_row(form.description) }}
+			{{ form_row(form.category) }}
+			<button type="submit" class="btn">Valider</button>
+			{{ form_end(form) }}
+			<div class="edit-trick-content-details">
+				<ul class="edit-trick-content-details-list">
+					<li>Date de création :
+						{{ trick.createdAt|date("d/m/Y") }}</li>
+					<li>Date de modification :
+						{{ trick.updatedAt|date("d/m/Y")}}</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}
+{% block form_row %}
+    <div class="edit-trick-content-form-row">
+        {{ form_label(form) }}
+        {{ form_widget(form) }}
+        <div class="edit-trick-content-form-error">
+            {{ form_errors(form) }}
+        </div>
+    </div>
+{% endblock %}
+{% block _trick_pictures_row %}
+
+	<h2>Ajouter des photos</h2>
+	
+	{{ form_widget(form) }}
+	
+	<button type="button" class="btn-add-picture" id="add_picture">Ajouter une autre photo</button>
+	
+{% endblock %}
+{% block _trick_pictures_entry_widget %}
+	<div class="modal-none">
+    <div class="edit-trick-content-form-entry">
+        {{ form_label(form.file)}}
+		{{ form_widget(form.file)}}
+        <div class="edit-trick-content-form-error">
+            {{ form_errors(form.file) }}
+        </div>
+    </div>
+    <div class="edit-trick-content-form-entry">
+        {{ form_label(form.caption)}}
+        {{ form_widget(form.caption)}}
+        <div class="edit-trick-content-form-error">
+            {{ form_errors(form.caption) }}
+        </div>
+	</div>
+	<button type="button" class="btn-delete-picture fas fa-trash-alt"></button>
+	</div>
+{% endblock %}
+{% block _trick_videos_row %}
+    <h2>Ajouter des vidéos</h2>
+    {{ form_widget(form) }}
+	<button type="button" class="btn-add-video" id="add_video">Ajouter une autre vidéo</button>{% endblock %}
+	{% block _trick_videos_entry_widget %}
+	<div class="modal-none">
+    	<div class="edit-trick-content-form-entry">
+       	 {{ form_label(form.url) }}
+        	{{ form_widget(form.url) }}
+        	<div class="edit-trick-content-form-error">
+            	{{ form_errors(form.url) }}
+        	</div>
+    	</div>
+    	<div class="edit-trick-content-form-entry">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name) }}
+        	<div class="edit-trick-content-form-error">
+            {{ form_errors(form.name) }}
+        	</div>
+		</div>
+
+<button type="button" class="btn-delete-video fas fa-trash-alt"></button>
+</div>
+{% endblock %}
+{% block javascripts %}{{ encore_entry_script_tags('js/edit-trick') }}{% endblock %}

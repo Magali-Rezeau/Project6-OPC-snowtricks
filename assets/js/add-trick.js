@@ -1,113 +1,56 @@
-jQuery(document).ready(function () {
+(function () {
+    const containerPicture = document.getElementById('trick_pictures');
+    const containerVideo = document.getElementById('trick_videos');
 
-  // Recovery of the <div>
-  $containerPicture = $('div#trick_pictures');
+    let indexPicture = containerPicture.querySelectorAll('.add-trick-form-row').length;
+    let indexVideo = containerVideo.querySelectorAll('.add-trick-form-row').length;
 
-  // Définition of the counter to name the added fiels
-  var index = $containerPicture.find('input').length;
+    if (indexPicture == 0) {
+        addPictureForm(containerPicture);
+    }
+    if (indexVideo == 0) {
+        addVideoForm(containerVideo);
+    }
+   
+    document.querySelector('.btn-add-picture').addEventListener('click', function (event) {
+        event.preventDefault();
+        addPictureForm(containerPicture);
+    })
 
-  // Need a new field to each click on the add link
-  $('#add_picture').click(function (e) {
-    addPicture($containerPicture);
-    e.preventDefault();
-    return false;
-  });
+    document.querySelector('.btn-add-video').addEventListener('click', function (event) {
+        event.preventDefault();
+        addVideoForm(containerVideo);
+    })
 
-  // Adding a first fiels if there is not already one
-  if (index == 0) {
-    addPicture($containerPicture);
-  } else {
-    // Adding a delete link
-    $containerPicture.children('div').each(function () {
-      addDeleteLink($(this));
-    });
-  }
+    function addRemoveBtn() {
+        document.querySelectorAll('button.btn-delete-picture.fas.fa-trash-alt').forEach((element) => {
+            element.addEventListener('click', function(event) {
+                event.preventDefault();
+                this.parentNode.remove();
+            })
+        })
+        document.querySelectorAll('button.btn-delete-video.fas.fa-trash-alt').forEach((element) => {
+            element.addEventListener('click', function (event) {
+                event.preventDefault();
+                this.parentNode.remove();
+            })
+        })
+    }
 
-  // To Add a PictureType form
-  function addPicture($containerPicture) {
-    var template = $containerPicture.attr('data-prototype').replace(/__name__/g, index)
-      ;
+    function addPictureForm(containerPicture) {
+        const prototypePicture = containerPicture.getAttribute('data-prototype');
+        const templatePicture = prototypePicture.replace(/__name__/g, indexPicture);
+        containerPicture.insertAdjacentHTML('beforeend', templatePicture);
+        indexPicture++;
+        addRemoveBtn();
+    }
 
-    // Creation of an jQuery object wich contains the template
-    $prototype = $(template);
+   function addVideoForm(containerVideo) {
+        const prototypeVideo = containerVideo.getAttribute('data-prototype');
+        const templateVideo = prototypeVideo.replace(/__name__/g, indexVideo);
+        containerVideo.insertAdjacentHTML('beforeend', templateVideo);
+        indexVideo++;
+        addRemoveBtn();
+    }
 
-    addDeleteLinkPicture($prototype);
-
-    // Addition of the prototype at the end of the <div>
-    $containerPicture.append($prototype);
-
-    // Counter increment
-    index++;
-  }
-
-  // To add a delete link
-  function addDeleteLinkPicture($prototype) {
-    // Link creation
-    $deleteLinkPicture = $('<button type="button" class="btn-delete-picture">X</button>');
-
-    // Added link
-    $prototype.append($deleteLinkPicture);
-
-    $deleteLinkPicture.click(function (e) {
-      $prototype.remove();
-      e.preventDefault();
-      return false;
-    });
-  }
-
-  // Recovery of the <div>
-  $containerVideo = $('div#trick_videos');
-
-  // Définition of the counter to name the added fiels
-  var index = $containerVideo.find('input').length;
-
-  // Need a new field to each click on the add link
-  $('#add_video').click(function (e) {
-    addVideo($containerVideo);
-    e.preventDefault();
-    return false;
-  });
-
-  // Adding a first fiels if there is not already one
-  if (index == 0) {
-    addVideo($containerVideo);
-  } else {
-    // Adding a delete link
-    $containerVideo.children('div').each(function () {
-      addDeleteLink($(this));
-    });
-  }
-
-  // To Add a VideoType form
-  function addVideo($containerVideo) {
-    var template = $containerVideo.attr('data-prototype').replace(/__name__/g, index)
-      ;
-
-    // Creation of an jQuery object wich contains the template
-    $prototype = $(template);
-
-    addDeleteLinkVideo($prototype);
-
-    // Addition of the prototype at the end of the <div>
-    $containerVideo.append($prototype);
-
-    // Counter increment
-    index++;
-  }
-
-  // To add a delete link
-  function addDeleteLinkVideo($prototype) {
-    // Link creation
-    $deleteLinkVideo = $('<button type="button" class="btn-delete-video">X</button>');
-
-    // Added link
-    $prototype.append($deleteLinkVideo);
-
-    $deleteLinkVideo.click(function (e) {
-      $prototype.remove();
-
-      e.preventDefault();
-      return false;
-    });
-  }
-});
+})()

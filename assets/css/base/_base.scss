@@ -36,9 +36,12 @@ ul li {
   list-style-type: none;
   color: $color-blue-dark;
 }
-
+button:target {
+  outline: none;
+}
 a {
   text-decoration: none;
+  outline: none;
   color: $color-dark;
 
   @include medium-only {
@@ -50,10 +53,6 @@ a {
 
   @include smallest-only {
     font-size: .7rem;
-  }
-
-  &:hover {
-    color: $color-blue-light;
   }
 }
 
@@ -133,8 +132,11 @@ svg {
 input, textarea {
   padding: 1rem;
   outline: 0;
-  font-size: 1rem;
+  
   font-family: $ff-content;
+  @include small-only {
+    font-size: 1rem;
+  }
 }
 
 select {
@@ -144,6 +146,8 @@ select {
   color: $color-blue-dark;
   @include medium-only {
     height: 4rem;
+    padding: .5rem;
+    width: 15rem;
   }
   @include small-only {
     height: 3rem;

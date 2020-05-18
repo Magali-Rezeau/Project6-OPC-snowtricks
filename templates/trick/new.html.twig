@@ -12,6 +12,7 @@
 		{{ form_row(form.description) }}
 		{{ form_row(form.category) }}
 		{{ form_row(form.pictures) }}
+		
 		{{ form_row(form.videos) }}
 		<button type="submit" class="btn btn-form">Valider</button>
 		{{ form_end(form) }}
@@ -33,10 +34,10 @@
 {% endblock %}
 {% block _trick_pictures_entry_widget %}
 	<div class="add-trick-form-entry">
-		{{ form_label(form.path)}}
-		{{ form_widget(form.path)}}
+		{{ form_label(form.file)}}
+		{{ form_widget(form.file)}}
 		<div class="add-trick-form-error">
-			{{ form_errors(form.path) }}
+			{{ form_errors(form.file) }}
 		</div>
 	</div>
 	<div class="add-trick-form-entry">
@@ -46,11 +47,12 @@
 			{{ form_errors(form.caption) }}
 		</div>
 	</div>
-{% endblock %}
+	<button type="button" class="btn-delete-picture fas fa-trash-alt"></button>
+{% endblock %} 
 {% block _trick_videos_row %}
 	<h3>Ajouter des vidéos</h3>
 	{{ form_widget(form) }}
-	<button type="button" class="btn-add-picture" id="add_video">Ajouter une autre vidéo</button>
+	<button type="button" class="btn-add-video" id="add_video">Ajouter une autre vidéo</button>
 {% endblock %}
 {% block _trick_videos_entry_widget %}
 	<div class="add-trick-form-entry">
@@ -67,5 +69,6 @@
 			{{ form_errors(form.name) }}
 		</div>
 	</div>
-{% endblock %}
-{% block javascripts %}{{ encore_entry_script_tags('js/add') }}{% endblock %}
+	<button type="button" class="btn-delete-video fas fa-trash-alt"></button>
+{% endblock %} 
+{% block javascripts %}{{ encore_entry_script_tags('js/add-trick') }}{% endblock %}
