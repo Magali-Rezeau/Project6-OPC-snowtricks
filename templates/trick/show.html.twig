@@ -5,16 +5,13 @@
 {% block body %}
 <section class="trick">
 {% set edit_url = path('trick_edit', {'slug':trick.slug}) %}
+{% set delete_url = path('trick_delete', {'slug':trick.slug}) %}
     <div class="trick-title">
 	    <h1>{{ trick.name }}</h1>
         <div class="trick-title-icon">
 		    <a class="fas fa-pencil-alt" href="{{ edit_url }}">
 		    </a>
-		    <form method="POST" action="#">
-			    <input type="hidden" name="_method" value="delete">
-			    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trick.id)}}">
-			    <button class="fas fa-trash-alt" type="submit"  onclick="return confirm('Etes-vous sûr ?');"></button>
-		    </form>
+            <a href="{{ delete_url }}" class="fas fa-trash-alt" onclick="return confirm('Etes-vous sûr de vouloir supprimer cette figure ?');"></a>
 	    </div>
     </div>
     <div class="trick-content">

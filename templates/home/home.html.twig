@@ -46,6 +46,7 @@
 			{% for trick in tricks %}
 			{% set show_url = path('trick_show', {'slug':trick.slug}) %}
 			{% set edit_url = path('trick_edit', {'slug':trick.slug}) %}
+			{% set delete_url = path('trick_delete', {'slug':trick.slug}) %}
 				<div class="tricks-content-card">
 					<div class="tricks-content-card-img">
 						{% if trick.pictures is defined %}
@@ -66,11 +67,7 @@
                     	<button class="btn"><a href="{{ show_url }}">{{ trick.name }}</a></button> 
                     	<div class="tricks-content-card-btn-icon">
                         	<a href="{{ edit_url }}"><i class="fas fa-pencil-alt"></i></a>
-                        	<form method="POST" action="#">
-                            	<input type="hidden" name="_method" value="delete">
-                            	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trick.id)}}">
-                           		<button class="fas fa-trash-alt" type="submit"  onclick="return confirm('Etes-vous sûr ?');"></button>
-                        	</form>
+                        	<a href="{{ delete_url }}" class="fas fa-trash-alt" onclick="return confirm('Etes-vous sûr de vouloir supprimer cette figure ?');"></a>
 						</div>
                     </div>
 				</div>
