@@ -26,4 +26,16 @@ class UploaderHelper
 
         return $newFilename;
     }
+    public function uploadProfilePicture(UploadedFile $uploadedFile): string
+    {
+        $destination = $this->uploadsPath.'/profilePictures';
+        $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+        $newFilename = $originalFilename . '-' . uniqid() . '.' . $uploadedFile->guessExtension();
+
+        $uploadedFile->move(
+            $destination,
+            $newFilename
+        );
+        return $newFilename;
+    }
 }
