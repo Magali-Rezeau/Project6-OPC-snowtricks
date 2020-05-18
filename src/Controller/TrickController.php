@@ -71,15 +71,12 @@ class TrickController extends AbstractController
        
         $originalPictures = new ArrayCollection();
         $originalVideos = new ArrayCollection();
-        $filesystem = new Filesystem();
+        
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-            
            foreach ($originalPictures as $picture) {
                 if (false === $trick->getPictures()->contains($picture)) {
-                   
-                    $filesystem->remove('uploads/pictures/' .$picture->getPath());
                     $picture->getTrick()->removeElement($trick);
                     $entityManagerInterface->persist($picture);
                 }
@@ -94,7 +91,7 @@ class TrickController extends AbstractController
                 $picture->setTrick($trick);
                 $entityManagerInterface->persist($picture);
             }
-
+           
             foreach ($originalVideos as $video) {
                 if (false === $trick->getVideos()->contains($video)) {
                     $video->getTrick()->removeElement($trick);
