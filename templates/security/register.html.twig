@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}S'inscrire{% endblock %}
+{% form_theme form _self %}
+{% block body %}
+<section class="register">
+    <div class="register-title">
+        <h2>S'inscrire</h2>
+     </div>
+     <div class="register-form">
+        {{ form_start(form) }}
+        {{ form_row(form.username) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password) }}
+        {{ form_row(form.passwordVerification) }}
+        {{ form_row(form.profile_picture) }}
+        <input type="submit" class="btn" value="Valider">
+        {{ form_end(form) }}
+    </div>
+</section>
+{% endblock %}
+{% block form_row %}
+    <div class="register-form-row">
+        {{ form_label(form) }}
+        {{ form_widget(form) }}
+        <div class="register-form-row-error">
+            {{ form_errors(form) }}
+        </div>
+    </div>
+{% endblock %}
