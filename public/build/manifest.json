@@ -61,7 +61,5 @@
   "build/images/fa-solid-900.svg": "/build/images/fa-solid-900.ec763292.svg",
   "build/images/logo.png": "/build/images/logo.80e3f7e3.png",
   "build/images/menu.png": "/build/images/menu.ac6a8ef1.png",
-  "build/images/sprite.svg": "/build/images/sprite.75299b65.svg",
-  "build/vendors~js/edit-trick.js": "/build/vendors~js/edit-trick.js",
-  "build/vendors~js/add-trick.js": "/build/vendors~js/add-trick.js"
+  "build/images/sprite.svg": "/build/images/sprite.75299b65.svg"
 }
