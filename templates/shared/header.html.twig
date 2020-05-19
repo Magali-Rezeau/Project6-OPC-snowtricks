@@ -13,10 +13,10 @@
             <li><a href="{{ path('home') }}#tricks">Tricks</a></li>
             <li><a href="{{ path('trick_new') }}">New trick</a></li>
             {% if not app.user %}
-            <li><a href="#">S'inscrire</a></li>
-            <li><a href="#">Se connecter</a></li>
+            <li><a href="{{ path('register') }}">S'inscrire</a></li>
+            <li><a href="{{ path('login') }}">Se connecter</a></li>
             {% else %}
-            <li><a href="#">Se déconnecter</a></li>
+            <li><a href="{{ path('logout') }}">Se déconnecter</a></li>
             {% endif %}
         </ul>
     </nav>
@@ -36,9 +36,9 @@
                         <li><a href="{{ path('trick_new') }}">New trick</a></li>
                         {% if not app.user %}
                         <li><a href="{{ path('register') }}">S'inscrire</a></li>
-                        <li><a href="#">Se connecter</a></li>
+                        <li><a href="{{ path('login') }}">Se connecter</a></li>
                         {% else %}
-                        <li><a href="#">Se déconnecter</a></li>
+                        <li><a href="{{ path('logout') }}">Se déconnecter</a></li>
                         {% endif %}
                     </ul>
                 </div>

@@ -14,11 +14,11 @@
 				<p>Ce site a été créé pour faire découvrir et partager les figures de snowboard. Inscrivez-vous pour devenir membre de la communauté et collaborer à l'apprentissage des figures de snowboard.</p>
 				<div class="about-content-btn">
 					<button class="btn" type="button">
-						<a href="#">S'inscrire</a>
+						<a href="{{ path('register') }}">S'inscrire</a>
 					</button>
 					<p class="about-content-p">Déjà inscrit ?</p>
 					<button class="btn" type="button">
-						<a href="#">Se connecter</a>
+						<a href="{{ path('login') }}">Se connecter</a>
 					</button>
 				</div>
 			</div>
@@ -28,12 +28,12 @@
 				<p>Partagez vos connaissances et collaborer à l'apprentissage des figures de snowboard.</p>
 				<p>. Vous pouvez ajouter des nouvelles figures.</p>
 				<button class="btn" type="button">
-					<a href="#">Ajouter</a>
+					<a href="{{ path('trick_new') }}">Ajouter</a>
 				</button>
 				<p>Vous pouvez également modifier les tricks de votre choix en ajoutant ou en supprimmant le descriptif, des photos ou des vidéos.</p>
 				<p class="about-content-p">Se déconnecter ?</p>
 				<button class="btn" type="button">
-					<a href="#">Se déconnecter</a>
+					<a href="{{ path('logout') }}">Se déconnecter</a>
 				</button>
 			</div>
 		{% endif %}
@@ -65,10 +65,12 @@
 					</div>	
 					<div class="tricks-content-card-btn">
                     	<button class="btn"><a href="{{ show_url }}">{{ trick.name }}</a></button> 
+						{% if app.user %}
                     	<div class="tricks-content-card-btn-icon">
                         	<a href="{{ edit_url }}"><i class="fas fa-pencil-alt"></i></a>
                         	<a href="{{ delete_url }}" class="fas fa-trash-alt" onclick="return confirm('Etes-vous sûr de vouloir supprimer cette figure ?');"></a>
 						</div>
+						{% endif %}
                     </div>
 				</div>
 			{% endfor %}

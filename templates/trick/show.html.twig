@@ -8,11 +8,13 @@
 {% set delete_url = path('trick_delete', {'slug':trick.slug}) %}
     <div class="trick-title">
 	    <h1>{{ trick.name }}</h1>
+        {% if app.user %}
         <div class="trick-title-icon">
 		    <a class="fas fa-pencil-alt" href="{{ edit_url }}">
 		    </a>
             <a href="{{ delete_url }}" class="fas fa-trash-alt" onclick="return confirm('Etes-vous sûr de vouloir supprimer cette figure ?');"></a>
 	    </div>
+        {% endif %}
     </div>
     <div class="trick-content">
         {% for picture in trick.pictures %}
@@ -26,7 +28,7 @@
         {% else %}
         <div class="trick-content-img">
             <figure class="tricks-content-card-img-figure">
-                <a href="#"><img src="{{ asset('uploads/pictures/default-picture.png') }}"></a>
+                <a><img src="{{ asset('uploads/pictures/default-picture.png') }}"></a>
             </figure>
         </div>
         {% endfor %}
