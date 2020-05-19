@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Se connecter{% endblock %}
+
+{% block body %}
+<section class="login">
+   <div class="login-title">
+      <h2>Se connecter</h2>
+   </div>
+   {% if error %}
+   <div class="login-error">
+   {{ error.messageKey|trans(error.messageData,'security') }}
+   </div>
+   {% endif %}
+   <form action="{{ path('login')}}" class="login-form" method="POST">
+       <div class="login-form-row">
+          <label for="">Pseudo</label>
+          <input type="text" name="_username" placeholder="Veuillez saisir votre pseudo." value="{{ lastUsername }}"required>
+       </div>
+       <div class="login-form-row">
+         <label for="">Mot de passe</label>
+         <input type="password" name="_password" placeholder="Veuillez saisir votre mot de passe." required>
+      </div>
+      <input type="submit" class="btn" value="Valider">
+   </form>
+</section>
+{% endblock %}

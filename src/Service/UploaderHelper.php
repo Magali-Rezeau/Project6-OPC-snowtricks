@@ -13,9 +13,9 @@ class UploaderHelper
         $this->uploadsPath = $uploadsPath;
     }
 
-    public function uploadPicture(UploadedFile $uploadedFile): string
+    public function uploadPicture(UploadedFile $uploadedFile, $folder): string
     {  
-        $destination = $this->uploadsPath.'/pictures';
+        $destination = $this->uploadsPath.'/'.$folder;
         $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
         $newFilename = $originalFilename . '-' . uniqid() . '.' . $uploadedFile->guessExtension();
 
@@ -24,18 +24,6 @@ class UploaderHelper
             $newFilename
         );
 
-        return $newFilename;
-    }
-    public function uploadProfilePicture(UploadedFile $uploadedFile): string
-    {
-        $destination = $this->uploadsPath.'/profilePictures';
-        $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
-        $newFilename = $originalFilename . '-' . uniqid() . '.' . $uploadedFile->guessExtension();
-
-        $uploadedFile->move(
-            $destination,
-            $newFilename
-        );
         return $newFilename;
     }
 }
