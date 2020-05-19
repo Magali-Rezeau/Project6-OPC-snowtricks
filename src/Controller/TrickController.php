@@ -34,7 +34,7 @@ class TrickController extends AbstractController
             foreach($pictures as $picture) {
                  $uploadedFile = $picture->getFile();
                  if($uploadedFile) {
-                     $newFilename = $uploaderHelper->uploadPicture($uploadedFile);
+                     $newFilename = $uploaderHelper->uploadPicture($uploadedFile, 'pictures');
                      $picture->setPath($newFilename);
                  } 
                 $picture->setTrick($trick);
@@ -85,7 +85,7 @@ class TrickController extends AbstractController
             foreach($pictures as $picture) {
                  $uploadedFile = $picture->getFile();
                  if($uploadedFile) {
-                     $newFilename = $uploaderHelper->uploadPicture($uploadedFile);
+                     $newFilename = $uploaderHelper->uploadPicture($uploadedFile, 'pictures');
                      $picture->setPath($newFilename);
                  } 
                 $picture->setTrick($trick);

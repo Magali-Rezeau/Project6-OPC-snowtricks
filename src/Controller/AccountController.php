@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
-use App\Repository\UserRepository;
 use App\Service\UploaderHelper;
+use App\Repository\UserRepository;
 use Symfony\Component\Mime\Address;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -13,12 +13,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class SecurityController extends AbstractController
+class AccountController extends AbstractController
 {
     /**
      * @Route("/register", name="register")
+     * @return Response
      */
     public function register(Request $request, EntityManagerInterface $entityManagerInterface, UserPasswordEncoderInterface $userPasswordEncoderInterface, UploaderHelper $uploaderHelper, MailerInterface $mailerInterface)
     {
@@ -30,7 +33,7 @@ class SecurityController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $uploadedFile = $form['profile_picture']->getData();
             if ($uploadedFile) {
-                $newFilename = $uploaderHelper->uploadProfilePicture($uploadedFile);
+                $newFilename = $uploaderHelper->uploadPicture($uploadedFile, 'profilePictures');
                 $user->setProfilePicture($newFilename);
             }
 
@@ -53,8 +56,8 @@ class SecurityController extends AbstractController
            
             $this->addFlash('success', 'Votre compte a bien été créé. Un email vient de vous être envoyé pour activer votre compte.');
         }
-        return $this->render('security/register.html.twig', [
-            'controller_name' => 'SecurityController',
+        return $this->render('account/register.html.twig', [
+            'controller_name' => 'AccountController',
             'form' => $form->createView()
         ]);
     }
@@ -66,7 +69,7 @@ class SecurityController extends AbstractController
     public function activation($token, UserRepository $userRepository, EntityManagerInterface $entityManagerInterface) 
     {
         $user = $userRepository->findOneBy(['activation_token' => $token]);
-        
+
         if(!$user){
             throw $this->createNotFoundException('Cet utilisateur n\'existe pas');
         }
@@ -78,5 +81,27 @@ class SecurityController extends AbstractController
 
         $this->addFlash('success', 'Votre compte a bien été activé.');
         return $this->redirectToRoute('home');
+    }
+
+    /**
+    * @Route("/login", name="login")
+    * @return Response
+    */
+    public function login(AuthenticationUtils $authenticationUtils)
+    {
+        return $this->render('account/login.html.twig', [
+            'controller_name' => 'AccountController',
+            'lastUsername' => $authenticationUtils->getLastUsername(),
+            'error' => $authenticationUtils->getLastAuthenticationError()
+        ]);
+    }
+
+    /**
+    * @Route("/logout", name="logout")
+    * @return void
+    */
+    public function logout()
+    {
+        
     }
 }
