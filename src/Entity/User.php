@@ -26,24 +26,22 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min=5, max=10, 
-     * minMessage="Votre pseudo doit contenir au moins 5 caractères.",
-     * maxMessage="Votre pseudo doit contenir moins de 10 caractères.")
+     * @Assert\Length(min=2, max=50, 
+     * minMessage="Votre pseudo doit contenir au moins 2 caractères.",
+     * maxMessage="Votre pseudo doit contenir moins de 50 caractères.")
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min=5, max=10, 
-     * minMessage="Votre mot de passe doit contenir au moins 5 caractères.", 
-     * maxMessage="Votre mot de passe doit contenir moins de 10 caractères.")
+     * @Assert\Length(min=5, 
+     * minMessage="Votre mot de passe doit contenir au moins 5 caractères.")
      */
     private $password;
 
      /**
-     * @Assert\Length(min=5, max=10, 
-     * minMessage="Votre mot de passe doit contenir au moins 5 caractères.", 
-     * maxMessage="Votre mot de passe doit contenir moins de 10 caractères.")
+     * @Assert\Length(min=5, 
+     * minMessage="Votre mot de passe doit contenir au moins 5 caractères.")
      * @Assert\EqualTo(propertyPath="password", 
      * message="Les mots de passe saisies sont différents")
      */
@@ -64,6 +62,11 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $profile_picture;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $activation_token;
 
     public function __construct() 
     {
@@ -157,5 +160,17 @@ class User implements UserInterface
     public function getRoles()
     {
         return ['ROLE_USER'];
+    }
+
+    public function getActivationToken(): ?string
+    {
+        return $this->activation_token;
+    }
+
+    public function setActivationToken(?string $activation_token): self
+    {
+        $this->activation_token = $activation_token;
+
+        return $this;
     }
 }
