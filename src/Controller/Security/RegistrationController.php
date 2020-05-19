@@ -3,14 +3,12 @@
 namespace App\Controller\Security;
 
 use App\Entity\User;
+use App\Service\Mailer;
 use App\Form\RegistrationType;
 use App\Service\UploaderHelper;
 use App\Repository\UserRepository;
-use Symfony\Component\Mime\Address;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +20,7 @@ class RegistrationController extends AbstractController
      * @Route("/register", name="register")
      * @return Response
      */
-    public function register(Request $request, EntityManagerInterface $entityManagerInterface, UserPasswordEncoderInterface $userPasswordEncoderInterface, UploaderHelper $uploaderHelper, MailerInterface $mailerInterface)
+    public function register(Request $request, EntityManagerInterface $entityManagerInterface, UserPasswordEncoderInterface $userPasswordEncoderInterface, UploaderHelper $uploaderHelper, Mailer $mailer)
     {
         $user = new User();
 
@@ -41,17 +39,10 @@ class RegistrationController extends AbstractController
             $entityManagerInterface->persist($user);
             $entityManagerInterface->flush();
 
-            $email = (new TemplatedEmail())
-                ->from(new Address('noreply@snowtricks.com', 'Snowtricks'))
-                ->to(new Address($user->getEmail(), $user->getUsername()))
-                ->subject('Bienvenue dans la communauté Snowtricks')
-                ->text("Nice to meet you {$user->getUsername()}! ❤️")
-                ->htmlTemplate('email/activation.html.twig')
-                ->context([
-                    'user' => $user,
-                    'token' => $user->getActivationToken()
-                ]);
-            $mailerInterface->send($email);
+            $mailer->sendMessage('noreply@snowtricks.com',$user->getEmail(), $user->getUsername(),'Mot de passe oublié','email/activation.html.twig',[
+                'user' => $user,
+                'token' => $user->getActivationToken()
+            ]);
 
             $this->addFlash('success', 'Votre compte a bien été créé. Un email vient de vous être envoyé pour activer votre compte.');
         }
