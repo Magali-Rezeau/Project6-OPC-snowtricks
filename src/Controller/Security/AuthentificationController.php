@@ -7,8 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-
-class AccountController extends AbstractController
+class AuthentificationController extends AbstractController
 {
     /**
      * @Route("/login", name="login")
@@ -16,7 +15,7 @@ class AccountController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {
-        return $this->render('account/login.html.twig', [
+        return $this->render('security/login.html.twig', [
             'controller_name' => 'AccountController',
             'lastUsername' => $authenticationUtils->getLastUsername(),
             'error' => $authenticationUtils->getLastAuthenticationError()
