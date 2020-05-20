@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
-class ResettingController extends AbstractController
+class ResettingPasswordController extends AbstractController
 {
     /**
      * @Route("/forgotten_password", name="forgotten_password")

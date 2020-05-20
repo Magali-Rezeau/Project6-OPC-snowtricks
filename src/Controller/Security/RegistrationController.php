@@ -40,7 +40,7 @@ class RegistrationController extends AbstractController
             $entityManagerInterface->persist($user);
             $entityManagerInterface->flush();
 
-            $mailer->sendMessage('noreply@snowtricks.com',$user->getEmail(), $user->getUsername(),'Mot de passe oublié','email/activation.html.twig',[
+            $mailer->sendMessage('noreply@snowtricks.com',$user->getEmail(), $user->getUsername(),'Activer votre compte','email/activation.html.twig',[
                 'user' => $user,
                 'token' => $user->getActivationToken()
             ]);

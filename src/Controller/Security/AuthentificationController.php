@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
-class AccountController extends AbstractController
+class AuthentificationController extends AbstractController
 {
     /**
      * @Route("/login", name="login")

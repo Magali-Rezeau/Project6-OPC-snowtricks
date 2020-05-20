@@ -16,7 +16,7 @@
             <li><a href="{{ path('register') }}">S'inscrire</a></li>
             <li><a href="{{ path('login') }}">Se connecter</a></li>
             {% else %}
-             <li><a href="{{ path('logout') }}">Mon compte</a></li>
+             <li><a href="{{ path('profile') }}">Mon compte</a></li>
             <li><a href="{{ path('logout') }}">Se déconnecter</a></li>
             {% endif %}
         </ul>
@@ -39,7 +39,7 @@
                         <li><a href="{{ path('register') }}">S'inscrire</a></li>
                         <li><a href="{{ path('login') }}">Se connecter</a></li>
                         {% else %}
-                        <li><a href="{{ path('logout') }}">Mon compte</a></li>
+                        <li><a href="{{ path('profile') }}">Mon compte</a></li>
                         <li><a href="{{ path('logout') }}">Se déconnecter</a></li>
                         {% endif %}
                     </ul>
