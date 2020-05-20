@@ -17,6 +17,7 @@
         {{ form_row(form.username) }}
         {{ form_row(form.email) }}
         {{ form_row(form.profile_picture) }}
+         <a href="{{ path('update_password') }}">Modifier mon mot de passe ?</a>
         <input type="submit" class="btn" value="Valider">
         {{ form_end(form) }}
     </div>
