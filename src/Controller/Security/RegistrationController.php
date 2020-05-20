@@ -47,7 +47,7 @@ class RegistrationController extends AbstractController
 
             $this->addFlash('success', 'Votre compte a bien été créé. Un email vient de vous être envoyé pour activer votre compte.');
         }
-        return $this->render('account/register.html.twig', [
+        return $this->render('security/register.html.twig', [
             'controller_name' => 'AccountController',
             'form' => $form->createView()
         ]);

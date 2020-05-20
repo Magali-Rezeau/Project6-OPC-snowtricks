@@ -16,6 +16,7 @@ security:
         main:
             anonymous: lazy
             provider: in_database
+            user_checker: App\Service\UserChecker
             form_login: 
                 login_path: login
                 check_path: login
