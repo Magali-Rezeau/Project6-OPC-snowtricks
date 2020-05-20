@@ -37,7 +37,7 @@ class RegistrationType extends ApplicationType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'translation_domain' => 'registration-form'
+            'translation_domain' => 'account-form'
         ]);
     }
 }
