@@ -1,4 +1,4 @@
-.login {
+.login, .default {
     display: grid;
     grid-template-columns: 10rem 1fr 10rem;
     align-content: center;
@@ -7,7 +7,7 @@
     @include shadow;
 
     @include medium-only {
-        grid-template-columns: 8rem 1fr 8rem;
+        grid-template-columns: 7rem 1fr 7rem;
         margin: 3rem 5rem;
     }
 
@@ -24,7 +24,7 @@
         width: 100%;
         grid-column: 2/3;
         text-align: center;
-        margin: 7rem; 
+        margin: 6rem; 
 
         @include small-only {
             margin: 2rem; 
@@ -35,6 +35,14 @@
         width: 100%;
         grid-column: 2/3;
         text-align: center; 
+        margin: 4rem;
+
+        @include medium-only {
+            margin: 2rem; 
+        }
+        @include small-only {
+            margin: 1rem; 
+        }
     }
 
     &-form {
@@ -82,13 +90,24 @@
                     width: 100%;
                 }
             } 
+            &-error ul li {
+                color: red;
+                font-size: 1.5rem;
+                
+                @include medium-only {
+                    font-size: 1.2rem;
+                }
+                @include small-only {
+                    font-size: .8rem;
+                }
+            }
         }
 
         & .btn {
             margin: 7rem auto;
             display: block;
 
-            @include small-only {
+            @include medium-only {
                 margin: 4rem auto;
             }
         }
