@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use DateTime;
+use App\Entity\User;
 use App\Entity\Trick;
+use App\Entity\Comment;
 use App\Form\TrickType;
+use App\Form\CommentType;
 use App\Service\UploaderHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -105,7 +109,7 @@ class TrickController extends AbstractController
                 $video->setTrick($trick);
                 $entityManagerInterface->persist($video);
             }
-
+            $trick->setUpdatedAt(new DateTime());
             $entityManagerInterface->persist($trick);
             $entityManagerInterface->flush();
             $this->addFlash('success', "La figure a bien été modifié.");
@@ -145,11 +149,32 @@ class TrickController extends AbstractController
      * 
      * @return Response
      */
-    public function show(Trick $trick)
+    public function show(Trick $trick, Request $request, EntityManagerInterface $entityManagerInterface)
     {
+        $comments = $trick->getComments();
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {  
+            $comment->setTrick($trick);
+            $comment->setUser($this->getUser());
+
+            $entityManagerInterface->persist($comment);
+            $entityManagerInterface->flush();
+
+            $this->addFlash(
+                'success',
+                'Votre commentaire a bien été enregistré !'
+            );
+        }
         return $this->render('trick/show.html.twig', [
             'controller_name' => 'TrickController',
-            'trick' => $trick
+            'trick' => $trick,
+            'comments' => $comments,
+            'user' => $this->getUser(),
+            'form' => $form->createView()
         ]);
     }  
 }

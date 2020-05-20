@@ -70,4 +70,50 @@
         </div>
     </div>
 </section>
+<section class="trick-comment">
+    <div class="trick-comment-title">
+        <h2>Commentaires</h2>
+    </div>
+    {% for comment in trick.comments %}
+    <div class="trick-comment-content">
+
+        <div class="trick-comment-content-user">
+            <img class="trick-comment-profile-picture"
+                src="{{ asset('uploads/profilePictures/'~ comment.user.profilePicture) }}">
+            <h3>{{ comment.user.username }}</h3>
+        </div>
+        <div class="trick-comment-content-text">
+            <h4>Le {{ comment.createdAt|date("d/m/Y \\à H:i:s") }}</h4>
+            <p>{{ comment.content }}</p>
+        </div>
+        <hr>
+    </div>
+    {% else %}
+    <div class="trick-comment-content">
+        <p>Il n'y a pas encore de commentaire sur cette figure.</p>
+    </div>
+    {% endfor %}
+   {% if app.user %}
+    <div class="trick-comment-add">
+        <div class="trick-comment-add-user">
+            <img class="trick-comment-profile-picture"
+                src="{{ asset('uploads/profilePictures/'~ user.profilePicture) }}">
+            <h3>{{ user.username }}</h3>
+        </div>
+        {{ form_start(form) }}
+        {{ form_row(form.content) }}
+        <input type="submit" class="btn" value="Valider">
+        {{ form_end(form) }}
+    </div>
+    {% endif %}
+</section>
+{% endblock %}
+{% block form_row %}
+    <div class="register-form-row">
+        {{ form_label(form) }}
+        {{ form_widget(form) }}
+        <div class="register-form-row-error">
+            {{ form_errors(form) }}
+        </div>
+    </div>
 {% endblock %}
