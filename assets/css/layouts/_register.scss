@@ -7,7 +7,7 @@
     @include shadow;
 
     @include medium-only {
-        grid-template-columns: 8rem 1fr 8rem;
+        grid-template-columns: 7rem 1fr 7rem;
         margin: 3rem 5rem;
     }
 
@@ -38,7 +38,7 @@
         flex-direction: column;
 
         @include medium-only {
-            width: 90%;
+            width: 100%;
         }
       
         &-row {
@@ -53,7 +53,7 @@
 
             @include small-only {
                 margin-bottom: 1.5rem;
-                height: 6rem;
+                height: auto;
                 flex-direction: column;
                 justify-content: center;
             }
@@ -76,6 +76,16 @@
                     width: 100%;
                 }
             }  
+            &-error ul li {
+                color: red;
+                font-size: 1.5rem;
+                @include medium-only {
+                    font-size: 1.2rem;
+                }
+                @include small-only {
+                    font-size: .8rem;
+                }
+            }
         } 
 
         & .btn {

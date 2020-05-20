@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -20,7 +21,7 @@ class RegistrationController extends AbstractController
      * @Route("/register", name="register")
      * @return Response
      */
-    public function register(Request $request, EntityManagerInterface $entityManagerInterface, UserPasswordEncoderInterface $userPasswordEncoderInterface, UploaderHelper $uploaderHelper, Mailer $mailer)
+    public function register(Request $request, EntityManagerInterface $entityManagerInterface, UserPasswordEncoderInterface $userPasswordEncoderInterface, UploaderHelper $uploaderHelper, Mailer $mailer, TokenGeneratorInterface $tokenGeneratorInterface)
     {
         $user = new User();
 
@@ -35,7 +36,7 @@ class RegistrationController extends AbstractController
             }
 
             $user->setPassword($userPasswordEncoderInterface->encodePassword($user, $user->getPassword()));
-            $user->setActivationToken(md5(uniqid()));
+            $user->setActivationToken($tokenGeneratorInterface->generateToken());
             $entityManagerInterface->persist($user);
             $entityManagerInterface->flush();
 
@@ -69,6 +70,6 @@ class RegistrationController extends AbstractController
         $entityManagerInterface->flush();
 
         $this->addFlash('success', 'Votre compte a bien été activé.');
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('login');
     }
 }
