@@ -11,13 +11,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Collections\ArrayCollection;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TrickController extends AbstractController
 {
     /**
      * @Route("/trick/new", name="trick_new")
-     * 
+     * @IsGranted("ROLE_USER")
      * @return Response
      */
     public function create(Request $request, EntityManagerInterface $entityManagerInterface, UploaderHelper $uploaderHelper)
@@ -63,7 +64,7 @@ class TrickController extends AbstractController
 
     /**
      * @Route("/trick/{slug}/edit", name="trick_edit")
-     * 
+     * @IsGranted("ROLE_USER")
      * @return Response
      */
     public function edit(Trick $trick, Request $request, EntityManagerInterface $entityManagerInterface, UploaderHelper $uploaderHelper)
@@ -121,7 +122,7 @@ class TrickController extends AbstractController
     
     /**
      * @Route("/trick/{slug}/delete", name="trick_delete")
-     *
+     * @IsGranted("ROLE_USER")
      * @return Response
      */
     public function delete(Trick $trick, EntityManagerInterface $entityManagerInterface) {

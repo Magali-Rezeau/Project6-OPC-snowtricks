@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
-class ResettingController extends AbstractController
+class ResettingPasswordController extends AbstractController
 {
     /**
      * @Route("/forgotten_password", name="forgotten_password")
@@ -55,7 +55,7 @@ class ResettingController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
-        return $this->render('account/forgotten-password.html.twig', [
+        return $this->render('security/forgotten-password.html.twig', [
             'controller_name' => 'AccountController',
             'form' => $form->createView(),
         ]);
@@ -85,7 +85,7 @@ class ResettingController extends AbstractController
 
             return $this->redirectToRoute('login');
         }
-        return $this->render('account/reset-password.html.twig', [
+        return $this->render('security/reset-password.html.twig', [
             'controller_name' => 'AccountController',
             'token' => $token,
             'form' => $form->createView()
