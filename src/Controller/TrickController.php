@@ -8,7 +8,9 @@ use App\Entity\Trick;
 use App\Entity\Comment;
 use App\Form\TrickType;
 use App\Form\CommentType;
+use App\Service\Paginator;
 use App\Service\UploaderHelper;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
@@ -145,13 +147,12 @@ class TrickController extends AbstractController
     }
     
     /**
-     * @Route("/trick/{slug}", name="trick_show")
+     * @Route("/trick/{slug}/{page<\d+>?1}", name="trick_show")
      * 
      * @return Response
      */
-    public function show(Trick $trick, Request $request, EntityManagerInterface $entityManagerInterface)
+    public function show(Trick $trick, Request $request, EntityManagerInterface $entityManagerInterface, CommentRepository $commentRepository, $page, Paginator $paginator)
     {
-        $comments = $trick->getComments();
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
@@ -169,10 +170,17 @@ class TrickController extends AbstractController
                 'Votre commentaire a bien été enregistré !'
             );
         }
+        $paginator
+            ->setEntity(Comment::class)
+            ->setOrder(['created_at' => 'DESC'])
+            ->setAttribut(['trick' => $trick])
+            ->setCurrentPage($page)
+            ->setLimit(4);
+        
         return $this->render('trick/show.html.twig', [
             'controller_name' => 'TrickController',
             'trick' => $trick,
-            'comments' => $comments,
+            'paginator' => $paginator,
             'user' => $this->getUser(),
             'form' => $form->createView()
         ]);

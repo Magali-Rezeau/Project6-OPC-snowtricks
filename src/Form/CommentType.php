@@ -13,7 +13,9 @@ class CommentType extends ApplicationType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content', TextareaType::class, $this->fieldsConfiguration('Veuillez saisir votre commentaire.'))
+            ->add('content', TextareaType::class, $this->fieldsConfiguration('Veuillez saisir votre commentaire.'), [
+                'label' => false
+            ])
         ;
     }
 
