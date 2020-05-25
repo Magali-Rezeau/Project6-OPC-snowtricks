@@ -65,11 +65,11 @@
 								<div class="edit-trick-content-video-thumbnail-card">
 									<iframe width="200" height="150" src="{{ video.url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 									<div class="edit-trick-content-video-thumbnail-card-icon">
-									<a href="" class="js-modal-video fas fa-pencil-alt">
-									</a>
-									<a class="btn-delete-video fas fa-trash-alt" href="" onclick="return confirm('Etes-vous sûr ?');">
-									</a>
-								</div>
+										<a href="" class="js-modal-video fas fa-pencil-alt">
+										</a>
+										<a class="btn-delete-video fas fa-trash-alt" href="" onclick="return confirm('Etes-vous sûr ?');">
+										</a>
+									</div>
 								</div>
 								{% endfor %}
 							</div>
@@ -108,7 +108,7 @@
 {% endblock %}
 {% block _trick_pictures_row %}
 
-	<h2>Ajouter des photos</h2>
+	
 	
 	{{ form_widget(form) }}
 	
@@ -135,7 +135,6 @@
 	</div>
 {% endblock %}
 {% block _trick_videos_row %}
-    <h2>Ajouter des vidéos</h2>
     {{ form_widget(form) }}
 	<button type="button" class="btn-add-video" id="add_video">Ajouter une autre vidéo</button>{% endblock %}
 	{% block _trick_videos_entry_widget %}

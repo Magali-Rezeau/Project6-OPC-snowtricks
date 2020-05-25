@@ -108,6 +108,7 @@
         </div>
     </div>
     {% endif %}
+    {% if paginator.data is not empty %}
     <nav aria-label="pagination" class="trick-comment-pagination">
     {% set page = paginator.currentPage %}
     {% set pages = paginator.pages %}
@@ -120,6 +121,7 @@
         <li class="{% if page == pages %}disabled{% endif %}"><a href="{{ path('trick_show', {'slug':trick.slug, 'page': page + 1 }) }}"><img src="{{ asset('build/images/arrow-right.png') }}" class="arrow-left"></a></li>
     </ul>
 </nav>
+ {% endif %}
 </section>
 {% endblock %}
 {% block form_row %}

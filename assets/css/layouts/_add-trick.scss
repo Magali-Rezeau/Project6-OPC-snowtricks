@@ -43,7 +43,7 @@
 
        
 
-        & h2 {
+        & h3 {
             margin: 8rem auto 2rem auto;
             font-size: 2.5rem;
             @include small-only {
@@ -99,6 +99,7 @@
                     width: 100%;
                 }
             }
+
         }
 
         & #trick_pictures,
