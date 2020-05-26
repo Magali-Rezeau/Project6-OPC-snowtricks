@@ -2,9 +2,15 @@
 
 namespace App\Controller;
 
+use DateTime;
+use App\Entity\User;
 use App\Entity\Trick;
+use App\Entity\Comment;
 use App\Form\TrickType;
+use App\Form\CommentType;
+use App\Service\Paginator;
 use App\Service\UploaderHelper;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
@@ -105,7 +111,7 @@ class TrickController extends AbstractController
                 $video->setTrick($trick);
                 $entityManagerInterface->persist($video);
             }
-
+            $trick->setUpdatedAt(new DateTime());
             $entityManagerInterface->persist($trick);
             $entityManagerInterface->flush();
             $this->addFlash('success', "La figure a bien été modifié.");
@@ -141,15 +147,42 @@ class TrickController extends AbstractController
     }
     
     /**
-     * @Route("/trick/{slug}", name="trick_show")
+     * @Route("/trick/{slug}/{page<\d+>?1}", name="trick_show")
      * 
      * @return Response
      */
-    public function show(Trick $trick)
+    public function show(Trick $trick, Request $request, EntityManagerInterface $entityManagerInterface, CommentRepository $commentRepository, $page, Paginator $paginator)
     {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {  
+            $comment->setTrick($trick);
+            $comment->setUser($this->getUser());
+
+            $entityManagerInterface->persist($comment);
+            $entityManagerInterface->flush();
+
+            $this->addFlash(
+                'success',
+                'Votre commentaire a bien été enregistré !'
+            );
+        }
+        $paginator
+            ->setEntity(Comment::class)
+            ->setOrder(['created_at' => 'DESC'])
+            ->setAttribut(['trick' => $trick])
+            ->setCurrentPage($page)
+            ->setLimit(4);
+        
         return $this->render('trick/show.html.twig', [
             'controller_name' => 'TrickController',
-            'trick' => $trick
+            'trick' => $trick,
+            'paginator' => $paginator,
+            'user' => $this->getUser(),
+            'form' => $form->createView()
         ]);
     }  
 }

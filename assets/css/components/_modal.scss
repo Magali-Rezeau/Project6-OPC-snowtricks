@@ -26,7 +26,9 @@
             width: 50rem;
             flex-direction: column;
         }
-
+        & button .btn-delete-picture .fas .fa-trash-alt {
+            display: inline-block;
+        }
         & .js-modal-close {
             position: absolute;
             width: 2rem;
@@ -123,6 +125,7 @@
                 width: 100%;
             }
         }
+       
     }
 }
 

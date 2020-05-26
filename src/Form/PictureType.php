@@ -12,10 +12,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class PictureType extends ApplicationType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, $options)
     {
         $builder
-          
             ->add('file', FileType::class,
             [
             'required' => false ])

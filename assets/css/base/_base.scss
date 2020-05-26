@@ -113,6 +113,9 @@ hr {
   width: 25rem;
   height: .2rem;
   margin: 2rem auto;
+  @include small-only {
+    margin: 1rem auto;
+  }
 }
 
 svg {
@@ -132,7 +135,7 @@ svg {
 input, textarea {
   padding: 1rem;
   outline: 0;
-  
+  border: none;
   font-family: $ff-content;
   @include small-only {
     font-size: 1rem;

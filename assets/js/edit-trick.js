@@ -103,6 +103,7 @@
     const openModal = function (event) {
         event.preventDefault()
         let target = document.querySelector(event.target.getAttribute("href"));
+        target.querySelector('.fas.fa-trash-alt').style.display = "none";
         target.style.display = "block";
         target.removeAttribute("aria-hidden");
         target.setAttribute("aria-modal", "true");
@@ -133,7 +134,6 @@
     document.querySelectorAll('.js-modal-video').forEach(a => {
         a.addEventListener('click', openModal);
     })
-
     const btnDeletePicture = document.querySelectorAll('.btn-delete-picture.fas.fa-trash-alt');
     for (let i = 0; i < btnDeletePicture.length; i++) {
         btnDeletePicture[i].setAttribute("href", "#modal-picture-" + i);
@@ -164,4 +164,6 @@
             this.parentNode.parentNode.remove();
         })
     })
+
+    
 })()
