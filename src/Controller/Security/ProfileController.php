@@ -2,10 +2,8 @@
 
 namespace App\Controller\Security;
 
-use App\Entity\User;
 use App\Service\Mailer;
 use App\Form\ProfileType;
-use App\Form\ResetPasswordType;
 use App\Service\UploaderHelper;
 use App\Repository\UserRepository;
 use App\Form\ForgottenPasswordType;
@@ -18,13 +16,30 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class ProfileController extends AbstractController
-{
+{    
+    /**
+     * @var EntityManagerInterface
+     */
+    private $manager;
+
+        
+    /**
+     * @var TokenGeneratorInterface 
+     */
+    private $tokenGenerator;
+
+    public function __construct(EntityManagerInterface $manager, TokenGeneratorInterface $tokenGenerator)
+    {
+        $this->manager = $manager;
+        $this->tokenGenerator = $tokenGenerator;
+    }
+
     /**
      * @Route("/profile", name="profile")
      * @IsGranted("ROLE_USER")
      * @return Response
      */
-    public function edit(Request $request, EntityManagerInterface $entityManagerInterface, UploaderHelper $uploaderHelper)
+    public function edit(Request $request, UploaderHelper $uploaderHelper)
     {
         $user = $this->getUser();
         $form = $this->createForm(ProfileType::class, $user);
@@ -37,8 +52,8 @@ class ProfileController extends AbstractController
                 $user->setProfilePicture($newFilename);
             }
 
-            $entityManagerInterface->persist($user);
-            $entityManagerInterface->flush();
+            $this->manager->persist($user);
+            $this->manager->flush();
 
             $this->addFlash('success', 'Votre compte a bien été modifié.');
         }
@@ -53,7 +68,7 @@ class ProfileController extends AbstractController
      * @Route("/update_password", name="update_password")
      * @IsGranted("ROLE_USER")
      */
-    public function updatePassword(Request $request, UserRepository $userRepository, EntityManagerInterface $entityManagerInterface, Mailer $mailer, TokenGeneratorInterface $tokenGeneratorInterface)
+    public function updatePassword(Request $request, UserRepository $userRepository, Mailer $mailer)
     {
         $form = $this->createForm(ForgottenPasswordType::class);
         $form->handleRequest($request);
@@ -67,12 +82,12 @@ class ProfileController extends AbstractController
                 return $this->redirectToRoute('login');
             }
 
-            $token = $tokenGeneratorInterface->generateToken();
+            $token = $this->tokenGenerator->generateToken();
 
             try {
                 $user->setResetToken($token);
-                $entityManagerInterface->persist($user);
-                $entityManagerInterface->flush();
+                $this->manager->persist($user);
+                $this->manager->flush();
             } catch (\Exception $e) {
                 $this->addFlash('error', $e->getMessage());
                 return $this->redirectToRoute('login');

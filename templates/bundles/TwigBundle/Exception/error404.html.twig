@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+ 
+{% block title %}Page non trouvée{% endblock %}
+{% block body %}
+<section class="notfound">
+        <div class="notfound-nbr">
+           
+			<h1><span>4</span><span>0</span><span>4</span></h1>
+			<h2>Oups! Page non trouvée</h2>
+			<h3>Nous sommes désolés mais la page que vous avez demandée est introuvable.</h3>
+            <button class="btn"><a href="{{ path('home') }}">Accueil</a></button>
+        </div>
+    </section>
+{% endblock %}

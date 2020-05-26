@@ -16,12 +16,34 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class RegistrationController extends AbstractController
-{
+{    
+    /**
+     * @var EntityManagerInterface
+     */
+    private $manager;
+        
+    /**
+     * @var UserPasswordEncoderInterface
+     */
+    private $encoder;
+        
+    /**
+     * @var TokenGeneratorInterface 
+     */
+    private $tokenGenerator;
+
+    public function __construct(EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, TokenGeneratorInterface $tokenGenerator)
+    {
+        $this->manager = $manager;
+        $this->encoder = $encoder;
+        $this->tokenGenerator = $tokenGenerator;
+    }
+    
     /**
      * @Route("/register", name="register")
      * @return Response
      */
-    public function register(Request $request, EntityManagerInterface $entityManagerInterface, UserPasswordEncoderInterface $userPasswordEncoderInterface, UploaderHelper $uploaderHelper, Mailer $mailer, TokenGeneratorInterface $tokenGeneratorInterface)
+    public function register(Request $request, UploaderHelper $uploaderHelper, Mailer $mailer)
     {
         $user = new User();
 
@@ -35,10 +57,10 @@ class RegistrationController extends AbstractController
                 $user->setProfilePicture($newFilename);
             }
 
-            $user->setPassword($userPasswordEncoderInterface->encodePassword($user, $user->getPassword()));
-            $user->setActivationToken($tokenGeneratorInterface->generateToken());
-            $entityManagerInterface->persist($user);
-            $entityManagerInterface->flush();
+            $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
+            $user->setActivationToken($this->tokenGenerator->generateToken());
+            $this->manager->persist($user);
+            $this->manager->flush();
 
             $mailer->sendMessage('noreply@snowtricks.com',$user->getEmail(), $user->getUsername(),'Activer votre compte','email/activation.html.twig',[
                 'user' => $user,
@@ -56,7 +78,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/activation/{token}", name="activation")
      */
-    public function activation($token, UserRepository $userRepository, EntityManagerInterface $entityManagerInterface)
+    public function activation($token, UserRepository $userRepository)
     {
         $user = $userRepository->findOneBy(['activation_token' => $token]);
 
@@ -66,8 +88,8 @@ class RegistrationController extends AbstractController
 
         $user->setActivationToken(null);
 
-        $entityManagerInterface->persist($user);
-        $entityManagerInterface->flush();
+        $this->manager->persist($user);
+        $this->manager->flush();
 
         $this->addFlash('success', 'Votre compte a bien été activé.');
         return $this->redirectToRoute('login');

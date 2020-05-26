@@ -15,12 +15,34 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class ResetPasswordController extends AbstractController
-{
+{    
+    /**
+     * @var EntityManagerInterface
+     */
+    private $manager;    
+
+    /**
+     * @var UserPasswordEncoderInterface
+     */
+    private $encoder;    
+
+    /**
+     * @var TokenGeneratorInterface
+     */
+    private $tokenGenerator;
+
+    public function __construct(EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, TokenGeneratorInterface $tokenGenerator)
+    {
+        $this->manager = $manager;
+        $this->encoder = $encoder;
+        $this->tokenGenerator = $tokenGenerator;
+    }
+    
     /**
      * @Route("/forgotten_password", name="forgotten_password")
      *
      */
-    public function forgottenPassword(Request $request, UserRepository $userRepository, EntityManagerInterface $entityManagerInterface, Mailer $mailer, TokenGeneratorInterface $tokenGeneratorInterface)
+    public function forgottenPassword(Request $request, UserRepository $userRepository, Mailer $mailer)
     {
         $form = $this->createForm(ForgottenPasswordType::class);
         $form->handleRequest($request);
@@ -34,12 +56,12 @@ class ResetPasswordController extends AbstractController
                 return $this->redirectToRoute('login');
             }
 
-            $token = $tokenGeneratorInterface->generateToken();
+            $token = $this->tokenGenerator->generateToken();
 
             try {
                 $user->setResetToken($token);
-                $entityManagerInterface->persist($user);
-                $entityManagerInterface->flush();
+                $this->manager->persist($user);
+                $this->manager->flush();
             } catch (\Exception $e) {
                 $this->addFlash('error', $e->getMessage());
                 return $this->redirectToRoute('login');
@@ -64,7 +86,7 @@ class ResetPasswordController extends AbstractController
     /**
      * @Route("/reset_password/{id}/{token}", name="reset_password")
      */
-    public function resetPassword(Request $request, User $user, EntityManagerInterface $entityManagerInterface, $token, UserPasswordEncoderInterface $userPasswordEncoderInterface)
+    public function resetPassword(Request $request, User $user, $token)
     {
         if ($user->getResetToken() === null || $token !== $user->getResetToken()) {
 
@@ -76,10 +98,10 @@ class ResetPasswordController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $user->setPassword($userPasswordEncoderInterface->encodePassword($user, $user->getPassword()));
+            $user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
             $user->setResetToken(null);
-            $entityManagerInterface->persist($user);
-            $entityManagerInterface->flush();
+            $this->manager->persist($user);
+            $this->manager->flush();
 
             $this->addFlash('success', 'Votre mot de passe a été mis à jour.');
 

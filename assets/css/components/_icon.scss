@@ -1,12 +1,14 @@
-.fa-pencil-alt, .fa-trash-alt  {
+.fa-pencil-alt,
+.fa-trash-alt {
     color: $color-blue;
-   font-size: 2rem;
+    font-size: 2rem;
     cursor: pointer;
     display: inline-block;
     background-color: transparent;
     border: none;
     outline: none;
+
     @include small-only {
         font-size: 1rem;
-    } 
+    }
 }

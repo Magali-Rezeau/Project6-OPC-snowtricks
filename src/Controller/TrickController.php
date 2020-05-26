@@ -3,14 +3,12 @@
 namespace App\Controller;
 
 use DateTime;
-use App\Entity\User;
 use App\Entity\Trick;
 use App\Entity\Comment;
 use App\Form\TrickType;
 use App\Form\CommentType;
 use App\Service\Paginator;
 use App\Service\UploaderHelper;
-use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,18 +19,26 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TrickController extends AbstractController
-{
+{    
+    /**
+     * @var EntityManagerInterface
+     */
+    private $manager;
+
+    public function __construct(EntityManagerInterface $manager) {
+        $this->manager = $manager;
+    }
+
     /**
      * @Route("/trick/new", name="trick_new")
      * @IsGranted("ROLE_USER")
      * @return Response
      */
-    public function create(Request $request, EntityManagerInterface $entityManagerInterface, UploaderHelper $uploaderHelper)
+    public function create(Request $request, UploaderHelper $uploaderHelper)
     {  
         $trick = new Trick();
        
         $form = $this->createForm(TrickType::class, $trick);
-        
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()) {
@@ -45,16 +51,16 @@ class TrickController extends AbstractController
                      $picture->setPath($newFilename);
                  } 
                 $picture->setTrick($trick);
-                $entityManagerInterface->persist($picture);
+                $this->manager->persist($picture);
             }
 
             foreach($trick->getVideos() as $video) {
                 $video->setTrick($trick);
-                $entityManagerInterface->persist($video);
+                $this->manager->persist($video);
             }
 
-            $entityManagerInterface->persist($trick);
-            $entityManagerInterface->flush();
+            $this->manager->persist($trick);
+            $this->manager->flush();
             
             $this->addFlash('success', "La nouvelle figure  a bien été enregistrée.");
 
@@ -73,7 +79,7 @@ class TrickController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @return Response
      */
-    public function edit(Trick $trick, Request $request, EntityManagerInterface $entityManagerInterface, UploaderHelper $uploaderHelper)
+    public function edit(Trick $trick, Request $request, UploaderHelper $uploaderHelper)
     {
        
         $originalPictures = new ArrayCollection();
@@ -85,7 +91,7 @@ class TrickController extends AbstractController
            foreach ($originalPictures as $picture) {
                 if (false === $trick->getPictures()->contains($picture)) {
                     $picture->getTrick()->removeElement($trick);
-                    $entityManagerInterface->persist($picture);
+                    $this->manager->persist($picture);
                 }
             }
             $pictures = $form['pictures']->getData();
@@ -96,24 +102,24 @@ class TrickController extends AbstractController
                      $picture->setPath($newFilename);
                  } 
                 $picture->setTrick($trick);
-                $entityManagerInterface->persist($picture);
+                $this->manager->persist($picture);
             }
            
             foreach ($originalVideos as $video) {
                 if (false === $trick->getVideos()->contains($video)) {
                     $video->getTrick()->removeElement($trick);
-                    $entityManagerInterface->persist($video);
+                    $this->manager->persist($video);
                 }
             }
  
             $videos = $form['videos']->getData();
             foreach($videos as $video) {
                 $video->setTrick($trick);
-                $entityManagerInterface->persist($video);
+                $this->manager->persist($video);
             }
             $trick->setUpdatedAt(new DateTime());
-            $entityManagerInterface->persist($trick);
-            $entityManagerInterface->flush();
+            $this->manager->persist($trick);
+            $this->manager->flush();
             $this->addFlash('success', "La figure a bien été modifié.");
             return $this->redirectToRoute('trick_show', [
                 'slug' => $trick->getSlug()
@@ -131,19 +137,19 @@ class TrickController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @return Response
      */
-    public function delete(Trick $trick, EntityManagerInterface $entityManagerInterface) {
-
+    public function delete(Trick $trick) 
+    {
         $filesystem = new Filesystem();
 
         foreach ($trick->getPictures() as $picture) {
             $filesystem->remove('uploads/pictures/' .$picture->getPath());
         }
        
-        $entityManagerInterface->remove($trick);
-        $entityManagerInterface->flush();
+        $this->manager->remove($trick);
+        $this->manager->flush();
+        
         $this->addFlash('success', "La figure {$trick->getName()} a bien été supprimé.");
-        return $this->redirectToRoute('home');
-           
+        return $this->redirectToRoute('home');     
     }
     
     /**
@@ -151,7 +157,7 @@ class TrickController extends AbstractController
      * 
      * @return Response
      */
-    public function show(Trick $trick, Request $request, EntityManagerInterface $entityManagerInterface, CommentRepository $commentRepository, $page, Paginator $paginator)
+    public function show(Trick $trick, Request $request, $page, Paginator $paginator)
     {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
@@ -162,8 +168,8 @@ class TrickController extends AbstractController
             $comment->setTrick($trick);
             $comment->setUser($this->getUser());
 
-            $entityManagerInterface->persist($comment);
-            $entityManagerInterface->flush();
+            $this->manager->persist($comment);
+            $this->manager->flush();
 
             $this->addFlash(
                 'success',
@@ -175,7 +181,8 @@ class TrickController extends AbstractController
             ->setOrder(['created_at' => 'DESC'])
             ->setAttribut(['trick' => $trick])
             ->setCurrentPage($page)
-            ->setLimit(4);
+            ->setLimit(4)
+        ;
         
         return $this->render('trick/show.html.twig', [
             'controller_name' => 'TrickController',

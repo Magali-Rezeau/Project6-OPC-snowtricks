@@ -4,11 +4,11 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,.8);
+    background-color: rgba(0, 0, 0, .8);
     display: none;
     margin: 0;
     padding: 0;
- 
+
     &-wrapper {
         display: flex;
         width: 120rem;
@@ -21,14 +21,16 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        
+
         @include medium-only {
             width: 50rem;
             flex-direction: column;
         }
+
         & button .btn-delete-picture .fas .fa-trash-alt {
             display: inline-block;
         }
+
         & .js-modal-close {
             position: absolute;
             width: 2rem;
@@ -48,45 +50,50 @@
                 @include medium-only {
                     width: 100%;
                 }
+
                 @include small-only {
                     height: 2rem;
                     width: 100%;
                     align-self: flex-start;
                 }
             }
-        
+
             & input {
                 width: 70%;
                 height: 5rem;
                 display: block;
-        
+
                 @include medium-only {
                     height: 3rem;
                     width: 100%;
                 }
+
                 @include small-only {
                     height: 2rem;
                     width: 100%;
                 }
             }
-        
+
             & textarea {
                 width: 70%;
                 height: 20rem;
-        
+
                 @include small-only {
                     height: 15rem;
                     width: 100%;
                 }
             }
         }
+
         & input[type="file"] {
             top: 30%;
+
             @include medium-only {
                 top: 0;
                 position: initial;
             }
         }
+
         & label {
             width: 30%;
             display: block;
@@ -94,43 +101,44 @@
             @include medium-only {
                 width: 100%;
             }
+
             @include small-only {
                 height: 2rem;
                 width: 100%;
                 align-self: flex-start;
             }
         }
-    
+
         & input {
             width: 70%;
             height: 5rem;
             display: block;
-    
+
             @include medium-only {
                 height: 3rem;
                 width: 100%;
             }
+
             @include small-only {
                 height: 2rem;
                 width: 100%;
             }
         }
-    
+
         & textarea {
             width: 70%;
             height: 20rem;
-    
+
             @include small-only {
                 height: 15rem;
                 width: 100%;
             }
         }
-       
     }
 }
 
 .modal-none {
-    display:flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;

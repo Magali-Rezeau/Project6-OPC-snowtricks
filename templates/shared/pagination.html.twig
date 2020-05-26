@@ -1,0 +1,14 @@
+  {% if paginator.data is not empty %}
+    <nav aria-label="pagination" class="pagination">
+    {% set page = paginator.currentPage %}
+    {% set pages = paginator.pages %}
+    <ul class="pagination-list">
+        <li class="pagination-list-item {% if page == 1 %}disabled{% endif %}"><a href="{{ path(route, {'slug':trick.slug, 'page': page - 1 }) }}#comment"><img src="{{ asset('build/images/arrow-left.png') }}" class="arrow-right"></a></li>
+        {% for i in 1..pages %}
+        {% set show_url = path(route, {'slug':trick.slug, 'page': i}) %}
+        <li class="pagination-list-item {% if page == i %}active{% endif %}"><a href="{{ show_url }}#comment">{{ i }}</a></li>
+        {% endfor %}
+        <li class="pagination-list-item {% if page == pages %}disabled{% endif %}"><a href="{{ path(route, {'slug':trick.slug, 'page': page + 1 }) }}#comment"><img src="{{ asset('build/images/arrow-right.png') }}" class="arrow-left"></a></li>
+    </ul>
+</nav>
+ {% endif %}
