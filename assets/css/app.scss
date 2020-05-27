@@ -7,6 +7,8 @@
 @import './components/button';
 @import './components/icon';
 @import './components/flash';
+@import './components/modal';
+@import './components/pagination';
 @import './layouts/home-header';
 @import './layouts/header';
 @import './layouts/footer';
@@ -15,10 +17,7 @@
 @import './layouts/trick';
 @import './layouts/add-trick';
 @import './layouts/edit-trick';
-@import './components/modal';
-@import './components/pagination';
-@import './layouts/register';
-@import './layouts/login';
+@import './layouts/form';
 @import './layouts/trick-comment';
 @import './layouts/error-page';
 

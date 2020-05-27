@@ -1,59 +1,82 @@
-<header class=
-    {% if app.request.attributes.get('_route') == "home" %}
-        "home-header" 
-    {% else %}
-        "header"
-    {% endif %}>
-    <div class="home-header-logo">
-        <img src="{{ asset('build/images/logo.png') }}" alt="logo-snowtricks" class="home-header-logo-img">
-    </div>
-    <nav class="home-header-nav">
-        <ul>
-            <li><a href="{{ path('home') }}">Home</a></li>
-            <li><a href="{{ path('home') }}#tricks">Tricks</a></li>
-            {% if not app.user %}
-            <li><a href="{{ path('register') }}">S'inscrire</a></li>
-            <li><a href="{{ path('login') }}">Se connecter</a></li>
-            {% else %}
-             <li><a href="{{ path('trick_new') }}">New trick</a></li>
-             <li><a href="{{ path('profile') }}">Mon compte</a></li>
-            <li><a href="{{ path('logout') }}">Se déconnecter</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-    <nav class="home-header-nav-wrap">
-        <input type="checkbox" class="home-header-nav-wrap-toggler">
-        <div class="home-header-nav-wrap-hamburger">
-            <div>
-                <img src="{{ asset('build/images/menu.png') }}" alt="hamburger-menu" class="home-header-nav-wrap-hamburger-img">
-            </div>
-        </div>
-        <div class="home-header-nav-wrap-menu">
-            <div>
-                <div>
-                    <ul>
-                        <li><a href="{{ path('home') }}">Home</a></li>
-                        <li><a href="{{ path('home') }}#tricks">Tricks</a></li>
-                        {% if not app.user %}
-                        <li><a href="{{ path('register') }}">S'inscrire</a></li>
-                        <li><a href="{{ path('login') }}">Se connecter</a></li>
-                        {% else %}
-                        <li><a href="{{ path('trick_new') }}">New trick</a></li>
-                        <li><a href="{{ path('profile') }}">Mon compte</a></li>
-                        <li><a href="{{ path('logout') }}">Se déconnecter</a></li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
-    {% if app.request.attributes.get('_route') == "home" %}
-        <div class="home-header-title">
-            <h1>Le site communautaire</h1>
-            <h2>des tricks de snowboard</h2>
-        </div>
-        <div class="home-header-arrow">
-            <a href="{{ path('home') }}#tricks"><img src="{{ asset('build/images/arrow-down.png') }}" class="arrow" alt="arrow-down"></a>
-        </div>
-    {% endif %}
+<header class={% if app.request.attributes.get('_route') == "home" %} "home-header" {% else %} "header" {% endif %}>
+	<div class="home-header-logo">
+		<img src="{{ asset('build/images/logo.png') }}" alt="logo-snowtricks" class="home-header-logo-img">
+	</div>
+	<nav class="home-header-nav">
+		<ul>
+			<li>
+				<a href="{{ path('home') }}">Home</a>
+			</li>
+			<li>
+				<a href="{{ path('home') }}#tricks">Tricks</a>
+			</li>
+			{% if not app.user %}
+				<li>
+					<a href="{{ path('register') }}">S'inscrire</a>
+				</li>
+				<li>
+					<a href="{{ path('login') }}">Se connecter</a>
+				</li>
+			{% else %}
+				<li>
+					<a href="{{ path('trick_new') }}">New trick</a>
+				</li>
+				<li>
+					<a href="{{ path('profile') }}">Mon compte</a>
+				</li>
+				<li>
+					<a href="{{ path('logout') }}">Se déconnecter</a>
+				</li>
+			{% endif %}
+		</ul>
+	</nav>
+	<nav class="home-header-nav-wrap">
+		<input type="checkbox" class="home-header-nav-wrap-toggler">
+		<div class="home-header-nav-wrap-hamburger">
+			<div>
+				<img src="{{ asset('build/images/menu.png') }}" alt="hamburger-menu" class="home-header-nav-wrap-hamburger-img">
+			</div>
+		</div>
+		<div class="home-header-nav-wrap-menu">
+			<div>
+				<div>
+					<ul>
+						<li>
+							<a href="{{ path('home') }}">Home</a>
+						</li>
+						<li>
+							<a href="{{ path('home') }}#tricks">Tricks</a>
+						</li>
+						{% if not app.user %}
+							<li>
+								<a href="{{ path('register') }}">S'inscrire</a>
+							</li>
+							<li>
+								<a href="{{ path('login') }}">Se connecter</a>
+							</li>
+						{% else %}
+							<li>
+								<a href="{{ path('trick_new') }}">New trick</a>
+							</li>
+							<li>
+								<a href="{{ path('profile') }}">Mon compte</a>
+							</li>
+							<li>
+								<a href="{{ path('logout') }}">Se déconnecter</a>
+							</li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
+	{% if app.request.attributes.get('_route') == "home" %}
+		<div class="home-header-title">
+			<h1>Le site communautaire</h1>
+			<h2>des tricks de snowboard</h2>
+		</div>
+		<div class="home-header-arrow">
+			<a href="{{ path('home') }}#tricks"><img src="{{ asset('build/images/arrow-down.png') }}" class="arrow" alt="arrow-down"></a>
+		</div>
+	{% endif %}
 </header>

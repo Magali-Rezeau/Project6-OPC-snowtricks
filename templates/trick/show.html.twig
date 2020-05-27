@@ -3,119 +3,124 @@
 {% block title %}{{ trick.name }}{% endblock %}
 
 {% block body %}
-<section class="trick">
-
-{% set edit_url = path('trick_edit', {'slug':trick.slug}) %}
-{% set delete_url = path('trick_delete', {'slug':trick.slug}) %}
-    <div class="trick-title">
-	    <h1>{{ trick.name }}</h1>
-        {% if app.user %}
-        <div class="trick-title-icon">
-		    <a class="fas fa-pencil-alt" href="{{ edit_url }}">
-		    </a>
-            <a href="{{ delete_url }}" class="fas fa-trash-alt" onclick="return confirm('Etes-vous sûr de vouloir supprimer cette figure ?');"></a>
-	    </div>
-        {% endif %}
-    </div>
-    <div class="trick-content">
-        {% for picture in trick.pictures %}
-        {% if loop.first %}
-        <div class="trick-content-img">
-            <figure class="trick-content-img-figure">
-                <img src="{{ asset('uploads/pictures/' ~ picture.path) }}">
-            </figure>
-        </div>
-        {% endif %}
-        {% else %}
-        <div class="trick-content-img">
-            <figure class="tricks-content-card-img-figure">
-                <a><img src="{{ asset('uploads/pictures/default-picture.png') }}"></a>
-            </figure>
-        </div>
-        {% endfor %}
-        <div class="trick-content-more">
-            <input type="checkbox" hidden class="trick-content-more-state" id="read-more">
-            <div class="trick-content-more-target">
-                <div class="trick-content-title-img">
-                    <h3>Photos</h3>
-                </div>
-                <div class="trick-content-thumbnail">
-                    {% for picture in trick.pictures %}
-                    <figure class="trick-content-thumbnail-figure">
-                        <img src="{{ asset('uploads/pictures/' ~ picture.path) }}">
-                    </figure>
-                    {% endfor %}
-                </div>
-                <div class="trick-content-title-videos">
-                    <h3>Vidéos</h3>
-                </div>
-                <div class="trick-content-videos">
-                    {% for video in trick.videos %}
-                    <iframe src="{{ video.url }}" width="50%" frameborder="100" width="1920" height="1080"
-                        allowfullscreen></iframe>
-                    {% endfor %}
-                </div>
-            </div>
-            <label for="read-more" class="trick-content-more-trigger_closed btn">Voir plus</label>
-            <label for="read-more" class="trick-content-more-trigger_opened btn">Voir Moins</label>
-        </div>
-        <div class="trick-content-description">
-            <p>{{ trick.description|nl2br }}</p>
-        </div>
-        <div class="trick-content-details">
-            <ul class="trick-content-details-list">
-                <li>Date de création : {{ trick.createdAt|date("d/m/Y") }}</li>
-                <li>Date de modification : {{ trick.updatedAt|date("d/m/Y")}}</li>
-                <li>Catégorie : {{ trick.category.name }}</li>
-            </ul>
-        </div>
-    </div>
-</section>
-<section class="trick-comment" id="comment">
-    <div class="trick-comment-title">
-        <h2>Commentaires</h2>
-    </div>
-    {% for comment in paginator.data %}
-    <div class="trick-comment-content">
-        <div class="trick-comment-content-user">
-            <img class="trick-comment-profile-picture"
-                src="{{ asset('uploads/profilePictures/'~ comment.user.profilePicture) }}">
-            <h3>{{ comment.user.username }}</h3>
-        </div>
-        <div class="trick-comment-content-text">
-            <h4>Le {{ comment.createdAt|date("d/m/Y \\à H:i:s","Europe/Paris") }}</h4>
-            <p>{{ comment.content }}</p>
-        </div>
-        <hr>
-    </div>
-    {% else %}
-    <div class="trick-comment-content">
-        <p>Il n'y a pas encore de commentaire sur cette figure.</p>
-    </div>
-    {% endfor %}
-   {% if app.user %}
-    <div class="trick-comment-add">
-        <div class="trick-comment-add-user">
-            <img class="trick-comment-profile-picture"
-                src="{{ asset('uploads/profilePictures/'~ user.profilePicture) }}">
-            <h3>{{ user.username }}</h3>
-        </div>
-        <div class="trick-comment-add-form">
-            {{ form_start(form) }}
-            {{ form_row(form.content) }}
-            <input type="submit" class="btn" value="Valider">
-            {{ form_end(form) }}
-        </div>
-    </div>
-    {% endif %}
-    {% include 'shared/pagination.html.twig' with {'route': 'trick_show'} %}
-</section>
+	<section class="trick">
+		{% set edit_url = path('trick_edit', {'slug':trick.slug}) %}
+		{% set delete_url = path('trick_delete', {'slug':trick.slug}) %}
+		<div class="trick-title">
+			<h1>{{ trick.name }}</h1>
+			{% if app.user %}
+				<div class="trick-title-icon">
+					<a class="fas fa-pencil-alt" href="{{ edit_url }}"></a>
+					<a href="{{ delete_url }}" class="fas fa-trash-alt" onclick="return confirm('Etes-vous sûr de vouloir supprimer cette figure ?');"></a>
+				</div>
+			{% endif %}
+		</div>
+		<div class="trick-content">
+			{% for picture in trick.pictures %}
+				{% if trick.pictures is defined %}
+					{% if loop.first %}
+						<div class="trick-content-img">
+							<figure class="trick-content-img-figure">
+								<img src="{{ asset('uploads/pictures/' ~ picture.path) }}">
+							</figure>
+						</div>
+					{% endif %}
+				{% else %}
+					<div class="trick-content-img">
+						<figure class="tricks-content-card-img-figure">
+							<a><img src="{{ asset('uploads/pictures/default-picture.png') }}"></a>
+						</figure>
+					</div>
+				{% endif %}
+			{% endfor %}
+			<div class="trick-content-more">
+				<input type="checkbox" hidden class="trick-content-more-state" id="read-more">
+				<div class="trick-content-more-target">
+					<div class="trick-content-title-img">
+						<h3>Photos</h3>
+					</div>
+					<div class="trick-content-thumbnail">
+						{% for picture in trick.pictures %}
+							{% if not loop.first %}
+								<figure class="trick-content-thumbnail-figure">
+									<img src="{{ asset('uploads/pictures/' ~ picture.path) }}">
+								</figure>
+							{% endif %}
+						{% endfor %}
+					</div>
+					<div class="trick-content-title-videos">
+						<h3>Vidéos</h3>
+					</div>
+					<div class="trick-content-videos">
+						{% for video in trick.videos %}
+							<iframe src="{{ video.url }}" width="50%" frameborder="100" width="1920" height="1080" allowfullscreen></iframe>
+						{% endfor %}
+					</div>
+				</div>
+				<label for="read-more" class="trick-content-more-trigger_closed btn">Voir plus</label>
+				<label for="read-more" class="trick-content-more-trigger_opened btn">Voir Moins</label>
+			</div>
+			<div class="trick-content-description">
+				<p>{{ trick.description|nl2br }}</p>
+			</div>
+			<div class="trick-content-details">
+				<ul class="trick-content-details-list">
+					<li>Date de création :
+						{{ trick.createdAt|date("d/m/Y") }}</li>
+					{% if trick.updatedAt is not empty %}
+						<li>Date de modification :
+							{{ trick.updatedAt|date("d/m/Y")}}</li>
+					{% endif %}
+					<li>Catégorie :
+						{{ trick.category.name }}</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	<section class="trick-comment" id="comment">
+		<div class="trick-comment-title">
+			<h2>Commentaires</h2>
+		</div>
+		{% for comment in paginator.data %}
+			<div class="trick-comment-content">
+				<div class="trick-comment-content-user">
+					<img class="trick-comment-profile-picture" src="{{ asset('uploads/profilePictures/'~ comment.user.profilePicture) }}">
+					<h3>{{ comment.user.username }}</h3>
+				</div>
+				<div class="trick-comment-content-text">
+					<h4>Le
+						{{ comment.createdAt|date("d/m/Y \\à H:i:s","Europe/Paris") }}</h4>
+					<p>{{ comment.content }}</p>
+				</div>
+				<hr>
+			</div>
+		{% else %}
+			<div class="trick-comment-content">
+				<p>Il n'y a pas encore de commentaire sur cette figure.</p>
+			</div>
+		{% endfor %}
+		{% if app.user %}
+			<div class="trick-comment-add">
+				<div class="trick-comment-add-user">
+					<img class="trick-comment-profile-picture" src="{{ asset('uploads/profilePictures/'~ user.profilePicture) }}">
+					<h3>{{ user.username }}</h3>
+				</div>
+				<div class="trick-comment-add-form">
+					{{ form_start(form) }}
+					{{ form_row(form.content) }}
+					<input type="submit" class="btn" value="Valider">
+					{{ form_end(form) }}
+				</div>
+			</div>
+		{% endif %}
+		{% include 'shared/pagination.html.twig' with {'route': 'trick_show'} %}
+	</section>
 {% endblock %}
 {% block form_row %}
-    <div class="trick-comment-add-form-row">
-        {{ form_widget(form) }}
-        <div class="trick-comment-add-form-row-error">
-            {{ form_errors(form) }}
-        </div>
-    </div>
+	<div class="trick-comment-add-form-row">
+		{{ form_widget(form) }}
+		<div class="trick-comment-add-form-row-error">
+			{{ form_errors(form) }}
+		</div>
+	</div>
 {% endblock %}
