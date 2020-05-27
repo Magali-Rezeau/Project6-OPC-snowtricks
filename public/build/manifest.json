@@ -1,12 +1,12 @@
 {
-  "build/0.19e75649.js": "/build/0.19e75649.js",
-  "build/1.a861eed9.css": "/build/1.a861eed9.css",
-  "build/1.2f564c6c.js": "/build/1.2f564c6c.js",
-  "build/css/app.css": "/build/css/app.bf502a18.css",
-  "build/js/add-trick.js": "/build/js/add-trick.e3a8ad3e.js",
-  "build/js/app.js": "/build/js/app.cc7caac3.js",
-  "build/js/edit-trick.js": "/build/js/edit-trick.b3f9fb11.js",
-  "build/runtime.js": "/build/runtime.e9dea5e6.js",
+  "build/css/app.css": "/build/css/app.css",
+  "build/js/add-trick.js": "/build/js/add-trick.js",
+  "build/js/app.js": "/build/js/app.js",
+  "build/js/edit-trick.js": "/build/js/edit-trick.js",
+  "build/runtime.js": "/build/runtime.js",
+  "build/vendors~css/app.css": "/build/vendors~css/app.css",
+  "build/vendors~css/app.js": "/build/vendors~css/app.js",
+  "build/vendors~js/add-trick~js/edit-trick.js": "/build/vendors~js/add-trick~js/edit-trick.js",
   "build/fonts/Chalkduster.woff": "/build/fonts/Chalkduster.05ecdaa0.woff",
   "build/fonts/Chalkduster.eot": "/build/fonts/Chalkduster.4a4bf398.eot",
   "build/fonts/Chalkduster.ttf": "/build/fonts/Chalkduster.bd9805cb.ttf",
@@ -63,5 +63,6 @@
   "build/images/fa-solid-900.svg": "/build/images/fa-solid-900.ec763292.svg",
   "build/images/logo.png": "/build/images/logo.80e3f7e3.png",
   "build/images/menu.png": "/build/images/menu.ac6a8ef1.png",
-  "build/images/sprite.svg": "/build/images/sprite.75299b65.svg"
+  "build/images/sprite.svg": "/build/images/sprite.75299b65.svg",
+  "build/vendors~js/add-trick.js": "/build/vendors~js/add-trick.js"
 }

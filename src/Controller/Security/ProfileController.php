@@ -21,8 +21,7 @@ class ProfileController extends AbstractController
      * @var EntityManagerInterface
      */
     private $manager;
-
-        
+   
     /**
      * @var TokenGeneratorInterface 
      */
