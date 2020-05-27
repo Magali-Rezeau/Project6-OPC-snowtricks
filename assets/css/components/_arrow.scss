@@ -14,4 +14,8 @@
 .arrow-right, .arrow-left {
     width: 3rem;
     margin: 1rem auto;
+    
+    @include small-only {
+        width: 2rem;
+    }
 }

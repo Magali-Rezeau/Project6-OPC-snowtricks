@@ -9,6 +9,7 @@
     background-position: bottom;
     background-repeat: no-repeat;
     background-color: $color-blue-light;
+
     @include medium-only {
         grid-template-columns: 20rem 1fr 10rem;
         height: 20rem;
@@ -17,9 +18,10 @@
         grid-template-columns: 15rem 1fr 5rem;
         height: 10rem;
     }
+
     &-logo {
-        grid-column: 1/2;  
-       
+        grid-column: 1/2;
+
         &-img {
             padding: 2rem;
             width: 100%;

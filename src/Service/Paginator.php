@@ -3,37 +3,44 @@
 namespace App\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 class Paginator
 {
     private $entity;
     private $limit;
     private $currentPage = 1;
-    private $emi;
+    private $manager;
     private $order;
     private $attribut;
 
-    public function __construct(EntityManagerInterface $emi)
+    public function __construct(EntityManagerInterface $manager)
     {
-        $this->emi = $emi;
+        $this->manager = $manager;
     }
 
     public function getData()
-    {
+    {  
+         if(empty($this->entity)) {
+            throw new Exception("L'entité n'a pas été spécifié");      
+        }
         $offset = $this->currentPage * $this->limit - $this->limit;
-        $repo = $this->emi->getRepository($this->entity);
+        $repo = $this->manager->getRepository($this->entity);
         $data = $repo->findBy($this->attribut,$this->order, $this->limit, $offset);
-        return $data;
-        
+        return $data;   
     }
+
     public function getPages()
     {
-        $repo = $this->emi->getRepository($this->entity);
+        if(empty($this->entity)) {
+            throw new Exception("L'entité n'a pas été spécifié");      
+        }
+        $repo = $this->manager->getRepository($this->entity);
         $total = count($repo->findBy($this->attribut));
         $pages = ceil($total / $this->limit);
-        return $pages;
-        
+        return $pages;  
     }
+
     public function getEntity()
     {
         return $this->entity;
@@ -89,5 +96,4 @@ class Paginator
 
         return $this;
     }
-
 }

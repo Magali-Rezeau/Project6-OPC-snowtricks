@@ -46,14 +46,14 @@
                 width: 50rem;
 
                 @include medium-only {
-                  width: 15rem;
+                    width: 15rem;
                 }
                 @include small-only {
                     width: 8rem;
                 }
             }
 
-            & > * {
+            &>* {
                 flex: 0 0 auto;
             }
         }

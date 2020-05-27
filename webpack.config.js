@@ -58,7 +58,7 @@ Encore
 
     // enables Sass/SCSS support
     .enableSassLoader()
-
+    .enablePostCssLoader()
     //copy files
     .copyFiles({
         from: './assets/images',

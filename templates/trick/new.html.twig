@@ -12,7 +12,6 @@
 		{{ form_row(form.description) }}
 		{{ form_row(form.category) }}
 		{{ form_row(form.pictures) }}
-		
 		{{ form_row(form.videos) }}
 		<button type="submit" class="btn btn-form">Valider</button>
 		{{ form_end(form) }}
@@ -48,7 +47,7 @@
 		</div>
 	</div>
 	<button type="button" class="btn-delete-picture fas fa-trash-alt"></button>
-{% endblock %} 
+{% endblock %}
 {% block _trick_videos_row %}
 	<h3>Ajouter des vidéos</h3>
 	{{ form_widget(form) }}
@@ -70,5 +69,5 @@
 		</div>
 	</div>
 	<button type="button" class="btn-delete-video fas fa-trash-alt"></button>
-{% endblock %} 
+{% endblock %}
 {% block javascripts %}{{ encore_entry_script_tags('js/add-trick') }}{% endblock %}

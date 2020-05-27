@@ -1,0 +1,40 @@
+.pagination {
+    grid-column: 2/3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10rem;
+    margin-bottom: 3rem;
+    
+    @include small-only {
+        height: 5rem;
+    }
+
+    &-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    
+        & .active a {
+            color: $color-blue;
+        }
+
+        & .disabled a {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        &-item a {
+            font-size: 3rem;
+            color: $color-blue-dark;
+            font-family: $ff-title;
+            padding: 1rem;
+
+            @include small-only {
+                 font-size: 2rem;
+            }
+        }
+    }
+}

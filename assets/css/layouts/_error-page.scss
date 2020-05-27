@@ -1,0 +1,55 @@
+.notfound {
+  position: relative;
+  height: 60vh;
+
+  &-nbr {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    & h1 {
+      font-family: $ff-title;
+      font-size: 30rem;
+      color: $color-blue;
+      letter-spacing: -3rem;
+
+      @include small-only {
+        font-size: 13rem;
+      }
+
+      &>span {
+        text-shadow: -8px 0px 0px rgb(52, 84, 124);
+      }
+    }
+
+    & h3 {
+      font-family: $ff-content;
+      font-size: 2rem;
+      color: $color-dark;
+
+      @include small-only {
+        font-size: .8rem;
+      }
+    }
+
+    & h2 {
+      font-family: $ff-content;
+      font-size: 3.5rem;
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-40%, -50%);
+      color: $color-dark;
+
+      @include small-only {
+        font-size: 1.3rem;
+      }
+    }
+  }
+
+  & button {
+    margin-top: 3rem;
+  }
+}

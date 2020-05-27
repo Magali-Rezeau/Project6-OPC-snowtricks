@@ -1,34 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Mon compte{% endblock %}
-{% form_theme form _self %}
+{% form_theme form 'security/_collection.html.twig' %}
 {% block body %}
-<section class="default">
-    <div class="default-title">
-        <h2>Mon compte</h2>
-     </div>
-     {% if user.profilePicture %} 
-      <figure class="default-img">
-                        <img src="{{ asset('uploads/profilePictures/' ~ user.profilePicture) }}">
-                    </figure>
-     {% endif %}
-     <div class="default-form">
-        {{ form_start(form) }}
-        {{ form_row(form.username) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.profile_picture) }}
-         <a href="{{ path('update_password') }}">Modifier mon mot de passe ?</a>
-        <input type="submit" class="btn" value="Valider">
-        {{ form_end(form) }}
-    </div>
-</section>
-{% endblock %}
-{% block form_row %}
-    <div class="default-form-row">
-        {{ form_label(form) }}
-        {{ form_widget(form) }}
-        <div class="default-form-row-error">
-            {{ form_errors(form) }}
-        </div>
-    </div>
+	<section class="default">
+		<div class="default-title">
+			<h2>Mon compte</h2>
+		</div>
+		{% if user.profilePicture %}
+			<figure class="default-img">
+				<img src="{{ asset('uploads/profilePictures/' ~ user.profilePicture) }}">
+			</figure>
+		{% endif %}
+		<div class="default-form">
+			{{ form_start(form) }}
+			{{ form_row(form.username) }}
+			{{ form_row(form.email) }}
+			{{ form_row(form.profile_picture) }}
+			<a href="{{ path('update_password') }}">Modifier mon mot de passe ?</a>
+			<input type="submit" class="btn" value="Valider">
+			{{ form_end(form) }}
+		</div>
+	</section>
 {% endblock %}

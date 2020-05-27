@@ -28,9 +28,10 @@
         grid-row: 1/2;
         align-self: center;
         text-align: center;
-        
+
         & h1 {
             font-size: 3rem;
+
             @include small-only {
                 font-size: 1.3rem;
             }
@@ -53,19 +54,20 @@
         &-picture {
             width: 100%;
             font-size: 1rem;
+
             &-featured img {
                 width: 100%;
                 display: block;
                 margin-bottom: 1rem;
-               
             }
+
             &-featured-icon {
-             
                 display: flex;
                 justify-content: flex-end;
-               & .btn-delete-picture {
-                   margin-left: 1rem;
-               }
+
+                & .btn-delete-picture {
+                    margin-left: 1rem;
+                }
             }
 
             &-thumbnail {
@@ -77,12 +79,13 @@
                 align-content: center;
                 text-align: center;
                 font-size: 1rem;
+
                 &-figure img {
                     width: 20rem;
                     height: 20rem;
                     object-fit: cover;
                     display: block;
-                  
+
                     @include medium-only {
                         width: 15rem;
                         height: 15rem;
@@ -92,70 +95,73 @@
                         height: 10rem;
                     }
                 }
+
                 &-figure-icon {
                     width: 20rem;
                     display: flex;
                     justify-content: flex-end;
                     margin-top: 1rem;
+
                     @include medium-only {
                         width: 15rem;
-                       
                     }
+
                     @include small-only {
                         width: 10rem;
-                       
                     }
-                   & .btn-delete-picture {
-                       margin-left: 1rem;
-                   }
+
+                    & .btn-delete-picture {
+                        margin-left: 1rem;
+                    }
                 }
             }
         }
 
         &-video {
             width: 100%;
+
             &-thumbnail {
-           
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: space-evenly;
                 align-items: center;
                 align-content: center;
                 text-align: center;
-              
+
                 &-card {
                     display: flex;
                     flex-direction: column;
-                   
+
                     & iframe {
                         width: 20rem;
-                    height: 20rem;
-                    @include medium-only {
-                        width: 15rem;
-                        height: 15rem;
+                        height: 20rem;
+
+                        @include medium-only {
+                            width: 15rem;
+                            height: 15rem;
+                        }
+                        @include small-only {
+                            width: 10rem;
+                            height: 10rem;
+                        }
                     }
-                    @include small-only {
-                        width: 10rem;
-                        height: 10rem;
-                    }
-                      
-                    }
+
                     &-icon {
                         width: 20rem;
                         display: flex;
                         justify-content: flex-end;
                         margin-top: 1rem;
+
                         @include medium-only {
                             width: 15rem;
-                           
                         }
                         @include small-only {
                             width: 10rem;
-                           
                         }
-                       & .btn-delete-video {
-                           margin-left: 1rem;
-                       }
+
+                        & .btn-delete-video {
+                            margin-left: 1rem;
+                        }
                     }
                 }
             }
@@ -195,17 +201,14 @@
                 }
             }
         }
-        & .btn  {
+
+        & .btn {
             width: 100%;
-             margin: 3rem auto;
-         }
- 
-     
-       
+            margin: 3rem auto;
+        }
     }
 
     &-content-more {
-
         &-target {
             display: block;
 
@@ -222,6 +225,7 @@
             @include medium-only {
                 width: 14rem;
             }
+
             @include small-only {
                 width: 8rem;
                 font-size: .7rem;
@@ -259,7 +263,7 @@
             }
         }
     }
-   
+
     &-content-form {
         grid-column: 2/3;
         grid-row: 2/3;
@@ -297,9 +301,11 @@
             & label {
                 width: 30%;
                 display: block;
+
                 @include medium-only {
                     width: 20%;
                 }
+
                 @include small-only {
                     height: 2rem;
                     width: 100%;
@@ -315,6 +321,7 @@
                 @include medium-only {
                     height: 3rem;
                 }
+
                 @include small-only {
                     height: 2rem;
                     width: 100%;
@@ -330,15 +337,15 @@
                     width: 100%;
                 }
             }
-          
+
         }
 
         & #trick_pictures,
         & #trick_videos {
             width: 100%;
-            margin-top: 2rem;;
+            margin-top: 2rem;
         }
-        
+
         &-entry {
             width: 45%;
             display: flex;
@@ -390,6 +397,5 @@
                 font-size: .8rem;
             }
         }
-       
     }
 }

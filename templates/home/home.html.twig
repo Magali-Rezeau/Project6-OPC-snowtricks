@@ -44,9 +44,9 @@
 		</div>
 		<div class="tricks-content">
 			{% for trick in tricks %}
-			{% set show_url = path('trick_show', {'slug':trick.slug}) %}
-			{% set edit_url = path('trick_edit', {'slug':trick.slug}) %}
-			{% set delete_url = path('trick_delete', {'slug':trick.slug}) %}
+				{% set show_url = path('trick_show', {'slug':trick.slug}) %}
+				{% set edit_url = path('trick_edit', {'slug':trick.slug}) %}
+				{% set delete_url = path('trick_delete', {'slug':trick.slug}) %}
 				<div class="tricks-content-card">
 					<div class="tricks-content-card-img">
 						{% if trick.pictures is defined %}
@@ -62,51 +62,61 @@
 								</figure>
 							{% endfor %}
 						{% endif %}
-					</div>	
+					</div>
 					<div class="tricks-content-card-btn">
-                    	<button class="btn"><a href="{{ show_url }}">{{ trick.name }}</a></button> 
+						<button class="btn">
+							<a href="{{ show_url }}">{{ trick.name }}</a>
+						</button>
 						{% if app.user %}
-                    	<div class="tricks-content-card-btn-icon">
-                        	<a href="{{ edit_url }}"><i class="fas fa-pencil-alt"></i></a>
-                        	<a href="{{ delete_url }}" class="fas fa-trash-alt" onclick="return confirm('Etes-vous sûr de vouloir supprimer cette figure ?');"></a>
-						</div>
+							<div class="tricks-content-card-btn-icon">
+								<a href="{{ edit_url }}">
+									<i class="fas fa-pencil-alt"></i>
+								</a>
+								<a href="{{ delete_url }}" class="fas fa-trash-alt" onclick="return confirm('Etes-vous sûr de vouloir supprimer cette figure ?');"></a>
+							</div>
 						{% endif %}
-                    </div>
+					</div>
 				</div>
 			{% endfor %}
 		</div>
 		<div class="tricks-content-more">
 			<input type="checkbox" hidden class="tricks-content-more-state" id="read-more">
 			{% for trick in tricks_more %}
-			{% set show_url = path('trick_show', {'slug':trick.slug}) %}
-			{% set edit_url = path('trick_edit', {'slug':trick.slug}) %}
+				{% set show_url = path('trick_show', {'slug':trick.slug}) %}
+				{% set edit_url = path('trick_edit', {'slug':trick.slug}) %}
 				<div class="tricks-content-more-target tricks-content-card">
 					<div class="tricks-content-card-img">
-							{% if trick.pictures is defined %}
+						{% if trick.pictures is defined %}
 							{% for picture in trick.pictures %}
 								{% if loop.first %}
 									<figure class="tricks-content-card-img-figure">
-										<a href="{{ show_url }}"><img src="{{ asset('uploads/pictures/' ~ picture.path) }}"></a>
+										<a href="{{ show_url }}"><img src="{{ asset('uploads/pictures/' ~ picture.path) }}" alt="{{ picture.caption }}"></a>
 									</figure>
 								{% endif %}
 							{% else %}
 								<figure class="tricks-content-card-img-figure">
-									<a href="{{ show_url }}"><img src="{{ asset('uploads/pictures/default-picture.png') }}"></a>
+									<a href="{{ show_url }}"><img src="{{ asset('uploads/pictures/default-picture.png') }}" alt="Snowtricks : image par défaut"></a>
 								</figure>
 							{% endfor %}
 						{% endif %}
 					</div>
 					<div class="tricks-content-card-btn">
-                    	<button class="btn"><a href="{{ show_url }}">{{ trick.name }}</a></button> 
-                    	<div class="tricks-content-card-btn-icon">
-                        	<a href="{{ edit_url }}"><i class="fas fa-pencil-alt"></i></a>
-                        	<form method="POST" action="#">
-                            	<input type="hidden" name="_method" value="delete">
-                            	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trick.id)}}">
-                           		<input class="fas fa-trash-alt" type="submit" value="&#xf2ed;" onclick="return confirm('Etes-vous sûr ?');">
-                        	</form>
-						</div>
-                    </div>
+						<button class="btn">
+							<a href="{{ show_url }}">{{ trick.name }}</a>
+						</button>
+						{% if app.user %}
+							<div class="tricks-content-card-btn-icon">
+								<a href="{{ edit_url }}">
+									<i class="fas fa-pencil-alt"></i>
+								</a>
+								<form method="POST" action="#">
+									<input type="hidden" name="_method" value="delete">
+									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trick.id)}}">
+									<input class="fas fa-trash-alt" type="submit" value="&#xf2ed;" onclick="return confirm('Etes-vous sûr ?');">
+								</form>
+							</div>
+						{% endif %}
+					</div>
 				</div>
 			{% endfor %}
 			<label for="read-more" class="tricks-content-more-trigger_closed btn">Voir plus</label>
