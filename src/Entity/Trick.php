@@ -34,7 +34,6 @@ class Trick
      * minMessage="Le nom de la figure doit contenir plus de 3 caractères.", 
      * maxMessage="Le nom de la figure ne peut pas contenir plus de 25 caractères."
      * )
-     * @Assert\NotBlank
      */
     private $name;
 
@@ -45,6 +44,10 @@ class Trick
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(
+     * min=5, 
+     * minMessage="Le descriptif de la figure doit contenir plus de 5 caractères."
+     * )
      */
     private $description;
 

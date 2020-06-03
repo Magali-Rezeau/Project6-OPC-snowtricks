@@ -16,6 +16,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * fields={"username"},
  * message="Ce pseudo est déjà utilisé."
  * )
+ * @UniqueEntity(
+ *  fields={"email"},
+ *  message="Cet email est déjà utilisé"
+ * )
  */
 class User implements UserInterface
 {

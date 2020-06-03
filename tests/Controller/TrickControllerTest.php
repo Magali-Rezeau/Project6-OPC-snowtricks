@@ -25,7 +25,6 @@ class TrickControllerTest extends WebTestCase
     public function testSlug()
     {
             $trick = new Trick();
-            $this->assertEquals('name-of-the-trick', $trick->slugify('Name of the trick'));
-        
+            $this->assertEquals('name-of-the-trick', $trick->slugify('Name of the trick'));  
     }
 }

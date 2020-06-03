@@ -11,6 +11,6 @@ class TrickRepositoryTest extends KernelTestCase
     {
         self::bootKernel();
         $tricks = self::$container->get(TrickRepository::class)->count([]);
-        $this->assertEquals(10, $tricks);
+        $this->assertEquals(11, $tricks);
     }
 }

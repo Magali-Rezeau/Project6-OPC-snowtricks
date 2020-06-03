@@ -22,12 +22,6 @@ class RegistrationType extends ApplicationType
             ->add('password', PasswordType::class, $this->fieldsConfiguration('Veuillez saisir un mot de passe.'))
             ->add('passwordVerification', PasswordType::class, $this->fieldsConfiguration('Veuillez confirmer votre mot de passe.'))
             ->add('profile_picture', FileType::class, [
-                'constraints' => [
-                    new Image([
-                        'maxSize' => '2M'
-                    ])
-                ],
-                'mapped' => false,
                 'required' => false,
                 ] )
         ;

@@ -14,6 +14,7 @@ class UserChecker implements UserCheckerInterface
         if (!$user instanceof User) {
             return;
         }
+
         if ($user->getActivationToken() != null) {
             throw new CustomUserMessageAuthenticationException(
                 "Compte non activé ! Merci de bien vouloir consulter vos emails."

@@ -97,6 +97,17 @@
                     width: 100%;
                 }
             }
+            &-error ul li {
+                color: red;
+                font-size: 1.5rem;
+    
+                @include medium-only {
+                    font-size: 1.2rem;
+                }
+                @include small-only {
+                    font-size: .8rem;
+                }
+            }
         }
 
         & #trick_pictures,
@@ -139,18 +150,19 @@
             & label {
                 width: 20%;
             }
+            &-error ul li {
+                color: red;
+                font-size: 1.5rem;
+    
+                @include medium-only {
+                    font-size: 1.2rem;
+                }
+                @include small-only {
+                    font-size: .8rem;
+                }
+            }
         }
 
-        &-error ul li {
-            color: red;
-            font-size: 1.5rem;
-
-            @include medium-only {
-                font-size: 1.2rem;
-            }
-            @include small-only {
-                font-size: .8rem;
-            }
-        }
+       
     }
 }

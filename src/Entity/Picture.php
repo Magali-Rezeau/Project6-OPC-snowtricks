@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -27,14 +30,18 @@ class Picture
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
-     * min=3,
-     * max=50, 
-     * minMessage="Le titre de la photo doit contenir plus de 3 caractères.",
-     * maxMessage="Le titre de la photo ne peut pas contenir plus de 50 caractères."
+     * min=5, 
+     * minMessage="Le titre doit contenir au moins 2 caractères."
      * )
      */
     private $caption;
 
+    /**
+     * @Assert\Image(
+     *  mimeTypes= {"image/jpeg", "image/jpg", "image/png"},
+     *  mimeTypesMessage = "Le fichier ne possède pas une extension valide !"
+     *  )
+     */
     private $file;
 
     /**
