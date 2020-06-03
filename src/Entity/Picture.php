@@ -28,20 +28,10 @@ class Picture
     private $path;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(
-     * min=5, 
-     * minMessage="Le titre doit contenir au moins 2 caractères."
-     * )
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $caption;
 
-    /**
-     * @Assert\Image(
-     *  mimeTypes= {"image/jpeg", "image/jpg", "image/png"},
-     *  mimeTypesMessage = "Le fichier ne possède pas une extension valide !"
-     *  )
-     */
     private $file;
 
     /**

@@ -2,17 +2,59 @@
 
 namespace App\DataFixtures;
 
+use DateTime;
+use App\Entity\User;
 use App\Entity\Trick;
 use App\Entity\Video;
+use App\Entity\Comment;
 use App\Entity\Picture;
 use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+    private $encoder;
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
     public function load(ObjectManager $manager)
     {
+        $user = new User();
+        $password = $this->encoder->encodePassword($user, 'eva');
+        $user
+            ->setUsername('eva')
+            ->setEmail('eva@gmail.com')
+            ->setPassword($password)
+            ->setProfilePicture('profile-picture-default.png')
+            ->setCreatedAt(new DateTime())
+        ;
+        $manager->persist($user);
+
+        $user1 = new User();
+        $password = $this->encoder->encodePassword($user1, 'vincent');
+        $user1
+            ->setUsername('vincent')
+            ->setEmail('vincent@gmail.com')
+            ->setPassword($password)
+            ->setProfilePicture('dbz.jpg')
+            ->setCreatedAt(new DateTime())
+        ;
+        $manager->persist($user1);
+
+        $user2 = new User();
+        $password = $this->encoder->encodePassword($user2, 'marie');
+        $user2
+            ->setUsername('marie')
+            ->setEmail('marie@gmail.com')
+            ->setPassword($password)
+            ->setProfilePicture('image-aza.jpeg')
+            ->setCreatedAt(new DateTime())
+        ;
+        $manager->persist($user2);
+
         $video1 = new Video();
         $video1
             ->setName("How to Mute Grab on a Snowboard - Goofy")
@@ -155,6 +197,10 @@ class AppFixtures extends Fixture
         $category6 = new Category();
         $category6->setName("Rotations désaxées");
         $manager->persist($category6);
+
+        $category7 = new Category();
+        $category7->setName("Autres");
+        $manager->persist($category7);
         
         $trick1 = new Trick();
         $trick1
@@ -258,6 +304,33 @@ class AppFixtures extends Fixture
         ;
         $manager->persist($trick10);
        
+        $comment = new Comment();
+        $comment
+            ->setCreatedAt(new DateTime())
+            ->setUser($user1)
+            ->setTrick($trick1)
+            ->setContent('Lorem ipsum dolor sit amet')
+        ;
+        $manager->persist($comment);
+
+        $comment1 = new Comment();
+        $comment1
+            ->setCreatedAt(new DateTime())
+            ->setUser($user)
+            ->setTrick($trick1)
+            ->setContent('Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')
+        ;
+        $manager->persist($comment1);
+
+        $comment2 = new Comment();
+        $comment2
+            ->setCreatedAt(new DateTime())
+            ->setUser($user2)
+            ->setTrick($trick3)
+            ->setContent('Lorem ipsum dolor sit amet')
+        ;
+        $manager->persist($comment2);
+
         $manager->flush();
     }
 }

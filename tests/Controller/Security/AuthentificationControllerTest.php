@@ -33,8 +33,8 @@ class AuthentificationControllerTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', '/login');
         $form = $crawler->selectButton('Valider')->form([
-            '_username'=> 'vincent',
-            '_password' => 'vincent'
+            '_username'=> 'marie',
+            '_password' => 'marie'
         ]);
         $client->submit($form);
         $this->assertResponseRedirects('http://localhost/');

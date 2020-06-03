@@ -14,17 +14,10 @@ class TrickControllerTest extends WebTestCase
         $this->assertSelectorTextContains('h1', 'Mute'); 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
-    public function testDisplayEditTrick() 
-    {
-        $client = static::createClient();
-        $client->request('GET', '/trick/mute');
-        $this->assertSelectorTextContains('h1', 'Mute'); 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-    }
    
     public function testSlug()
     {
             $trick = new Trick();
-            $this->assertEquals('name-of-the-trick', $trick->slugify('Name of the trick'));  
+            $this->assertEquals('name-of-the-trick', $trick->slugify('Name of the trick')); 
     }
 }
