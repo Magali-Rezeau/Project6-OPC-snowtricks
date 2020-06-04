@@ -1,5 +1,6 @@
- P6-SnowTricks
+Project6-OPC-snowtricks
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/351eff23f63b48c290e4c16b8ce67359)](https://www.codacy.com/manual/Magali-Rezeau/Project6-OPC-snowtricks?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Magali-Rezeau/Project6-OPC-snowtricks&amp;utm_campaign=Badge_Grade)
 
 Jimmy Sweat is an ambitious entrepreneur passionate about snowboarding. Its objective is the creation of a collaborative site to make this sport known to the general public and help in the learning of tricks.
 
