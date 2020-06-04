@@ -1,0 +1,2 @@
+# Project6-OPC-snowtricks
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0034fa8eb83c4a5e92efe4bf7b3c4969)](https://app.codacy.com/manual/Magali-Rezeau/Project6-OPC-snowtricks?utm_source=github.com&utm_medium=referral&utm_content=Magali-Rezeau/Project6-OPC-snowtricks&utm_campaign=Badge_Grade_Dashboard)
