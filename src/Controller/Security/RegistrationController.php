@@ -40,7 +40,7 @@ class RegistrationController extends AbstractController
     }
     
     /**
-     * @Route("/register", name="register")
+     * @Route("/inscription", name="register")
      * @return Response
      */
     public function register(Request $request, UploaderHelper $uploaderHelper, Mailer $mailer)

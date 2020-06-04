@@ -30,7 +30,7 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/trick/new", name="trick_new")
+     * @Route("/trick/création", name="trick_new")
      * @IsGranted("ROLE_USER")
      * @return Response
      */
@@ -75,7 +75,7 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/trick/{slug}/edit", name="trick_edit")
+     * @Route("/trick/{slug}/modification", name="trick_edit")
      * @IsGranted("ROLE_USER")
      * @return Response
      */
@@ -133,7 +133,7 @@ class TrickController extends AbstractController
     }
     
     /**
-     * @Route("/trick/{slug}/delete", name="trick_delete")
+     * @Route("/trick/{slug}/suppression", name="trick_delete")
      * @IsGranted("ROLE_USER")
      * @return Response
      */

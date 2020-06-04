@@ -39,7 +39,7 @@ class ResetPasswordController extends AbstractController
     }
     
     /**
-     * @Route("/forgotten_password", name="forgotten_password")
+     * @Route("/mot-de-passe-oublié", name="forgotten_password")
      *
      */
     public function forgottenPassword(Request $request, UserRepository $userRepository, Mailer $mailer)
@@ -84,7 +84,7 @@ class ResetPasswordController extends AbstractController
     }
 
     /**
-     * @Route("/reset_password/{id}/{token}", name="reset_password")
+     * @Route("/réinitialisation/{id}/{token}", name="reset_password")
      */
     public function resetPassword(Request $request, User $user, $token)
     {
