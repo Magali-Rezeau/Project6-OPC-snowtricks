@@ -13,7 +13,7 @@
       font-family: $ff-title;
       font-size: 30rem;
       color: $color-blue;
-      letter-spacing: -3rem;
+      letter-spacing: -10rem;
 
       @include small-only {
         font-size: 13rem;
@@ -36,13 +36,13 @@
 
     & h2 {
       font-family: $ff-content;
-      font-size: 3.5rem;
+      font-size: 3rem;
       position: absolute;
       top: 60%;
-      left: 50%;
-      transform: translate(-40%, -50%);
+      left: 55%;
+      transform: translate(-45%, -50%);
       color: $color-dark;
-
+      width: 100%;
       @include small-only {
         font-size: 1.3rem;
       }

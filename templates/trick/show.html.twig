@@ -16,8 +16,9 @@
 			{% endif %}
 		</div>
 		<div class="trick-content">
-			{% for picture in trick.pictures %}
+			
 				{% if trick.pictures is defined %}
+				{% for picture in trick.pictures %}
 					{% if loop.first %}
 						<div class="trick-content-img">
 							<figure class="trick-content-img-figure">
@@ -31,8 +32,9 @@
 							<a><img src="{{ asset('uploads/pictures/default-picture.png') }}"></a>
 						</figure>
 					</div>
+						{% endfor %}
 				{% endif %}
-			{% endfor %}
+		
 			<div class="trick-content-more">
 				<input type="checkbox" hidden class="trick-content-more-state" id="read-more">
 				<div class="trick-content-more-target">

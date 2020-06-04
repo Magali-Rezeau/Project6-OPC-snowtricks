@@ -72,7 +72,17 @@
                 flex-direction: column;
                 justify-content: center;
             }
-
+            &-error ul li {
+                color: red;
+                font-size: 1.5rem;
+    
+                @include medium-only {
+                    font-size: 1.2rem;
+                }
+                @include small-only {
+                    font-size: .8rem;
+                }
+            }
             & label {
                 width: 50%;
 
