@@ -34,7 +34,7 @@ class ProfileController extends AbstractController
     }
 
     /**
-     * @Route("/profile", name="profile")
+     * @Route("/mon-compte", name="profile")
      * @IsGranted("ROLE_USER")
      * @return Response
      */

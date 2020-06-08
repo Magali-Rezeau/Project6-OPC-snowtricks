@@ -9,7 +9,7 @@ class ProfileControllerTest extends WebTestCase
     public function testPageIsRestricted()
     {
         $client = static::createClient();
-        $client->request('GET', '/profile');
+        $client->request('GET', '/mon-compte');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 }
